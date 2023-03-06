@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/supply_item_recycler_card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/supply_item_recycler_title"
+                android:singleLine="true"
+                android:layout_width="230dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                tools:text="SC-101 08x08 AC Керамический наполнитель" />
+
+            <TextView
+                android:id="@+id/supply_item_recycler_start_amount"
+                android:singleLine="true"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                tools:text="300"/>
+
+            <TextView
+                android:id="@+id/supply_item_recycler_rest_amount"
+                android:singleLine="true"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                tools:text="250" />
+
+            <TextView
+                android:id="@+id/supply_item_recycler_date"
+                android:singleLine="true"
+                android:layout_width="75dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                tools:text="05.06.22" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

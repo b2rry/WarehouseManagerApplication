@@ -1,0 +1,21 @@
+<resources>
+    <!--App names-->
+    <string name="app_name">Warehouse Manager</string>
+
+    <!--Button names-->
+    <string name="supply_list_activity_button">Список позиций</string>
+    <string name="log_book_activity_button">Журнал изменений</string>
+    <string name="about_program_button">Информация</string>
+    <string name="menu_button">Меню</string>
+    <string name="back_button">Назад</string>
+    <string name="edit_button">Изменить</string>
+    <string name="title_field">Название:</string>
+    <string name="date_field">Дата прихода:</string>
+    <string name="start_amount_field">Приход:</string>
+    <string name="rest_amount_field">Остаток:</string>
+    <string name="dispatches_field">Отгрузки:</string>
+    <string name="comment_field">Комментарий:</string>
+    <string name="kg_field">кг</string>
+
+
+</resources>
