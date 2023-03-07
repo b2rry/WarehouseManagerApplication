@@ -3,6 +3,7 @@ package com.appksa.warehousemanager.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +12,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appksa.warehousemanager.R;
 import com.appksa.warehousemanager.SupplyItemActivity;
+import com.appksa.warehousemanager.SupplyListActivity;
 import com.appksa.warehousemanager.model.SupplyItem;
 
 import java.util.List;
@@ -36,14 +39,23 @@ public class SupplyListAdapter extends RecyclerView.Adapter<SupplyListAdapter.Su
         return new SupplyListAdapter.SupplyListViewHolder(supplyListRecyclerItem);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull SupplyListViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        holder.cardView.setCardBackgroundColor(Color.parseColor(supplyItemList.get(position).getBgColor()));
         holder.supplyItemTitle.setText(supplyItemList.get(position).getTitle());
         holder.supplyItemDate.setText(supplyItemList.get(position).getDate());
         holder.supplyItemStartAmount.setText(String.valueOf(supplyItemList.get(position).getStartAmount()));
         holder.supplyItemRestAmount.setText(String.valueOf(supplyItemList.get(position).getRestAmount()));
+        if(supplyItemList.get(position).getRestAmount() < 0){
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.attention_red));
+        }else{
+            if(supplyItemList.get(position).getBgColor() == null) {
+                holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
+            }else{
+                holder.cardView.setCardBackgroundColor(Color.parseColor(supplyItemList.get(position).getBgColor()));
+            }
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,21 +12,26 @@
         android:theme="@style/Theme.WarehouseManager"
         tools:targetApi="31">
         <activity
+            android:name=".CreateDispatchEventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreateSupplyItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".LogBookActivity"
             android:exported="false"
-            android:label="@string/log_book_activity_button"/>
+            android:label="@string/log_book_activity_button" />
         <activity
             android:name=".AboutProgramActivity"
             android:exported="false"
-            android:label="@string/about_program_button"/>
+            android:label="@string/about_program_button" />
         <activity
             android:name=".SupplyListActivity"
             android:exported="false"
-            android:label="@string/supply_list_activity_button"/>
+            android:label="@string/supply_list_activity_button" />
         <activity
             android:name=".SupplyItemActivity"
-            android:exported="false"
-            android:label="Одна позиция"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

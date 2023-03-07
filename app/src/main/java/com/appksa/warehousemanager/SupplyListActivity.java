@@ -35,7 +35,14 @@ public class SupplyListActivity extends AppCompatActivity {
 
     public void onMainActivityClick(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
+
+    public void onCreateButtonClick(View view) {
+        Intent intent = new Intent(this, CreateSupplyItemActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);//страховка
+        intent.putExtra("supplyItemId", MainActivity.warehouseState.getIdGen());
         startActivity(intent);
     }
 }

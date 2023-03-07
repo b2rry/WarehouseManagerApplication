@@ -30,20 +30,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void generateTestPositions(){
-        DispatchEvent dispatchEvent1 = new DispatchEvent(25,"contractor_one");
-        DispatchEvent dispatchEvent2 = new DispatchEvent(50,"contractor_two");
-        DispatchEvent dispatchEvent3 = new DispatchEvent(75,"contractor_three");
+        WarehouseState tempClassForId = new WarehouseState(10L, null, null);
+
+        DispatchEvent dispatchEvent1 = new DispatchEvent(25,"contractor_one", "15.02.19");
+        DispatchEvent dispatchEvent2 = new DispatchEvent(50,"contractor_two", "17.08.20");
+        DispatchEvent dispatchEvent3 = new DispatchEvent(75,"contractor_three", "25.06.21");
         List<DispatchEvent> dispatchEventsList = new ArrayList<>();
         dispatchEventsList.add(dispatchEvent1);
         dispatchEventsList.add(dispatchEvent2);
         dispatchEventsList.add(dispatchEvent3);
 
-        SupplyItem supplyItem1 = new SupplyItem(111L,"S-101/SC 06x06 SC Керамический наполнитель", "06.03.2023", 300, "Green",dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem2 = new SupplyItem(222L,"S-106/AC 08x20 HX+ Керамический наполнитель", "06.03.2023", 400, "Blue",dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem3 = new SupplyItem(333L,"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 300, "Green",dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem4 = new SupplyItem(444L,"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 300, "Blue",dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem5 = new SupplyItem(555L,"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 300, "Green",dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem6 = new SupplyItem(666L,"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 300, "Blue",dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem1 = new SupplyItem(tempClassForId.getIdGen(),"S-101/SC 06x06 SC Керамический наполнитель", "06.03.2023", 300, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem2 = new SupplyItem(tempClassForId.getIdGen(),"S-106/AC 08x20 HX+ Керамический наполнитель", "06.03.2023", 400, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem3 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 300, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem4 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 200, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem5 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 150, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem6 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 100, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
         List<SupplyItem> supplyItemsList = new ArrayList<>();
         supplyItemsList.add(supplyItem1);
         supplyItemsList.add(supplyItem2);
@@ -58,19 +60,19 @@ public class MainActivity extends AppCompatActivity {
         logBookItemsList.add(logBookItem1);
         logBookItemsList.add(logBookItem2);
 
-        warehouseState = new WarehouseState(500L, supplyItemsList, logBookItemsList);
+        warehouseState = new WarehouseState(16L, supplyItemsList, logBookItemsList);
     }
 
 
     public void onSupplyListActivityClick(View view) {
         Intent intent = new Intent(this, SupplyListActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
     public void onLogBookActivityClick(View view) {
         Intent intent = new Intent(this, LogBookActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
@@ -80,3 +82,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+//change intent flags, add activities and layouts, add recycler adapters

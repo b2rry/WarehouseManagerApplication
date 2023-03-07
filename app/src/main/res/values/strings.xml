@@ -9,6 +9,10 @@
     <string name="menu_button">Меню</string>
     <string name="back_button">Назад</string>
     <string name="edit_button">Изменить</string>
+    <string name="apply_button">Подтвердить</string>
+    <string name="create_button">Добавить</string>
+
+    <!--Fields names-->
     <string name="title_field">Название:</string>
     <string name="date_field">Дата прихода:</string>
     <string name="start_amount_field">Приход:</string>
@@ -17,5 +21,11 @@
     <string name="comment_field">Комментарий:</string>
     <string name="kg_field">кг</string>
 
-
+    <!--Messages names-->
+    <string name="create_item_message">Создание позиции</string>
+    <string name="edit_item_message">Изменение позиции</string>
+    <string name="show_item_message">Просмотр позиции</string>
+    <string name="error_message">ERROR!Inform developer if possible!</string>
+    <string name="enter_amount_message">Введите значение</string>
+    <string name="enter_text_message">Введите текст</string>
 </resources>

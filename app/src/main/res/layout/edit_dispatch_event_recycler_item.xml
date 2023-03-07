@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:layout_width="390dp"
-    android:layout_height="50dp">
+    android:layout_width="380dp"
+    android:layout_height="40dp">
 
     <androidx.cardview.widget.CardView
 
-        android:id="@+id/supply_item_recycler_card_view"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_width="380dp"
+        android:layout_height="35dp"
         android:layout_marginBottom="4dp"
         android:layout_marginTop="1dp"
+        app:cardBackgroundColor="@color/little_orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,49 +20,53 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/supply_item_recycler_title"
-                android:layout_width="210dp"
-                android:layout_height="45dp"
+                android:id="@+id/dispatch_event_recycler_contractor"
+                android:layout_width="170dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                tools:text="SC-101 08x08 AC Керамический наполнитель" />
+                tools:text="ООО &quot;Викор&quot;" />
+
 
             <TextView
-                android:id="@+id/supply_item_recycler_start_amount"
-                android:layout_width="43dp"
-                android:layout_height="45dp"
+                android:id="@+id/dispatch_event_recycler_amount"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:text="300" />
 
             <TextView
-                android:id="@+id/supply_item_recycler_rest_amount"
-                android:layout_width="43dp"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:singleLine="true"
-                tools:text="250" />
-
-            <TextView
-                android:id="@+id/supply_item_recycler_date"
+                android:id="@+id/dispatch_event_recycler_date"
                 android:layout_width="80dp"
-                android:layout_height="45dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="35dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:singleLine="true"
                 tools:text="05.06.22" />
+
+            <TextView
+                android:id="@+id/dispatch_event_recycler_click"
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/attention_red"
+                android:text="@string/edit_button"
+                android:textSize="16sp"/>
 
         </LinearLayout>
 
