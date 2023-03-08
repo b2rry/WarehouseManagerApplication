@@ -6,4 +6,102 @@
     android:layout_height="match_parent"
     tools:context=".CreateDispatchEventActivity">
 
+    <TextView
+        android:id="@+id/text_view_create_dispatch_1"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/contractor_field"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_create_dispatch_2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/dispatch_date_field"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_1" />
+
+    <TextView
+        android:id="@+id/text_view_create_dispatch_3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/amount_field"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_2" />
+
+    <EditText
+        android:id="@+id/edit_text_create_disp_event_contractor"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/enter_text_message"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_1"
+        app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_1"
+        app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_1" />
+
+    <EditText
+        android:id="@+id/edit_text_create_disp_event_date"
+        android:layout_width="150dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="6dp"
+        android:hint="@string/enter_text_message"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_2"
+        app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_2"
+        app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_2" />
+
+    <EditText
+        android:id="@+id/edit_text_create_disp_event_amount"
+        android:layout_width="150dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="6dp"
+        android:hint="@string/enter_amount_message"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_3"
+        app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_3"
+        app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_3" />
+
+    <TextView
+        android:id="@+id/text_view_create_dispatch_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="@string/kg_field"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_text_create_disp_event_amount"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_create_disp_event_amount"
+        app:layout_constraintTop_toTopOf="@+id/edit_text_create_disp_event_amount" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/back_button"
+        android:onClick="onBackButtonClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/apply_button"
+        android:onClick="onApplyButtonClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button13" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,13 +4,14 @@ public class DispatchEvent {
 
     private int amount;
     private String contractor;
-
     private String dispatchDate;
+    private Long dispatchId;
 
-    public DispatchEvent(int amount, String contractor, String dispatchDate) {
+    public DispatchEvent(int amount, String contractor, String dispatchDate, Long dispatchId) {
         this.amount = amount;
         this.contractor = contractor;
         this.dispatchDate = dispatchDate;
+        this.dispatchId = dispatchId;
     }
 
     public int getAmount() {
@@ -35,5 +36,13 @@ public class DispatchEvent {
 
     public void setDispatchDate(String dispatchDate) {
         this.dispatchDate = dispatchDate;
+    }
+
+    public Long getDispatchId() {
+        return dispatchId;
+    }
+
+    public void setDispatchId(Long dispatchId) {
+        this.dispatchId = dispatchId;
     }
 }

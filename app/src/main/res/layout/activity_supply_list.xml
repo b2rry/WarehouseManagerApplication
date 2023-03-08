@@ -58,11 +58,11 @@
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/supply_list_recycler"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"
-        android:id="@+id/supply_list_recycler"
         app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

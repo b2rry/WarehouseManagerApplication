@@ -7,19 +7,19 @@
     tools:context=".CreateSupplyItemActivity">
 
     <EditText
-        android:id="@+id/edit_text_start_amount"
+        android:id="@+id/edit_text_create_disp_event_amount"
         android:layout_width="150dp"
-        android:layout_height="40dp"
+        android:layout_height="37dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="7dp"
         android:hint="@string/enter_amount_message"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView9"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="@+id/textView9" />
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_3"
+        app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_3"
+        app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_3" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/text_view_create_dispatch_1"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -29,98 +29,98 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/text_view_create_dispatch_2"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="50dp"
         android:text="@string/date_field"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_1" />
 
     <EditText
-        android:id="@+id/edit_text_title"
-        android:layout_width="290dp"
-        android:layout_height="40dp"
+        android:id="@+id/edit_text_create_disp_event_contractor"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="4dp"
-        android:hint="@string/title_field"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
-
-    <EditText
-        android:id="@+id/edit_text_date"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="15dp"
         android:hint="@string/enter_text_message"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView6"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_1"
+        app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_1"
+        app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_1" />
+
+    <EditText
+        android:id="@+id/edit_text_create_disp_event_date"
+        android:layout_width="150dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="7dp"
+        android:hint="@string/enter_text_message"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_2"
+        app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_2"
+        app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_2" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/text_view_create_dispatch_3"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="25dp"
         android:text="@string/start_amount_field"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_2" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="15dp"
         android:text="@string/dispatches_field"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintBottom_toTopOf="@+id/recycler_edit_dispatch_events"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/text_view_create_dispatch_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/kg_field"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_text_start_amount"
-        app:layout_constraintStart_toEndOf="@+id/edit_text_start_amount"
-        app:layout_constraintTop_toTopOf="@+id/edit_text_start_amount" />
+        app:layout_constraintBottom_toBottomOf="@+id/edit_text_create_disp_event_amount"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_create_disp_event_amount"
+        app:layout_constraintTop_toTopOf="@+id/edit_text_create_disp_event_amount" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_edit_dispatch_events"
         android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        android:layout_height="130dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/button9"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="50dp"
         android:text="@string/comment_field"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_edit_dispatch_events" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_3" />
 
     <EditText
         android:id="@+id/edit_text_comment"
-        android:layout_width="380dp"
-        android:layout_height="40dp"
+        android:layout_width="370dp"
+        android:layout_height="90dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
-        android:text="@string/enter_text_message"
-        android:textSize="15sp"
+        android:hint="@string/enter_text_message"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
@@ -129,6 +129,7 @@
         android:layout_width="100dp"
         android:layout_height="35dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="1dp"
         android:onClick="onAddDispatchEventClick"
         android:text="@string/create_button"
         android:textSize="10sp"

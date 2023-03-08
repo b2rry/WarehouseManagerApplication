@@ -29,9 +29,10 @@ public class SupplyItemActivity extends AppCompatActivity {
 
         currentSupplyItem = getSupplyItemById(id);
         if(currentSupplyItem == null){
+            //if here then Error
             setTitle(R.string.error_message);
         }else {
-            setTitle(R.string.show_item_message);
+            setTitle(R.string.show_item_message + " " + id);
 
             System.out.println("Create supItem event!");
 
@@ -73,6 +74,7 @@ public class SupplyItemActivity extends AppCompatActivity {
     }
 
     public void onBackButtonClick(View view) {
+        //добавить ветвление если изменено то пересоздать лист
         Intent intent = new Intent(this, SupplyListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);

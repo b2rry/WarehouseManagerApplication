@@ -23,7 +23,10 @@ public class SupplyItem {
         this.bgColor = bgColor;
         this.dispatchEventsList = dispatchEventsList;
         this.comment = comment;
+        setCorrectRestAmount();
+    }
 
+    public void setCorrectRestAmount(){
         restAmount = startAmount;
         for(DispatchEvent eventItem: dispatchEventsList){
             restAmount -= eventItem.getAmount();
@@ -60,14 +63,11 @@ public class SupplyItem {
 
     public void setStartAmount(int startAmount) {
         this.startAmount = startAmount;
+        setCorrectRestAmount();
     }
 
     public int getRestAmount() {
         return restAmount;
-    }
-
-    public void setRestAmount(int restAmount) {
-        this.restAmount = restAmount;
     }
 
     public String getBgColor() {

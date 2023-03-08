@@ -61,6 +61,7 @@ public class SupplyListAdapter extends RecyclerView.Adapter<SupplyListAdapter.Su
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, SupplyItemActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
                 intent.putExtra("supplyItemId", supplyItemList.get(position).getId());
 //                intent.putExtra("supplyItemTitle", supplyItemList.get(position).getTitle());

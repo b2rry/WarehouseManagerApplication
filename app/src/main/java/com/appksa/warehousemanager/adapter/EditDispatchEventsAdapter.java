@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appksa.warehousemanager.CreateDispatchEventActivity;
+import com.appksa.warehousemanager.MainActivity;
 import com.appksa.warehousemanager.R;
 import com.appksa.warehousemanager.model.DispatchEvent;
 
@@ -21,10 +22,12 @@ public class EditDispatchEventsAdapter extends RecyclerView.Adapter<EditDispatch
 
     Context context;
     List<DispatchEvent> editDispatchEventList;
+    Long currItemId;
 
-    public EditDispatchEventsAdapter(Context context, List<DispatchEvent> editDispatchEventList) {
+    public EditDispatchEventsAdapter(Context context, List<DispatchEvent> editDispatchEventList, Long currItemId) {
         this.context = context;
         this.editDispatchEventList = editDispatchEventList;
+        this.currItemId = currItemId;
     }
 
     @NonNull
@@ -45,10 +48,14 @@ public class EditDispatchEventsAdapter extends RecyclerView.Adapter<EditDispatch
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, CreateDispatchEventActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
                 intent.putExtra("dispatchEventDate", editDispatchEventList.get(position).getDispatchDate());
                 intent.putExtra("dispatchEventAmount", editDispatchEventList.get(position).getAmount());
                 intent.putExtra("dispatchEventContractor", editDispatchEventList.get(position).getContractor());
+                intent.putExtra("supplyItemId", currItemId);
+                intent.putExtra("isNewDispatch", false);
+                intent.putExtra("eventId", editDispatchEventList.get(position).getDispatchId());
 //                intent.putExtra("supplyItemTitle", supplyItemList.get(position).getTitle());
 //                intent.putExtra("supplyItemDate", supplyItemList.get(position).getDate());
 //                intent.putExtra("supplyItemStartAmount", supplyItemList.get(position).getStartAmount());
@@ -57,6 +64,7 @@ public class EditDispatchEventsAdapter extends RecyclerView.Adapter<EditDispatch
 //                intent.putExtra("supplyItemComment", supplyItemList.get(position).getComment());
 //                intent.putExtra("supplyItemDispatchEventsList", supplyItemList.get(position).getDispatchEventsList());
                 context.startActivity(intent);
+
             }
         });
 

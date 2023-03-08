@@ -20,6 +20,9 @@
     <string name="dispatches_field">Отгрузки:</string>
     <string name="comment_field">Комментарий:</string>
     <string name="kg_field">кг</string>
+    <string name="contractor_field">Контрагент:</string>
+    <string name="dispatch_date_field">Дата отгрузки:</string>
+    <string name="amount_field">Количество:</string>
 
     <!--Messages names-->
     <string name="create_item_message">Создание позиции</string>
@@ -28,4 +31,10 @@
     <string name="error_message">ERROR!Inform developer if possible!</string>
     <string name="enter_amount_message">Введите значение</string>
     <string name="enter_text_message">Введите текст</string>
+    <string name="create_dispatch_event_message">Добавление отгрузки</string>
+    <string name="change_dispatch_event_message">Изменение отгрузки</string>
+    <string name="incorrect_amount_format_message">Некорректный формат данных в поле "Количество"</string>
+    <string name="incorrect_prihod_format_message">Некорректный формат данных в поле "Приход"</string>
+    <string name="decline_dispatch_event_message">Чтобы добавить отгрузку создайте позицию"</string>
+
 </resources>
