@@ -12,13 +12,13 @@
         android:theme="@style/Theme.WarehouseManager"
         tools:targetApi="31">
         <activity
-            android:name=".CreateDispatchEventActivity"
+            android:name=".CreateChangeDispatchEventActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"
             android:windowSoftInputMode="adjustPan"/><!--атрибут для сдвига активности при выдвижении клавиатуры-->
         <activity
-            android:name=".CreateSupplyItemActivity"
+            android:name=".CreateChangeSupplyItemActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"

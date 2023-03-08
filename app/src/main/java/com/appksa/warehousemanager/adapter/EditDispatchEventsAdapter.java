@@ -11,8 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appksa.warehousemanager.CreateDispatchEventActivity;
-import com.appksa.warehousemanager.MainActivity;
+import com.appksa.warehousemanager.CreateChangeDispatchEventActivity;
 import com.appksa.warehousemanager.R;
 import com.appksa.warehousemanager.model.DispatchEvent;
 
@@ -47,7 +46,7 @@ public class EditDispatchEventsAdapter extends RecyclerView.Adapter<EditDispatch
         holder.dispatchEventEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, CreateDispatchEventActivity.class);
+                Intent intent = new Intent(context, CreateChangeDispatchEventActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
                 intent.putExtra("dispatchEventDate", editDispatchEventList.get(position).getDispatchDate());

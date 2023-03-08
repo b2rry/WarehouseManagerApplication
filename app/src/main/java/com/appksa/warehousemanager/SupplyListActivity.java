@@ -40,7 +40,7 @@ public class SupplyListActivity extends AppCompatActivity {
     }
 
     public void onCreateButtonClick(View view) {
-        Intent intent = new Intent(this, CreateSupplyItemActivity.class);
+        Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);//страховка
         intent.putExtra("supplyItemId", MainActivity.warehouseState.getIdGen());
         startActivity(intent);

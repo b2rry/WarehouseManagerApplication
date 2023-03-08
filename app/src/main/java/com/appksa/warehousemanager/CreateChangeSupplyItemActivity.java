@@ -17,7 +17,7 @@ import com.appksa.warehousemanager.model.SupplyItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateSupplyItemActivity extends AppCompatActivity {
+public class CreateChangeSupplyItemActivity extends AppCompatActivity {
 
     private SupplyItem currentSupplyItem;
     private int currentSupplyItemInd;
@@ -30,7 +30,7 @@ public class CreateSupplyItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_supply_item);
+        setContentView(R.layout.activity_create_change_supply_item);
 
         Long id = getIntent().getLongExtra("supplyItemId", 0);
 
@@ -129,7 +129,7 @@ public class CreateSupplyItemActivity extends AppCompatActivity {
         if(isCreationProcess) {
             Toast.makeText(getApplicationContext(), R.string.decline_dispatch_event_message, Toast.LENGTH_LONG).show();
         }else{
-            Intent intent = new Intent(this, CreateDispatchEventActivity.class);
+            Intent intent = new Intent(this, CreateChangeDispatchEventActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             intent.putExtra("supplyItemId", currentSupplyItem.getId());
             intent.putExtra("isNewDispatch", true);

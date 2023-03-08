@@ -11,10 +11,9 @@ import android.widget.Toast;
 import com.appksa.warehousemanager.model.DispatchEvent;
 import com.appksa.warehousemanager.model.SupplyItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CreateDispatchEventActivity extends AppCompatActivity {
+public class CreateChangeDispatchEventActivity extends AppCompatActivity {
 
     private SupplyItem currentSupplyItem;
     private int currSupplyItemInd;
@@ -29,7 +28,7 @@ public class CreateDispatchEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_dispatch_event);
+        setContentView(R.layout.activity_create_change_dispatch_event);
 
         Long id = getIntent().getLongExtra("supplyItemId", 0);
         isNewDispatch = getIntent().getBooleanExtra("isNewDispatch", true);
@@ -86,7 +85,7 @@ public class CreateDispatchEventActivity extends AppCompatActivity {
     }
 
     public void onBackButtonClick(View view) {
-        Intent intent = new Intent(this, CreateSupplyItemActivity.class);
+        Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
@@ -117,7 +116,7 @@ public class CreateDispatchEventActivity extends AppCompatActivity {
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmount();
             }
 
-            Intent intent = new Intent(this, CreateSupplyItemActivity.class);
+            Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP); //нету FLAG_ACTIVITY_SINGLE_TOP тк нужно пересоздать create_item_act
             intent.putExtra("supplyItemId", currentSupplyItem.getId());
             startActivity(intent);

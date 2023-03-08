@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.appksa.warehousemanager.adapter.DispatchEventAdapter;
-import com.appksa.warehousemanager.adapter.SupplyListAdapter;
-import com.appksa.warehousemanager.model.DispatchEvent;
 import com.appksa.warehousemanager.model.SupplyItem;
 
 import java.util.List;
@@ -81,7 +79,7 @@ public class SupplyItemActivity extends AppCompatActivity {
     }
 
     public void onChangeButtonClick(View view) {
-        Intent intent = new Intent(this, CreateSupplyItemActivity.class);
+        Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);//страховка
         intent.putExtra("supplyItemId", currentSupplyItem.getId());
         startActivity(intent);
