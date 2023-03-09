@@ -65,7 +65,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:singleLine="true"
-                android:textColor="@color/attention_red"
+                android:textColor="@color/soft_red"
                 android:text="@string/edit_button"
                 android:textSize="16sp"/>
 

@@ -64,9 +64,9 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
             editTextComment.setText(currentSupplyItem.getComment());
 
             switch(currentSupplyItem.getBgColor()){
-                case (R.color.transparent):
-                    RadioButton transparentButton = findViewById(R.id.color_change_radio_button_transparent);
-                    transparentButton.setChecked(true);
+                case (R.color.app_custom_background_light_grey):
+                    RadioButton lightGreyButton = findViewById(R.id.color_change_radio_button_light_grey);
+                    lightGreyButton.setChecked(true);
                     break;
                 case (R.color.app_custom_background_grey):
                     RadioButton greyButton = findViewById(R.id.color_change_radio_button_grey);
@@ -97,16 +97,16 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
                     purpleButton.setChecked(true);
                     break;
                 default:
-                    RadioButton transparentButton2 = findViewById(R.id.color_change_radio_button_transparent);
-                    transparentButton2.setChecked(true);
+                    RadioButton lightGreyButton2 = findViewById(R.id.color_change_radio_button_light_grey);
+                    lightGreyButton2.setChecked(true);
                     break;
             }
 
         }else{
             //create
             currentSupplyItem = new SupplyItem(id, "NAME", "DATE", 0, 0, new ArrayList<DispatchEvent>(), "");
-            RadioButton transparentButton = findViewById(R.id.color_change_radio_button_transparent);
-            transparentButton.setChecked(true);
+            RadioButton lightGreyButton = findViewById(R.id.color_change_radio_button_light_grey);
+            lightGreyButton.setChecked(true);
         }
 
     }
@@ -179,8 +179,8 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
 
             int selectedRadioButtonId = changeColorRadioGroup.getCheckedRadioButtonId();
             switch(selectedRadioButtonId){
-                case (R.id.color_change_radio_button_transparent) :
-                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.transparent);
+                case (R.id.color_change_radio_button_light_grey) :
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.app_custom_background_light_grey);
                     break;
                 case (R.id.color_change_radio_button_grey) :
                     MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.app_custom_background_grey);
@@ -204,7 +204,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
                     MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.app_custom_background_purple);
                     break;
                 default:
-                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.transparent);
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.app_custom_background_light_grey);
                     break;
             }
 
