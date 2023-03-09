@@ -9,13 +9,13 @@ public class SupplyItem {
     private String date;
     private int startAmount;
     private int restAmount;
-    private String bgColor;
+    private int bgColor;
     private List<DispatchEvent> dispatchEventsList;
     private String comment;
 
     //возможно нужны пустые конструкторы для десериализации из json
 
-    public SupplyItem(Long id, String title, String date, int startAmount, String bgColor, List<DispatchEvent> dispatchEventsList, String comment) {
+    public SupplyItem(Long id, String title, String date, int startAmount, int bgColor, List<DispatchEvent> dispatchEventsList, String comment) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -70,11 +70,11 @@ public class SupplyItem {
         return restAmount;
     }
 
-    public String getBgColor() {
+    public int getBgColor() {
         return bgColor;
     }
 
-    public void setBgColor(String bgColor) {
+    public void setBgColor(int bgColor) {
         this.bgColor = bgColor;
     }
 

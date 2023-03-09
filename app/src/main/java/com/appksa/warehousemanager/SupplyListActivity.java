@@ -17,11 +17,6 @@ public class SupplyListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supply_list);
 
-
-
-    }
-    @Override
-    protected void onResume() {
         RecyclerView supplyListRecycler = findViewById(R.id.supply_list_recycler);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
@@ -30,6 +25,9 @@ public class SupplyListActivity extends AppCompatActivity {
         SupplyListAdapter supplyListAdapter = new SupplyListAdapter(this, MainActivity.warehouseState.getSupplyItemsList());
         supplyListRecycler.setAdapter(supplyListAdapter);
 
+    }
+    @Override
+    protected void onResume() {
         super.onResume();
     }
 
@@ -41,7 +39,7 @@ public class SupplyListActivity extends AppCompatActivity {
 
     public void onCreateButtonClick(View view) {
         Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);//страховка
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("supplyItemId", MainActivity.warehouseState.getIdGen());
         startActivity(intent);
     }

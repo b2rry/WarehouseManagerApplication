@@ -10,10 +10,11 @@
     <color name="little_orange">#FDDEB5</color>
     <color name="attention_red">#FB5C5C</color>
     <color name="transparent">@android:color/transparent</color>
-    <color name="app_custom_background_red">#66ff0000</color>
-    <color name="app_custom_background_blue">#660000FF</color>
-    <color name="app_custom_background_green">#66008000</color>
     <color name="app_custom_background_grey">#33000000</color>
-    <color name="app_custom_background_yellow">#66FFFF00</color>
-
+    <color name="app_custom_background_red">#55ff0000</color>
+    <color name="app_custom_background_orange">#55FF8C00</color>
+    <color name="app_custom_background_yellow">#55FFFF00</color>
+    <color name="app_custom_background_green">#55008000</color>
+    <color name="app_custom_background_blue">#550000FF</color>
+    <color name="app_custom_background_purple">#55800080</color>
 </resources>

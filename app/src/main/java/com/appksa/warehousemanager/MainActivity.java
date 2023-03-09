@@ -24,9 +24,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         generateTestPositions();
-
-
-
     }
 
     public void generateTestPositions(){
@@ -46,14 +43,14 @@ public class MainActivity extends AppCompatActivity {
         dispatchEventsList.add(dispatchEvent5);
         dispatchEventsList.add(dispatchEvent6);
 
-        SupplyItem supplyItem1 = new SupplyItem(tempClassForId.getIdGen(),"S-101/SC 06x06 SC Керамический наполнитель", "06.03.2023", 300, "green", dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem2 = new SupplyItem(tempClassForId.getIdGen(),"S-106/AC 08x20 HX+ Керамический наполнитель", "06.03.2023", 400, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem3 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 300, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem4 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 200, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem5 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 150, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem6 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 100, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem7 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 150, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem8 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 200, null, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem1 = new SupplyItem(tempClassForId.getIdGen(),"S-101/SC 06x06 SC Керамический наполнитель", "06.03.2023", 300, R.color.transparent, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem2 = new SupplyItem(tempClassForId.getIdGen(),"S-106/AC 08x20 HX+ Керамический наполнитель", "06.03.2023", 400, R.color.transparent, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem3 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 300, R.color.transparent, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem4 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 200, R.color.transparent, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem5 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 150, R.color.transparent, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem6 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 100, R.color.transparent, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem7 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 150, R.color.transparent, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem8 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 200, R.color.transparent, dispatchEventsList,"Test comment line. Here will be comments about this supply item!");
         List<SupplyItem> supplyItemsList = new ArrayList<>();
         supplyItemsList.add(supplyItem1);
         supplyItemsList.add(supplyItem2);
@@ -92,4 +89,3 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
-//change intent flags, add activities and layouts, add recycler adapters

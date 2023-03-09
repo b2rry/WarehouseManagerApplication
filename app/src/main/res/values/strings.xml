@@ -11,6 +11,7 @@
     <string name="edit_button">Изменить</string>
     <string name="apply_button">Подтвердить</string>
     <string name="create_button">Добавить</string>
+    <string name="all_positions_button">Все позиции</string>
 
     <!--Fields names-->
     <string name="title_field">Название:</string>
@@ -36,5 +37,6 @@
     <string name="incorrect_amount_format_message">Некорректный формат данных в поле "Количество"</string>
     <string name="incorrect_prihod_format_message">Некорректный формат данных в поле "Приход"</string>
     <string name="decline_dispatch_event_message">Чтобы добавить отгрузку создайте позицию"</string>
+    <string name="Choose_supply_item_color_message">Выберите цвет заднего фона</string>
 
 </resources>

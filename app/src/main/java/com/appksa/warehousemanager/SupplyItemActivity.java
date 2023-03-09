@@ -17,6 +17,7 @@ import java.util.List;
 public class SupplyItemActivity extends AppCompatActivity {
 
     SupplyItem currentSupplyItem;
+    private boolean isChanged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +25,14 @@ public class SupplyItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_supply_item);
 
         Long id = getIntent().getLongExtra("supplyItemId", 0);
+        isChanged = getIntent().getBooleanExtra("isChanged", false);
 
         currentSupplyItem = getSupplyItemById(id);
         if(currentSupplyItem == null){
             //if here then Error
             setTitle(R.string.error_message);
         }else {
-            setTitle(R.string.show_item_message + " " + id);
+            setTitle(R.string.show_item_message + " позиция с id " + id);
 
             System.out.println("Create supItem event!");
 
@@ -71,16 +73,19 @@ public class SupplyItemActivity extends AppCompatActivity {
         return null;
     }
 
-    public void onBackButtonClick(View view) {
-        //добавить ветвление если изменено то пересоздать лист
+    public void onAllPositionsButtonClick(View view) {
         Intent intent = new Intent(this, SupplyListActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        if(!isChanged) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        }else{
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
         startActivity(intent);
     }
 
     public void onChangeButtonClick(View view) {
         Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);//страховка
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("supplyItemId", currentSupplyItem.getId());
         startActivity(intent);
     }

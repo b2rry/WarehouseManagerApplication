@@ -50,11 +50,8 @@ public class SupplyListAdapter extends RecyclerView.Adapter<SupplyListAdapter.Su
         if(supplyItemList.get(position).getRestAmount() < 0){
             holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.attention_red));
         }else{
-            if(supplyItemList.get(position).getBgColor() == null) {
-                holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
-            }else{
-                holder.cardView.setCardBackgroundColor(Color.parseColor(supplyItemList.get(position).getBgColor()));
-            }
+            int colorId = supplyItemList.get(position).getBgColor();
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, colorId));
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

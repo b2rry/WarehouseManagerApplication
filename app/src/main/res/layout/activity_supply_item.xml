@@ -60,7 +60,7 @@
 
     <TextView
         android:id="@+id/textView_title"
-        android:layout_width="290dp"
+        android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:text="@string/title_field"
@@ -94,11 +94,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
         android:text="@string/dispatches_field"
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintBottom_toTopOf="@+id/recycler_dispatch_events"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/text_view_create_dispatch_4"
@@ -123,26 +123,26 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_dispatch_events"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        android:layout_height="130dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:text="@string/comment_field"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_dispatch_events" />
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
         android:id="@+id/textView_comment"
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:text="@string/comment_field"
@@ -157,8 +157,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/back_button"
-        android:onClick="onBackButtonClick"
+        android:text="@string/all_positions_button"
+        android:onClick="onAllPositionsButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -168,8 +168,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/edit_button"
         android:onClick="onChangeButtonClick"
+        android:text="@string/edit_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button7" />
 </androidx.constraintlayout.widget.ConstraintLayout>

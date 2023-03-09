@@ -49,9 +49,9 @@ public class EditDispatchEventsAdapter extends RecyclerView.Adapter<EditDispatch
                 Intent intent = new Intent(context, CreateChangeDispatchEventActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
-                intent.putExtra("dispatchEventDate", editDispatchEventList.get(position).getDispatchDate());
-                intent.putExtra("dispatchEventAmount", editDispatchEventList.get(position).getAmount());
-                intent.putExtra("dispatchEventContractor", editDispatchEventList.get(position).getContractor());
+                //intent.putExtra("dispatchEventDate", editDispatchEventList.get(position).getDispatchDate());
+                //intent.putExtra("dispatchEventAmount", editDispatchEventList.get(position).getAmount());
+                //intent.putExtra("dispatchEventContractor", editDispatchEventList.get(position).getContractor());
                 intent.putExtra("supplyItemId", currItemId);
                 intent.putExtra("isNewDispatch", false);
                 intent.putExtra("eventId", editDispatchEventList.get(position).getDispatchId());

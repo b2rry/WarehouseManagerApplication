@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.appksa.warehousemanager.adapter.EditDispatchEventsAdapter;
@@ -19,16 +21,18 @@ import java.util.List;
 
 public class CreateChangeSupplyItemActivity extends AppCompatActivity {
 
-    private SupplyItem currentSupplyItem;
-    private int currentSupplyItemInd;
-    private boolean isCreationProcess;
+    private SupplyItem currentSupplyItem; // поле текущей позиции склада
+    private int currentSupplyItemInd; // поле индекса в коллекции текущей позиции склада
+    private boolean isCreationProcess; // поле для хранения состояния действия пользователя, создания или изменения позиции
     EditText editTextTitle;
     EditText editTextDate;
     EditText editTextStartAmount;
     EditText editTextComment;
+    RadioGroup changeColorRadioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_change_supply_item);
 
@@ -50,6 +54,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
         editTextDate = findViewById(R.id.edit_text_create_disp_event_date);
         editTextStartAmount = findViewById(R.id.edit_text_create_disp_event_amount);
         editTextComment = findViewById(R.id.edit_text_comment);
+        changeColorRadioGroup = findViewById(R.id.supply_item_color_radio_group);
 
         if(currentSupplyItem != null){
             //change
@@ -57,10 +62,57 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
             editTextDate.setText(currentSupplyItem.getDate());
             editTextStartAmount.setText(String.valueOf(currentSupplyItem.getStartAmount()));
             editTextComment.setText(currentSupplyItem.getComment());
+
+            switch(currentSupplyItem.getBgColor()){
+                case (R.color.transparent):
+                    RadioButton transparentButton = findViewById(R.id.color_change_radio_button_transparent);
+                    transparentButton.setChecked(true);
+                    break;
+                case (R.color.app_custom_background_grey):
+                    RadioButton greyButton = findViewById(R.id.color_change_radio_button_grey);
+                    greyButton.setChecked(true);
+                    break;
+                case (R.color.app_custom_background_red):
+                    RadioButton redButton = findViewById(R.id.color_change_radio_button_red);
+                    redButton.setChecked(true);
+                    break;
+                case (R.color.app_custom_background_orange):
+                    RadioButton orangeButton = findViewById(R.id.color_change_radio_button_orange);
+                    orangeButton.setChecked(true);
+                    break;
+                case (R.color.app_custom_background_yellow):
+                    RadioButton yellowButton = findViewById(R.id.color_change_radio_button_yellow);
+                    yellowButton.setChecked(true);
+                    break;
+                case (R.color.app_custom_background_green):
+                    RadioButton greenButton = findViewById(R.id.color_change_radio_button_green);
+                    greenButton.setChecked(true);
+                    break;
+                case (R.color.app_custom_background_blue):
+                    RadioButton blueButton = findViewById(R.id.color_change_radio_button_blue);
+                    blueButton.setChecked(true);
+                    break;
+                case (R.color.app_custom_background_purple):
+                    RadioButton purpleButton = findViewById(R.id.color_change_radio_button_purple);
+                    purpleButton.setChecked(true);
+                    break;
+                default:
+                    RadioButton transparentButton2 = findViewById(R.id.color_change_radio_button_transparent);
+                    transparentButton2.setChecked(true);
+                    break;
+            }
+
         }else{
             //create
-            currentSupplyItem = new SupplyItem(id, "NAME", "DATE", 0, null, new ArrayList<DispatchEvent>(), "");
+            currentSupplyItem = new SupplyItem(id, "NAME", "DATE", 0, 0, new ArrayList<DispatchEvent>(), "");
+            RadioButton transparentButton = findViewById(R.id.color_change_radio_button_transparent);
+            transparentButton.setChecked(true);
         }
+
+    }
+
+    @Override
+    protected void onResume() {
 
         RecyclerView editDispatchEventsRecycler = findViewById(R.id.recycler_edit_dispatch_events);
 
@@ -69,6 +121,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
 
         EditDispatchEventsAdapter editDispatchEventsAdapter = new EditDispatchEventsAdapter(this, currentSupplyItem.getDispatchEventsList(), currentSupplyItem.getId());
         editDispatchEventsRecycler.setAdapter(editDispatchEventsAdapter);
+        super.onResume();
 
     }
 
@@ -85,9 +138,15 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
     }
 
     public void onBackButtonClick(View view) {
-        Intent intent = new Intent(this, SupplyItemActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP); //нету FLAG_ACTIVITY_SINGLE_TOP тк нужно пересоздать item тк вероятно была добавлена/изменена отгрузка
-        intent.putExtra("supplyItemId", currentSupplyItem.getId());
+        Intent intent;
+        if(!isCreationProcess) {
+            intent = new Intent(this, SupplyItemActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP); //нету FLAG_ACTIVITY_SINGLE_TOP тк нужно пересоздать item тк вероятно была добавлена/изменена отгрузка
+            intent.putExtra("supplyItemId", currentSupplyItem.getId());
+        }else{
+            intent = new Intent(this, SupplyListActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        }
         startActivity(intent);
     }
 
@@ -118,9 +177,41 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
                 MainActivity.warehouseState.getSupplyItemsList().add(currentSupplyItem);
             }
 
+            int selectedRadioButtonId = changeColorRadioGroup.getCheckedRadioButtonId();
+            switch(selectedRadioButtonId){
+                case (R.id.color_change_radio_button_transparent) :
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.transparent);
+                    break;
+                case (R.id.color_change_radio_button_grey) :
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.app_custom_background_grey);
+                    break;
+                case (R.id.color_change_radio_button_red) :
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.app_custom_background_red);
+                    break;
+                case (R.id.color_change_radio_button_orange) :
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.app_custom_background_orange);
+                    break;
+                case (R.id.color_change_radio_button_yellow) :
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.app_custom_background_yellow);
+                    break;
+                case (R.id.color_change_radio_button_green) :
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.app_custom_background_green);
+                    break;
+                case (R.id.color_change_radio_button_blue) :
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.app_custom_background_blue);
+                    break;
+                case (R.id.color_change_radio_button_purple) :
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.app_custom_background_purple);
+                    break;
+                default:
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(R.color.transparent);
+                    break;
+            }
+
             Intent intent = new Intent(this, SupplyItemActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP); //нету FLAG_ACTIVITY_SINGLE_TOP тк нужно пересоздать измененный item
             intent.putExtra("supplyItemId", currentSupplyItem.getId());
+            intent.putExtra("isChanged", true);
             startActivity(intent);
         }
     }
@@ -138,4 +229,3 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
         }
     }
 }
-//нужно сохранять состояние активности (уже измененные, но не сохраненные поля ввода) при возврате из активности добавления/изменения отгрузки

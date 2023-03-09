@@ -15,11 +15,11 @@ import java.util.List;
 
 public class CreateChangeDispatchEventActivity extends AppCompatActivity {
 
-    private SupplyItem currentSupplyItem;
-    private int currSupplyItemInd;
-    private DispatchEvent currDispatchEvent;
-    private int currDispatchEventInd;
-    private boolean isNewDispatch;
+    private SupplyItem currentSupplyItem; // поле для редактируемого item
+    private int currSupplyItemInd; // поле для индекса в листе редактируемого item
+    private DispatchEvent currDispatchEvent; // поле для редактируемого event
+    private int currDispatchEventInd; // поле для индекса в листе редактируемого event
+    private boolean isNewDispatch; // флаг создания нового event
     EditText editTextContractor;
     EditText editTextDate;
     EditText editTextAmount;
@@ -117,8 +117,7 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
             }
 
             Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP); //нету FLAG_ACTIVITY_SINGLE_TOP тк нужно пересоздать create_item_act
-            intent.putExtra("supplyItemId", currentSupplyItem.getId());
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP); //флаг FLAG_ACTIVITY_SINGLE_TOP присутствует тк можно не пересоздавать create_item_activity, из-за пересоздания recycler в методе onResume
             startActivity(intent);
         }
     }
