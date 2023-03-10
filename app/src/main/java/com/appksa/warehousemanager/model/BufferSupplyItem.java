@@ -2,21 +2,18 @@ package com.appksa.warehousemanager.model;
 
 import java.util.List;
 
-public class SupplyItem {
+public class BufferSupplyItem {
 
     private Long id;
     private String title;
     private String date;
-    private int startAmount;
-    private int stringStartAmount; //временное поле для буфера
-    private int restAmount;
+    private String startAmount;
+    private String restAmount;
     private int bgColor;
     private List<DispatchEvent> dispatchEventsList;
     private String comment;
 
-    //возможно нужны пустые конструкторы для десериализации из json
-
-    public SupplyItem(Long id, String title, String date, int startAmount, int bgColor, List<DispatchEvent> dispatchEventsList, String comment) {
+    public BufferSupplyItem(Long id, String title, String date, String startAmount, int bgColor, List<DispatchEvent> dispatchEventsList, String comment) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -24,15 +21,8 @@ public class SupplyItem {
         this.bgColor = bgColor;
         this.dispatchEventsList = dispatchEventsList;
         this.comment = comment;
-        setCorrectRestAmount();
     }
 
-    public void setCorrectRestAmount(){
-        restAmount = startAmount;
-        for(DispatchEvent eventItem: dispatchEventsList){
-            restAmount -= eventItem.getAmount();
-        }
-    }
 
     public Long getId() {
         return id;
@@ -58,17 +48,20 @@ public class SupplyItem {
         this.date = date;
     }
 
-    public int getStartAmount() {
+    public String getStartAmount() {
         return startAmount;
     }
 
-    public void setStartAmount(int startAmount) {
+    public void setStartAmount(String startAmount) {
         this.startAmount = startAmount;
-        setCorrectRestAmount();
     }
 
-    public int getRestAmount() {
+    public String getRestAmount() {
         return restAmount;
+    }
+
+    public void setRestAmount(String restAmount) {
+        this.restAmount = restAmount;
     }
 
     public int getBgColor() {
@@ -93,13 +86,5 @@ public class SupplyItem {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public int getStringStartAmount() {
-        return stringStartAmount;
-    }
-
-    public void setStringStartAmount(int stringStartAmount) {
-        this.stringStartAmount = stringStartAmount;
     }
 }

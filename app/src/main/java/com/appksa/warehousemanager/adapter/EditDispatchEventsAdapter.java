@@ -9,10 +9,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appksa.warehousemanager.CreateChangeDispatchEventActivity;
+import com.appksa.warehousemanager.CreateChangeSupplyItemActivity;
 import com.appksa.warehousemanager.R;
+import com.appksa.warehousemanager.dialog.AcceptDeletionDispatchEventDialogFragment;
+import com.appksa.warehousemanager.dialog.AcceptDeletionSupplyItemDialogFragment;
 import com.appksa.warehousemanager.model.DispatchEvent;
 
 import java.util.List;
@@ -47,21 +51,11 @@ public class EditDispatchEventsAdapter extends RecyclerView.Adapter<EditDispatch
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, CreateChangeDispatchEventActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
-                //intent.putExtra("dispatchEventDate", editDispatchEventList.get(position).getDispatchDate());
-                //intent.putExtra("dispatchEventAmount", editDispatchEventList.get(position).getAmount());
-                //intent.putExtra("dispatchEventContractor", editDispatchEventList.get(position).getContractor());
                 intent.putExtra("supplyItemId", currItemId);
                 intent.putExtra("isNewDispatch", false);
                 intent.putExtra("eventId", editDispatchEventList.get(position).getDispatchId());
-//                intent.putExtra("supplyItemTitle", supplyItemList.get(position).getTitle());
-//                intent.putExtra("supplyItemDate", supplyItemList.get(position).getDate());
-//                intent.putExtra("supplyItemStartAmount", supplyItemList.get(position).getStartAmount());
-//                intent.putExtra("supplyItemRestAmount", supplyItemList.get(position).getRestAmount());
-//                intent.putExtra("supplyItemBgColor", Color.parseColor(supplyItemList.get(position).getBgColor()));
-//                intent.putExtra("supplyItemComment", supplyItemList.get(position).getComment());
-//                intent.putExtra("supplyItemDispatchEventsList", supplyItemList.get(position).getDispatchEventsList());
+
                 context.startActivity(intent);
 
             }
@@ -84,7 +78,7 @@ public class EditDispatchEventsAdapter extends RecyclerView.Adapter<EditDispatch
             dispatchEventContractor = itemView.findViewById(R.id.dispatch_event_recycler_contractor);
             dispatchEventAmount = itemView.findViewById(R.id.dispatch_event_recycler_amount);
             dispatchEventDate = itemView.findViewById(R.id.dispatch_event_recycler_date);
-            dispatchEventEditButton = itemView.findViewById(R.id.dispatch_event_recycler_click);
+            dispatchEventEditButton = itemView.findViewById(R.id.dispatch_event_recycler_edit_click);
 
         }
     }

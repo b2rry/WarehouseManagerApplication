@@ -12,11 +12,24 @@ public class LogBookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_book);
+
+        System.out.println("\t\t\t\t\tLogBookActivity Created");
+
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        System.out.println("\t\t\t\t\tLogBookActivity Resumed");
+    }
+    @Override
+    protected void onDestroy() {
+        System.out.println("\t\t\t\t\tLogBookActivity Destroyed");
+        super.onDestroy();
+    }
     public void onMainActivityClick(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 }

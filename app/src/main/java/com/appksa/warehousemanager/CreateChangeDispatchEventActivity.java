@@ -1,13 +1,23 @@
 package com.appksa.warehousemanager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.appksa.warehousemanager.adapter.EditDispatchEventsAdapter;
+import com.appksa.warehousemanager.dialog.AcceptDeletionDispatchEventDialogFragment;
+import com.appksa.warehousemanager.dialog.AcceptDeletionSupplyItemDialogFragment;
 import com.appksa.warehousemanager.model.DispatchEvent;
 import com.appksa.warehousemanager.model.SupplyItem;
 
@@ -30,20 +40,22 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_change_dispatch_event);
 
+        System.out.println("\t\t\t\t\tCreateChangeDispatchEventActivity Created");
+
         Long id = getIntent().getLongExtra("supplyItemId", 0);
         isNewDispatch = getIntent().getBooleanExtra("isNewDispatch", true);
-        Long eventId = getIntent().getLongExtra("eventId", 0);
+        Long eventId = getIntent().getLongExtra("eventId", 0);  //забыл для чего
 
         currentSupplyItem = getSupplyItemById(id);
 
-        if(!isNewDispatch) {
-            //change
-            setTitle(R.string.change_dispatch_event_message + " изменение " + eventId + " eid");
-            currDispatchEvent = getDispatchEventById(eventId);
-        }else{
+        if(isNewDispatch) {
             //create
             setTitle(R.string.create_dispatch_event_message + " создание " + eventId + " eid");
             currDispatchEvent = new DispatchEvent(0, "CONTRACTOR", "DATE", eventId);
+        }else{
+            //change
+            setTitle(R.string.change_dispatch_event_message + " изменение " + eventId + " eid");
+            currDispatchEvent = getDispatchEventById(eventId);
         }
 
         editTextContractor = findViewById(R.id.edit_text_create_disp_event_contractor);
@@ -57,6 +69,17 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
             editTextAmount.setText(String.valueOf(currDispatchEvent.getAmount()));
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        System.out.println("\t\t\t\t\tCreateChangeDispatchEventActivity Resumed");
+        super.onResume();
+    }
+    @Override
+    protected void onDestroy() {
+        System.out.println("\t\t\t\t\tCreateChangeDispatchEventActivity Destroyed");
+        super.onDestroy();
     }
 
     protected SupplyItem getSupplyItemById(Long id){
@@ -84,9 +107,22 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
         return null;
     }
 
+    @Override
+    public boolean dispatchTouchEvent(@NonNull MotionEvent event) { // переопределенный метод для скрытия клавитауры при нажатии не на клавиатуре
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                v.clearFocus();
+                InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        }
+        return super.dispatchTouchEvent(event);
+    }
+
     public void onBackButtonClick(View view) {
         Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
@@ -117,8 +153,24 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
             }
 
             Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP); //флаг FLAG_ACTIVITY_SINGLE_TOP присутствует тк можно не пересоздавать create_item_activity, из-за пересоздания recycler в методе onResume
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("isChanged", true);
+            intent.putExtra("supplyItemId", currentSupplyItem.getId());
             startActivity(intent);
         }
+    }
+    public void onDeleteButtonClick(View view) {
+        AcceptDeletionDispatchEventDialogFragment myDialogFragment = new AcceptDeletionDispatchEventDialogFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        myDialogFragment.show(fragmentManager, "deleteConfirm");
+    }
+    public void acceptDeletionDialogClicked() {
+        MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().remove(currDispatchEventInd);
+        MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmount();
+        Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("isChanged", true);
+        intent.putExtra("supplyItemId", currentSupplyItem.getId());
+        startActivity(intent);
     }
 }

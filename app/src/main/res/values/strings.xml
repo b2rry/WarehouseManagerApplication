@@ -12,6 +12,8 @@
     <string name="apply_button">Подтвердить</string>
     <string name="create_button">Добавить</string>
     <string name="all_positions_button">Все позиции</string>
+    <string name="delete_button">Удалить</string>
+    <string name="update_button">Обновить</string>
 
     <!--Fields names-->
     <string name="title_field">Название:</string>
@@ -38,5 +40,10 @@
     <string name="incorrect_prihod_format_message">Некорректный формат данных в поле "Приход"</string>
     <string name="decline_dispatch_event_message">Чтобы добавить отгрузку создайте позицию"</string>
     <string name="Choose_supply_item_color_message">Выберите цвет заднего фона:</string>
+    <string name="delete_supply_item_dialog_title_message">Подтвердите удаление позиции</string>
+    <string name="delete_dispatch_event_dialog_title_message">Подтвердите удаление отгрузки</string>
+    <string name="delete_dialog_message_message">Выберите соответствующее действие</string>
+    <string name="delete_dialog_action_first_message">Удалить</string>
+    <string name="delete_dialog_action_second_message">Отменить</string>
 
 </resources>
