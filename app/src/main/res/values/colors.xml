@@ -19,4 +19,6 @@
     <color name="app_custom_background_green">#ffabff94</color>
     <color name="app_custom_background_blue">#ff94abff</color>
     <color name="app_custom_background_purple">#fff194ff</color>
+    <color name="app_custom_dispatch_background_happened">#FFFDDEB5</color>
+    <color name="app_custom_dispatch_background_planed">#ffa7e2f2</color>
 </resources>

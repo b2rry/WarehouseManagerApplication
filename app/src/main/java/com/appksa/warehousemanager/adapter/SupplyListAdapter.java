@@ -3,8 +3,6 @@ package com.appksa.warehousemanager.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.appksa.warehousemanager.R;
 import com.appksa.warehousemanager.SupplyItemActivity;
-import com.appksa.warehousemanager.SupplyListActivity;
 import com.appksa.warehousemanager.model.SupplyItem;
 
 import java.util.List;
@@ -46,8 +43,8 @@ public class SupplyListAdapter extends RecyclerView.Adapter<SupplyListAdapter.Su
         holder.supplyItemTitle.setText(supplyItemList.get(position).getTitle());
         holder.supplyItemDate.setText(supplyItemList.get(position).getDate());
         holder.supplyItemStartAmount.setText(String.valueOf(supplyItemList.get(position).getStartAmount()));
-        holder.supplyItemRestAmount.setText(String.valueOf(supplyItemList.get(position).getRestAmount()));
-        if(supplyItemList.get(position).getRestAmount() < 0){
+        holder.supplyItemRestAvailableAmount.setText(String.valueOf(supplyItemList.get(position).getRestAvailableAmount()));
+        if(supplyItemList.get(position).getRestAvailableAmount() < 0){
             holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.attention_red));
         }else{
             int colorId = supplyItemList.get(position).getBgColor();
@@ -60,13 +57,6 @@ public class SupplyListAdapter extends RecyclerView.Adapter<SupplyListAdapter.Su
                 Intent intent = new Intent(context, SupplyItemActivity.class);
 
                 intent.putExtra("supplyItemId", supplyItemList.get(position).getId());
-//                intent.putExtra("supplyItemTitle", supplyItemList.get(position).getTitle());
-//                intent.putExtra("supplyItemDate", supplyItemList.get(position).getDate());
-//                intent.putExtra("supplyItemStartAmount", supplyItemList.get(position).getStartAmount());
-//                intent.putExtra("supplyItemRestAmount", supplyItemList.get(position).getRestAmount());
-//                intent.putExtra("supplyItemBgColor", Color.parseColor(supplyItemList.get(position).getBgColor()));
-//                intent.putExtra("supplyItemComment", supplyItemList.get(position).getComment());
-//                intent.putExtra("supplyItemDispatchEventsList", supplyItemList.get(position).getDispatchEventsList());
                 context.startActivity(intent);
             }
         });
@@ -81,7 +71,7 @@ public class SupplyListAdapter extends RecyclerView.Adapter<SupplyListAdapter.Su
     public static final class SupplyListViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
-        TextView supplyItemTitle, supplyItemDate, supplyItemStartAmount, supplyItemRestAmount;
+        TextView supplyItemTitle, supplyItemDate, supplyItemStartAmount, supplyItemRestAvailableAmount;
 
         public SupplyListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,7 +80,7 @@ public class SupplyListAdapter extends RecyclerView.Adapter<SupplyListAdapter.Su
             supplyItemTitle = itemView.findViewById(R.id.supply_item_recycler_title);
             supplyItemDate = itemView.findViewById(R.id.supply_item_recycler_date);
             supplyItemStartAmount = itemView.findViewById(R.id.supply_item_recycler_start_amount);
-            supplyItemRestAmount = itemView.findViewById(R.id.supply_item_recycler_rest_amount);
+            supplyItemRestAvailableAmount = itemView.findViewById(R.id.supply_item_recycler_rest_available_amount);
 
         }
     }

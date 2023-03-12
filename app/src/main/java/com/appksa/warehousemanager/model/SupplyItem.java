@@ -1,22 +1,25 @@
 package com.appksa.warehousemanager.model;
 
+import android.content.Intent;
+
 import java.util.List;
 
-public class SupplyItem {
+public class SupplyItem{
 
-    private Long id;
-    private String title;
-    private String date;
-    private int startAmount;
-    private int stringStartAmount; //временное поле для буфера
-    private int restAmount;
-    private int bgColor;
-    private List<DispatchEvent> dispatchEventsList;
-    private String comment;
+    protected Long id;
+    protected String title;
+    protected String date;
+    protected Integer startAmount;
+    protected Integer restAvailableAmount;
+    protected Integer restFactualAmount;
+    protected Integer bgColor;//на самом деле тут лежит id цвета из ресурсов
+    protected List<DispatchEvent> dispatchEventsList;
+    protected String comment;
+    protected Boolean consumableMaterial;
 
     //возможно нужны пустые конструкторы для десериализации из json
 
-    public SupplyItem(Long id, String title, String date, int startAmount, int bgColor, List<DispatchEvent> dispatchEventsList, String comment) {
+    public SupplyItem(Long id, String title, String date, int startAmount, int bgColor, List<DispatchEvent> dispatchEventsList, String comment, boolean consumableMaterial) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -24,13 +27,27 @@ public class SupplyItem {
         this.bgColor = bgColor;
         this.dispatchEventsList = dispatchEventsList;
         this.comment = comment;
-        setCorrectRestAmount();
+        this.consumableMaterial = consumableMaterial;
+        setCorrectRestAmounts();
+    }
+    public SupplyItem(String title, String date, int startAmount, int bgColor, int restAvailableAmount){
+        this.title = title;
+        this.date = date;
+        this.startAmount = startAmount;
+        this.bgColor = bgColor;
+        this.restAvailableAmount = restAvailableAmount;
     }
 
-    public void setCorrectRestAmount(){
-        restAmount = startAmount;
+    public void setCorrectRestAmounts(){
+        restAvailableAmount = startAmount;
         for(DispatchEvent eventItem: dispatchEventsList){
-            restAmount -= eventItem.getAmount();
+            restAvailableAmount -= eventItem.getAmount();
+        }
+        restFactualAmount = restAvailableAmount;
+        for(DispatchEvent eventItem: dispatchEventsList){
+            if(eventItem.isPlaned()) {
+                restFactualAmount += eventItem.getAmount();
+            }
         }
     }
 
@@ -58,20 +75,24 @@ public class SupplyItem {
         this.date = date;
     }
 
-    public int getStartAmount() {
+    public Integer getStartAmount() {
         return startAmount;
     }
 
     public void setStartAmount(int startAmount) {
         this.startAmount = startAmount;
-        setCorrectRestAmount();
+        setCorrectRestAmounts();
     }
 
-    public int getRestAmount() {
-        return restAmount;
+    public Integer getRestAvailableAmount() {
+        return restAvailableAmount;
     }
 
-    public int getBgColor() {
+    public Integer getRestFactualAmount() {
+        return restFactualAmount;
+    }
+
+    public Integer getBgColor() {
         return bgColor;
     }
 
@@ -95,11 +116,11 @@ public class SupplyItem {
         this.comment = comment;
     }
 
-    public int getStringStartAmount() {
-        return stringStartAmount;
+    public Boolean isConsumableMaterial() {
+        return consumableMaterial;
     }
 
-    public void setStringStartAmount(int stringStartAmount) {
-        this.stringStartAmount = stringStartAmount;
+    public void setConsumableMaterial(boolean consumableMaterial) {
+        this.consumableMaterial = consumableMaterial;
     }
 }

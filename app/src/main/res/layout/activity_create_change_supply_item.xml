@@ -84,11 +84,11 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_radio_group" />
 
     <TextView
-        android:id="@+id/text_view_create_dispatch_4"
+        android:id="@+id/text_view_units_third"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="@string/kg_field"
+        tools:text="@string/kg_units_field"
         app:layout_constraintBottom_toBottomOf="@+id/edit_text_create_disp_event_amount"
         app:layout_constraintStart_toEndOf="@+id/edit_text_create_disp_event_amount"
         app:layout_constraintTop_toTopOf="@+id/edit_text_create_disp_event_amount" />
@@ -144,10 +144,10 @@
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/back_button"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
         android:onClick="onBackButtonClick"
+        android:text="@string/back_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -155,10 +155,10 @@
         android:id="@+id/button10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/apply_button"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
         android:onClick="onApplyButtonClick"
+        android:text="@string/apply_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button9" />
 
@@ -252,7 +252,6 @@
         android:id="@+id/supply_item_color_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
         android:layout_marginTop="29dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="@+id/text_view_radio_group"
@@ -312,11 +311,32 @@
         android:id="@+id/text_view_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:text="@string/Choose_supply_item_color_message"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_comment" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/consumable_material_field"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/text_view_radio_group"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_comment" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/consumable_material_switch"
+        android:layout_width="45dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

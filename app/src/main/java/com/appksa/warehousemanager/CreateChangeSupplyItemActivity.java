@@ -2,6 +2,7 @@ package com.appksa.warehousemanager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appksa.warehousemanager.adapter.EditDispatchEventsAdapter;
@@ -36,6 +38,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
     EditText editTextStartAmount;
     EditText editTextComment;
     RadioGroup changeColorRadioGroup;
+    SwitchCompat consumableSwitchCompat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +66,15 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
         editTextStartAmount = findViewById(R.id.edit_text_create_disp_event_amount);
         editTextComment = findViewById(R.id.edit_text_comment);
         changeColorRadioGroup = findViewById(R.id.supply_item_color_radio_group);
+        consumableSwitchCompat = findViewById(R.id.consumable_material_switch);
+        TextView textUnitsThird = findViewById(R.id.text_view_units_third);
 
         if(isCreation){
-            currentSupplyItem = new SupplyItem(id, "NAME", "DATE", 0, 0, new ArrayList<DispatchEvent>(), "");//добавить конструктор полупустой
+            currentSupplyItem = new SupplyItem(id, "NAME", "DATE", 0, 0, new ArrayList<DispatchEvent>(), "", false);//добавить конструктор полупустой
             RadioButton lightGreyButton = findViewById(R.id.color_change_radio_button_light_grey);
             lightGreyButton.setChecked(true);
+            consumableSwitchCompat.setChecked(false);
+            textUnitsThird.setText(R.string.pieces_units_field);
         }else{
             bufferItem = MainActivity.bufferItem;
             System.out.println("isChanged -- " + isChanged + "bufferItem -- " + bufferItem);
@@ -77,12 +84,16 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
                 editTextStartAmount.setText(bufferItem.getStartAmount());
                 editTextComment.setText(bufferItem.getComment());
                 setCorrectRadioButton(bufferItem.getBgColor());
+                consumableSwitchCompat.setChecked(bufferItem.isConsumableMaterial());
+                textUnitsThird.setText(bufferItem.isConsumableMaterial() ? R.string.kg_units_field : R.string.pieces_units_field);
             }else {
                 editTextTitle.setText(currentSupplyItem.getTitle());
                 editTextDate.setText(currentSupplyItem.getDate());
                 editTextStartAmount.setText(String.valueOf(currentSupplyItem.getStartAmount()));
                 editTextComment.setText(currentSupplyItem.getComment());
                 setCorrectRadioButton(currentSupplyItem.getBgColor());
+                consumableSwitchCompat.setChecked(currentSupplyItem.isConsumableMaterial());
+                textUnitsThird.setText(currentSupplyItem.isConsumableMaterial() ? R.string.kg_units_field : R.string.pieces_units_field);
             }
         }
         RecyclerView editDispatchEventsRecycler = findViewById(R.id.recycler_edit_dispatch_events);
@@ -224,6 +235,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
                 currentSupplyItem.setDate(String.valueOf(editTextDate.getText()));
                 currentSupplyItem.setComment(String.valueOf(editTextComment.getText()));
                 currentSupplyItem.setBgColor(getSelectedRadioButtonColorId());
+                currentSupplyItem.setConsumableMaterial(consumableSwitchCompat.isChecked());
                 MainActivity.warehouseState.getSupplyItemsList().add(currentSupplyItem);
             } else {
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setStartAmount(bufStartAmount);
@@ -231,6 +243,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setDate(String.valueOf(editTextDate.getText()));
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setComment(String.valueOf(editTextComment.getText()));
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(getSelectedRadioButtonColorId());
+                MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setConsumableMaterial(consumableSwitchCompat.isChecked());
             }
 
             Intent intent = new Intent(this, SupplyItemActivity.class);
@@ -252,7 +265,8 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
                     String.valueOf(editTextStartAmount.getText()),
                     getSelectedRadioButtonColorId(),
                     null,
-                    String.valueOf(editTextComment.getText()));
+                    String.valueOf(editTextComment.getText()),
+                    consumableSwitchCompat.isChecked());
 
             Intent intent = new Intent(this, CreateChangeDispatchEventActivity.class);
             intent.putExtra("supplyItemId", currentSupplyItem.getId());

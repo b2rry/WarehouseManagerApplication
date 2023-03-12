@@ -73,21 +73,41 @@
         app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_3" />
 
     <TextView
-        android:id="@+id/text_view_create_dispatch_4"
+        android:id="@+id/text_view_units_fourth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="@string/kg_field"
+        tools:text="@string/kg_units_field"
         app:layout_constraintBottom_toBottomOf="@+id/edit_text_create_disp_event_amount"
         app:layout_constraintStart_toEndOf="@+id/edit_text_create_disp_event_amount"
         app:layout_constraintTop_toTopOf="@+id/edit_text_create_disp_event_amount" />
+
+    <TextView
+        android:id="@+id/textViewPlanedDispatchText"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/planed_dispatch_event_field"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_3" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/planed_dispatch_event_switch"
+        android:layout_width="45dp"
+        android:layout_height="30dp"
+        android:checked="false"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewPlanedDispatchText"
+        app:layout_constraintStart_toEndOf="@+id/textViewPlanedDispatchText"
+        app:layout_constraintTop_toTopOf="@+id/textViewPlanedDispatchText" />
 
     <Button
         android:id="@+id/button13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
         android:onClick="onBackButtonClick"
         android:text="@string/back_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -97,10 +117,10 @@
         android:id="@+id/button14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/apply_button"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
         android:onClick="onApplyButtonClick"
+        android:text="@string/apply_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button13" />
 
@@ -108,11 +128,11 @@
         android:id="@+id/button16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:onClick="onDeleteButtonClick"
         android:text="@string/delete_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:onClick="onDeleteButtonClick"
         app:layout_constraintStart_toEndOf="@+id/button14" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

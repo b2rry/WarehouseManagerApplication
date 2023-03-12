@@ -47,7 +47,7 @@
                 tools:text="300" />
 
             <TextView
-                android:id="@+id/supply_item_recycler_rest_amount"
+                android:id="@+id/supply_item_recycler_rest_available_amount"
                 android:layout_width="43dp"
                 android:layout_height="45dp"
                 android:layout_weight="1"

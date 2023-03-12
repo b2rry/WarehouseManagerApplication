@@ -1,8 +1,9 @@
 package com.appksa.warehousemanager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,16 +46,27 @@ public class SupplyItemActivity extends AppCompatActivity {
             TextView textTitle = findViewById(R.id.textView_title);
             TextView textDate = findViewById(R.id.textView_date);
             TextView textStartAmount = findViewById(R.id.textView_start_amount);
-            TextView textRestAmount = findViewById(R.id.textView_rest_amount);
+            TextView textRestAvailableAmount = findViewById(R.id.textView_rest_available_amount);
+            TextView textRestFactualAmount = findViewById(R.id.textView_rest_factual_amount);
             TextView textComment = findViewById(R.id.textView_comment);
+            CardView cardBackgroundColor = findViewById(R.id.card_view_background_color);
+            TextView textIsConsumable = findViewById(R.id.text_view_is_consumable_material);
+            TextView textUnits1 = findViewById(R.id.text_view_units_first);
+            TextView textUnits2 = findViewById(R.id.text_view_units_second);
+            TextView textUnits3 = findViewById(R.id.text_view_units_fifth); //еще две в др активностях
 
             textTitle.setText(currentSupplyItem.getTitle());
             textDate.setText(currentSupplyItem.getDate());
             textStartAmount.setText(String.valueOf(currentSupplyItem.getStartAmount()));
-            textRestAmount.setText(String.valueOf(currentSupplyItem.getRestAmount()));
+            textRestAvailableAmount.setText(String.valueOf(currentSupplyItem.getRestAvailableAmount()));
+            textRestFactualAmount.setText(String.valueOf(currentSupplyItem.getRestFactualAmount()));
             textComment.setText(currentSupplyItem.getComment());
-
+            cardBackgroundColor.setCardBackgroundColor(ContextCompat.getColor(this, currentSupplyItem.getBgColor()));
+            textIsConsumable.setText(currentSupplyItem.isConsumableMaterial() ? R.string.yes_message : R.string.no_message);
             RecyclerView dispatchEventRecycler = findViewById(R.id.recycler_dispatch_events);
+            textUnits1.setText(currentSupplyItem.isConsumableMaterial() ? R.string.kg_units_field : R.string.pieces_units_field);
+            textUnits2.setText(currentSupplyItem.isConsumableMaterial() ? R.string.kg_units_field : R.string.pieces_units_field);
+            textUnits3.setText(currentSupplyItem.isConsumableMaterial() ? R.string.kg_units_field : R.string.pieces_units_field);
 
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
             dispatchEventRecycler.setLayoutManager(layoutManager);

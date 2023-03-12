@@ -2,9 +2,8 @@ package com.appksa.warehousemanager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +12,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appksa.warehousemanager.adapter.EditDispatchEventsAdapter;
 import com.appksa.warehousemanager.dialog.AcceptDeletionDispatchEventDialogFragment;
-import com.appksa.warehousemanager.dialog.AcceptDeletionSupplyItemDialogFragment;
 import com.appksa.warehousemanager.model.DispatchEvent;
 import com.appksa.warehousemanager.model.SupplyItem;
 
@@ -33,6 +31,7 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
     EditText editTextContractor;
     EditText editTextDate;
     EditText editTextAmount;
+    SwitchCompat planedDispatchSwitch;
 
 
     @Override
@@ -51,7 +50,7 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
         if(isNewDispatch) {
             //create
             setTitle(R.string.create_dispatch_event_message + " создание " + eventId + " eid");
-            currDispatchEvent = new DispatchEvent(0, "CONTRACTOR", "DATE", eventId);
+            currDispatchEvent = new DispatchEvent(0, "CONTRACTOR", "DATE", eventId, false);
         }else{
             //change
             setTitle(R.string.change_dispatch_event_message + " изменение " + eventId + " eid");
@@ -61,14 +60,17 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
         editTextContractor = findViewById(R.id.edit_text_create_disp_event_contractor);
         editTextDate = findViewById(R.id.edit_text_create_disp_event_date);
         editTextAmount = findViewById(R.id.edit_text_create_disp_event_amount);
+        TextView textUnitsFourth = findViewById(R.id.text_view_units_fourth);
+        planedDispatchSwitch = findViewById(R.id.planed_dispatch_event_switch);
 
         if(!isNewDispatch) {
             //change
             editTextContractor.setText(currDispatchEvent.getContractor());
             editTextDate.setText(currDispatchEvent.getDispatchDate());
             editTextAmount.setText(String.valueOf(currDispatchEvent.getAmount()));
+            planedDispatchSwitch.setChecked(currDispatchEvent.isPlaned());
         }
-
+        textUnitsFourth.setText(currentSupplyItem.isConsumableMaterial() ? R.string.kg_units_field : R.string.pieces_units_field);
     }
 
     @Override
@@ -137,19 +139,21 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
         }
         if(!isException) {
 
-            if (!isNewDispatch) {
-                //change
-                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setAmount(bufAmount);
-                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setContractor(String.valueOf(editTextContractor.getText()));
-                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setDispatchDate(String.valueOf(editTextDate.getText()));
-                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmount();
-            } else {
+            if (isNewDispatch) {
                 //create
                 currDispatchEvent.setAmount(bufAmount);
                 currDispatchEvent.setContractor(String.valueOf(editTextContractor.getText()));
                 currDispatchEvent.setDispatchDate(String.valueOf(editTextDate.getText()));
+                currDispatchEvent.setPlaned(planedDispatchSwitch.isChecked());
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().add(currDispatchEvent);
-                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmount();
+                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmounts();
+            } else {
+                //change
+                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setAmount(bufAmount);
+                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setContractor(String.valueOf(editTextContractor.getText()));
+                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setDispatchDate(String.valueOf(editTextDate.getText()));
+                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setPlaned(planedDispatchSwitch.isChecked());
+                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmounts();
             }
 
             Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
@@ -166,7 +170,7 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
     }
     public void acceptDeletionDialogClicked() {
         MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().remove(currDispatchEventInd);
-        MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmount();
+        MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmounts();
         Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("isChanged", true);

@@ -8,12 +8,13 @@ public class BufferSupplyItem {
     private String title;
     private String date;
     private String startAmount;
-    private String restAmount;
+    private String restAvailableAmount;
     private int bgColor;
     private List<DispatchEvent> dispatchEventsList;
     private String comment;
+    private boolean consumableMaterial;
 
-    public BufferSupplyItem(Long id, String title, String date, String startAmount, int bgColor, List<DispatchEvent> dispatchEventsList, String comment) {
+    public BufferSupplyItem(Long id, String title, String date, String startAmount, int bgColor, List<DispatchEvent> dispatchEventsList, String comment, boolean consumableMaterial) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -21,6 +22,7 @@ public class BufferSupplyItem {
         this.bgColor = bgColor;
         this.dispatchEventsList = dispatchEventsList;
         this.comment = comment;
+        this.consumableMaterial = consumableMaterial;
     }
 
 
@@ -56,12 +58,12 @@ public class BufferSupplyItem {
         this.startAmount = startAmount;
     }
 
-    public String getRestAmount() {
-        return restAmount;
+    public String getRestAvailableAmount() {
+        return restAvailableAmount;
     }
 
-    public void setRestAmount(String restAmount) {
-        this.restAmount = restAmount;
+    public void setRestAvailableAmount(String restAvailableAmount) {
+        this.restAvailableAmount = restAvailableAmount;
     }
 
     public int getBgColor() {
@@ -86,5 +88,13 @@ public class BufferSupplyItem {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public boolean isConsumableMaterial() {
+        return consumableMaterial;
+    }
+
+    public void setConsumableMaterial(boolean consumableMaterial) {
+        this.consumableMaterial = consumableMaterial;
     }
 }

@@ -8,12 +8,13 @@
 
     <androidx.cardview.widget.CardView
 
+        android:id="@+id/card_dispatch_event"
         android:layout_width="320dp"
         android:layout_height="35dp"
         android:layout_marginBottom="4dp"
         android:layout_marginTop="1dp"
         app:cardCornerRadius="5dp"
-        app:cardBackgroundColor="@color/little_orange"
+        app:cardBackgroundColor="@color/app_custom_dispatch_background_happened"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -19,15 +19,19 @@
     <string name="title_field">Название:</string>
     <string name="date_field">Дата прихода:</string>
     <string name="start_amount_field">Приход:</string>
-    <string name="rest_amount_field">Остаток:</string>
+    <string name="rest_available_amount_field">Доступный остаток:</string>
     <string name="dispatches_field">Отгрузки:</string>
     <string name="comment_field">Комментарий:</string>
-    <string name="kg_field">кг</string>
+    <string name="kg_units_field">кг.</string>
+    <string name="pieces_units_field">шт.</string>
     <string name="contractor_field">Контрагент:</string>
     <string name="dispatch_date_field">Дата отгрузки:</string>
     <string name="amount_field">Количество:</string>
+    <string name="background_color_field">Цвет фона:</string>
 
     <!--Messages names-->
+    <string name="yes_message">Да</string>
+    <string name="no_message">Нет</string>
     <string name="create_item_message">Создание позиции</string>
     <string name="edit_item_message">Изменение позиции</string>
     <string name="show_item_message">Просмотр позиции</string>
@@ -45,5 +49,9 @@
     <string name="delete_dialog_message_message">Выберите соответствующее действие</string>
     <string name="delete_dialog_action_first_message">Удалить</string>
     <string name="delete_dialog_action_second_message">Отменить</string>
+    <string name="consumable_material_field">Расходный материал</string>
+    <string name="consumable_material_field_2">Расходный материал:</string>
+    <string name="planed_dispatch_event_field">Запланированная отгрузка:</string>
+    <string name="rest_factual_amount_field">Фактический остаток:</string>
 
 </resources>

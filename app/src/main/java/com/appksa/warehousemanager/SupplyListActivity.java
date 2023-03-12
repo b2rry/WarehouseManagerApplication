@@ -9,9 +9,16 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.appksa.warehousemanager.adapter.SupplyListAdapter;
+import com.appksa.warehousemanager.model.SupplyItem;
+
+import java.util.Comparator;
 
 public class SupplyListActivity extends AppCompatActivity {
-
+    RecyclerView supplyListRecycler;
+    public Comparator<SupplyItem> titleComparator;
+    public Comparator<SupplyItem> dateComparator;
+    public Comparator<SupplyItem> startAmountComparator;
+    public Comparator<SupplyItem> restAvailableAmountComparator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,23 +26,32 @@ public class SupplyListActivity extends AppCompatActivity {
 
         System.out.println("\t\t\t\t\tSupplyListActivity Created");
 
-        RecyclerView supplyListRecycler = findViewById(R.id.supply_list_recycler);
+        supplyListRecycler = findViewById(R.id.supply_list_recycler);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        supplyListRecycler.setLayoutManager(layoutManager);
-
-        SupplyListAdapter supplyListAdapter = new SupplyListAdapter(this, MainActivity.warehouseState.getSupplyItemsList());
-        supplyListRecycler.setAdapter(supplyListAdapter);
+        titleComparator = Comparator.comparing(SupplyItem::getTitle);
+        startAmountComparator = Comparator.comparing(SupplyItem::getStartAmount);
+        restAvailableAmountComparator = Comparator.comparing(SupplyItem::getRestAvailableAmount);
+        dateComparator = Comparator.comparing(SupplyItem::getDate);
     }
     @Override
     protected void onResume() {
         super.onResume();
+        MainActivity.warehouseState.getSupplyItemsList().sort(titleComparator.thenComparing(dateComparator.reversed()));
+        updateRecycler();
         System.out.println("\t\t\t\t\tSupplyListActivity Resumed");
     }
     @Override
     protected void onDestroy() {
         System.out.println("\t\t\t\t\tSupplyListActivity Destroyed");
         super.onDestroy();
+    }
+
+    protected void updateRecycler(){
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        supplyListRecycler.setLayoutManager(layoutManager);
+
+        SupplyListAdapter supplyListAdapter = new SupplyListAdapter(this, MainActivity.warehouseState.getSupplyItemsList());
+        supplyListRecycler.setAdapter(supplyListAdapter);
     }
 
     public void onMainActivityClick(View view) {
@@ -53,5 +69,25 @@ public class SupplyListActivity extends AppCompatActivity {
 
     public void onUpdateActivity(View view) {
         recreate();
+    }
+
+    public void onTitleSortClick(View view) {
+        MainActivity.warehouseState.getSupplyItemsList().sort(titleComparator.thenComparing(dateComparator.reversed()));
+        updateRecycler();
+    }
+
+    public void onStartAmountSortClick(View view) {
+        MainActivity.warehouseState.getSupplyItemsList().sort((startAmountComparator.reversed()).thenComparing(titleComparator).thenComparing(dateComparator.reversed()));
+        updateRecycler();
+    }
+
+    public void onRestAmountSortClick(View view) {
+        MainActivity.warehouseState.getSupplyItemsList().sort((restAvailableAmountComparator.reversed()).thenComparing(titleComparator).thenComparing(dateComparator.reversed()));
+        updateRecycler();
+    }
+
+    public void onDateSortClick(View view) {
+        MainActivity.warehouseState.getSupplyItemsList().sort((dateComparator.reversed()).thenComparing(titleComparator));
+        updateRecycler();
     }
 }

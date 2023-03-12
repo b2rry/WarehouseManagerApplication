@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appksa.warehousemanager.R;
@@ -38,6 +40,7 @@ public class DispatchEventAdapter extends RecyclerView.Adapter<DispatchEventAdap
         holder.dispatchEventContractor.setText(dispatchEventList.get(position).getContractor());
         holder.dispatchEventAmount.setText(String.valueOf(dispatchEventList.get(position).getAmount()));
         holder.dispatchEventDate.setText(dispatchEventList.get(position).getDispatchDate());
+        holder.cardDispatchEvent.setCardBackgroundColor(dispatchEventList.get(position).isPlaned() ? ContextCompat.getColor(context, R.color.app_custom_dispatch_background_planed) : ContextCompat.getColor(context, R.color.app_custom_dispatch_background_happened));
 
     }
 
@@ -49,6 +52,7 @@ public class DispatchEventAdapter extends RecyclerView.Adapter<DispatchEventAdap
     public static final class DispatchEventViewHolder extends RecyclerView.ViewHolder {
 
         TextView dispatchEventDate, dispatchEventAmount, dispatchEventContractor;
+        CardView cardDispatchEvent;
 
         public DispatchEventViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,6 +60,7 @@ public class DispatchEventAdapter extends RecyclerView.Adapter<DispatchEventAdap
             dispatchEventContractor = itemView.findViewById(R.id.dispatch_event_recycler_contractor);
             dispatchEventAmount = itemView.findViewById(R.id.dispatch_event_recycler_amount);
             dispatchEventDate = itemView.findViewById(R.id.dispatch_event_recycler_date);
+            cardDispatchEvent = itemView.findViewById(R.id.card_dispatch_event);
 
         }
     }

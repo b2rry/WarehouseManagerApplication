@@ -7,25 +7,48 @@
     tools:context=".SupplyItemActivity">
 
     <TextView
-        android:id="@+id/textView_rest_amount"
+        android:id="@+id/textView_rest_available_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="@string/rest_amount_field"
+        android:layout_marginStart="10dp"
+        android:text="@string/rest_available_amount_field"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView13"
         app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toTopOf="@+id/textView13"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView_rest_factual_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/rest_factual_amount_field"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_factual_amount_static"
+        app:layout_constraintStart_toEndOf="@+id/text_view_factual_amount_static"
+        app:layout_constraintTop_toTopOf="@+id/text_view_factual_amount_static" />
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="100dp"
+        android:layout_width="168dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
-        android:text="@string/rest_amount_field"
+        android:text="@string/rest_available_amount_field"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_3" />
+
+    <TextView
+        android:id="@+id/text_view_factual_amount_static"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/rest_factual_amount_field"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
         android:id="@+id/textView_start_amount"
@@ -33,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:text="@string/start_amount_field"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_3"
         app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_3"
         app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_3"
@@ -54,6 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="25dp"
+        android:textSize="16sp"
         android:text="@string/date_field"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_1" />
@@ -75,6 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:text="@string/date_field"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_2"
         app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_2"
         app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_2" />
@@ -85,6 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
+        android:textSize="16sp"
         android:text="@string/start_amount_field"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_2" />
@@ -94,59 +121,72 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
         android:text="@string/dispatches_field"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_dispatch_events"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
-        android:id="@+id/text_view_create_dispatch_4"
+        android:id="@+id/text_view_units_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="@string/kg_field"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView_start_amount"
         app:layout_constraintStart_toEndOf="@+id/textView_start_amount"
-        app:layout_constraintTop_toTopOf="@+id/textView_start_amount" />
+        tools:text="@string/kg_units_field" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/text_view_units_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="@string/kg_field"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_rest_amount"
-        app:layout_constraintStart_toEndOf="@+id/textView_rest_amount"
-        app:layout_constraintTop_toTopOf="@+id/textView_rest_amount" />
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_rest_available_amount"
+        app:layout_constraintStart_toEndOf="@+id/textView_rest_available_amount"
+        tools:text="@string/kg_units_field" />
+
+    <TextView
+        android:id="@+id/text_view_units_fifth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_rest_factual_amount"
+        app:layout_constraintStart_toEndOf="@+id/textView_rest_factual_amount"
+        tools:text="@string/kg_units_field" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_dispatch_events"
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
+        android:layout_height="0dp"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/button7"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:text="@string/comment_field"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_factual_amount_static" />
 
     <TextView
         android:id="@+id/textView_comment"
         android:layout_width="350dp"
-        android:layout_height="80dp"
+        android:layout_height="75dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:text="@string/comment_field"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18"
         tools:text="asrevwa EFWEF EFwefwfefwfewf wefwe f f f" />
@@ -155,8 +195,8 @@
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
         android:onClick="onAllPositionsButtonClick"
         android:text="@string/all_positions_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -166,8 +206,8 @@
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
         android:onClick="onChangeButtonClick"
         android:text="@string/edit_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -177,11 +217,56 @@
         android:id="@+id/button15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/delete_button"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:elegantTextHeight="false"
         android:onClick="onDeleteButtonClick"
+        android:text="@string/delete_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button8" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/background_color_field"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_comment" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_background_color"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="7dp"
+        app:cardBackgroundColor="@color/app_custom_background_red"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="@string/consumable_material_field_2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/card_view_background_color"
+        app:layout_constraintTop_toTopOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/text_view_is_consumable_material"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        tools:text="@string/no_message"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/textView7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

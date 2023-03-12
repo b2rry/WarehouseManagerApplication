@@ -13,12 +13,16 @@ import com.appksa.warehousemanager.model.SupplyItem;
 import com.appksa.warehousemanager.model.WarehouseState;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     public static WarehouseState warehouseState;
     public static BufferSupplyItem bufferItem;
+    public static HashMap<Long,SupplyItem> displayedSupplyItemsMap;
     WarehouseState tempClassForId;
 
     @Override
@@ -41,19 +45,18 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("\t\t\t\t\tMainActivity Destroyed");
         super.onDestroy();
     }
-
     public void generateTestPositions(){
         tempClassForId = new WarehouseState(-1L, null, null);
         //bufferItem = new BufferSupplyItem(tempClassForId.getIdGen(),"BUFFER MAIN INIT!!!","","",0,null,"");
 
-        SupplyItem supplyItem1 = new SupplyItem(tempClassForId.getIdGen(),"S-101/SC 06x06 SC Керамический наполнитель", "06.03.2023", 650, R.color.app_custom_background_light_grey, getList(),"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem2 = new SupplyItem(tempClassForId.getIdGen(),"S-106/AC 08x20 HX+ Керамический наполнитель", "06.03.2023", 400, R.color.app_custom_background_red, getList(),"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem3 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 500, R.color.app_custom_background_orange, getList(),"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem4 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 500, R.color.app_custom_background_yellow, getList(),"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem5 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 500, R.color.app_custom_background_green, getList(),"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem6 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 500, R.color.app_custom_background_blue, getList(),"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem7 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 500, R.color.app_custom_background_purple, getList(),"Test comment line. Here will be comments about this supply item!");
-        SupplyItem supplyItem8 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2023", 500, R.color.app_custom_background_grey, getList(),"Test comment line. Here will be comments about this supply item!");
+        SupplyItem supplyItem1 = new SupplyItem(tempClassForId.getIdGen(),"S-101/SC 06x06 SC Керамический наполнитель", "06.03.2023", 650, R.color.app_custom_background_light_grey, getList(),"Test comment line. Here will be comments about this supply item!", true);
+        SupplyItem supplyItem2 = new SupplyItem(tempClassForId.getIdGen(),"S-106/AC 08x20 HX+ Керамический наполнитель", "25.03.2023", 500, R.color.app_custom_background_red, getList(),"Test comment line. Here will be comments about this supply item!", true);
+        SupplyItem supplyItem3 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "25.03.2023", 500, R.color.app_custom_background_orange, getList(),"Test comment line. Here will be comments about this supply item!", true);
+        SupplyItem supplyItem4 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2024", 500, R.color.app_custom_background_yellow, getList(),"Test comment line. Here will be comments about this supply item!", true);
+        SupplyItem supplyItem5 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "14.03.2023", 500, R.color.app_custom_background_green, getList(),"Test comment line. Here will be comments about this supply item!", true);
+        SupplyItem supplyItem6 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "28.03.2023", 500, R.color.app_custom_background_blue, getList(),"Test comment line. Here will be comments about this supply item!", true);
+        SupplyItem supplyItem7 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "28.03.2023", 600, R.color.app_custom_background_purple, getList(),"Test comment line. Here will be comments about this supply item!", false);
+        SupplyItem supplyItem8 = new SupplyItem(tempClassForId.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "28.03.2023", 700, R.color.app_custom_background_grey, getList(),"Test comment line. Here will be comments about this supply item!", false);
         List<SupplyItem> supplyItemsList = new ArrayList<>();
         supplyItemsList.add(supplyItem1);
         supplyItemsList.add(supplyItem2);
@@ -75,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
 
     private List<DispatchEvent> getList(){
         List<DispatchEvent> dispatchEventsList = new ArrayList<>();
-        dispatchEventsList.add(new DispatchEvent(25,"contractor_one", "15.02.19", tempClassForId.getIdGen()));
-        dispatchEventsList.add(new DispatchEvent(50,"contractor_two", "17.08.20", tempClassForId.getIdGen()));
-        dispatchEventsList.add(new DispatchEvent(75,"contractor_three", "25.06.21", tempClassForId.getIdGen()));
-        dispatchEventsList.add(new DispatchEvent(25,"contractor_four", "23.06.21", tempClassForId.getIdGen()));
-        dispatchEventsList.add(new DispatchEvent(5,"contractor_five", "08.04.22", tempClassForId.getIdGen()));
-        dispatchEventsList.add(new DispatchEvent(5,"contractor_six", "09.09.22", tempClassForId.getIdGen()));
+        dispatchEventsList.add(new DispatchEvent(25,"contractor_one", "15.02.19", tempClassForId.getIdGen(),false));
+        dispatchEventsList.add(new DispatchEvent(50,"contractor_two", "17.08.20", tempClassForId.getIdGen(),false));
+        dispatchEventsList.add(new DispatchEvent(75,"contractor_three", "25.06.21", tempClassForId.getIdGen(),true));
+        dispatchEventsList.add(new DispatchEvent(25,"contractor_four", "23.06.21", tempClassForId.getIdGen(),false));
+        dispatchEventsList.add(new DispatchEvent(5,"contractor_five", "08.04.22", tempClassForId.getIdGen(),false));
+        dispatchEventsList.add(new DispatchEvent(5,"contractor_six", "09.09.22", tempClassForId.getIdGen(),false));
         return dispatchEventsList;
     }
 

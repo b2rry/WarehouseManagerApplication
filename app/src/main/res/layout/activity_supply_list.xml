@@ -10,52 +10,60 @@
         android:id="@+id/button6"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/menu_button"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
         android:onClick="onMainActivityClick"
+        android:text="@string/menu_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_view_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:text="Название"
+        android:textSize="16sp"
+        android:onClick="onTitleSortClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/text_view_start_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
+        android:layout_marginStart="125dp"
         android:text="Приход"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        android:textSize="16sp"
+        android:onClick="onStartAmountSortClick"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_title"
+        app:layout_constraintStart_toEndOf="@+id/text_view_title"
+        app:layout_constraintTop_toTopOf="@+id/text_view_title" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/text_view_rest_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:text="Остаток"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        android:textSize="16sp"
+        android:onClick="onRestAmountSortClick"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_start_amount"
+        app:layout_constraintStart_toEndOf="@+id/text_view_start_amount"
+        app:layout_constraintTop_toTopOf="@+id/text_view_start_amount" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/text_view_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="Дата прихода"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        android:layout_marginStart="15dp"
+        android:text="Дата"
+        android:textSize="16sp"
+        android:onClick="onDateSortClick"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_rest_amount"
+        app:layout_constraintStart_toEndOf="@+id/text_view_rest_amount"
+        app:layout_constraintTop_toTopOf="@+id/text_view_rest_amount" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/supply_list_recycler"
@@ -66,14 +74,14 @@
         app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_title" />
 
     <Button
         android:id="@+id/button11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
         android:onClick="onCreateButtonClick"
         android:text="@string/create_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,11 +91,11 @@
         android:id="@+id/button17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/update_button"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:onClick="onUpdateActivity"
+        android:text="@string/update_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button11" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
