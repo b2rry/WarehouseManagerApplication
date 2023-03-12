@@ -14,6 +14,8 @@
     <string name="all_positions_button">Все позиции</string>
     <string name="delete_button">Удалить</string>
     <string name="update_button">Обновить</string>
+    <string name="save_button">Сохранить</string>
+    <string name="update_summary_information_button">Обновить суммарную информацию</string>
 
     <!--Fields names-->
     <string name="title_field">Название:</string>
@@ -22,12 +24,23 @@
     <string name="rest_available_amount_field">Доступный остаток:</string>
     <string name="dispatches_field">Отгрузки:</string>
     <string name="comment_field">Комментарий:</string>
-    <string name="kg_units_field">кг.</string>
-    <string name="pieces_units_field">шт.</string>
+    <string name="kg_units_field">кг</string>
+    <string name="pieces_units_field">шт</string>
     <string name="contractor_field">Контрагент:</string>
     <string name="dispatch_date_field">Дата отгрузки:</string>
     <string name="amount_field">Количество:</string>
     <string name="background_color_field">Цвет фона:</string>
+    <string name="consumable_material_field">Расходный материал</string>
+    <string name="consumable_material_field_2">Расходный материал:</string>
+    <string name="planed_dispatch_event_field">Запланированная отгрузка:</string>
+    <string name="rest_factual_amount_field">Фактический остаток:</string>
+    <string name="final_product_text_field">Конечная продукция</string>
+    <string name="consumable_material_text_field">Расходные материалы</string>
+    <string name="amount_positions_in_app_field">Количество позиций в приложении:</string>
+    <string name="available_final_rest_amount_field">Количество доступных товаров для продажи:</string>
+    <string name="factual_final_rest_amount_field">Фактическое количество товаров на складе:</string>
+    <string name="available_consumable_rest_amount_field">Масса доступного товара для продажи:</string>
+    <string name="factual_consumable_rest_amount_field">Фактическая масса товара на складе:</string>
 
     <!--Messages names-->
     <string name="yes_message">Да</string>
@@ -49,10 +62,6 @@
     <string name="delete_dialog_message_message">Выберите соответствующее действие</string>
     <string name="delete_dialog_action_first_message">Удалить</string>
     <string name="delete_dialog_action_second_message">Отменить</string>
-    <string name="consumable_material_field">Расходный материал</string>
-    <string name="consumable_material_field_2">Расходный материал:</string>
-    <string name="planed_dispatch_event_field">Запланированная отгрузка:</string>
-    <string name="rest_factual_amount_field">Фактический остаток:</string>
 
     <!--Menu options-->
 

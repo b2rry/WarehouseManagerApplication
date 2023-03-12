@@ -10,6 +10,8 @@
     <color name="little_orange">#FDDEB5</color>
     <color name="attention_red">#ffff1f1f</color>
     <color name="soft_red">#ffff5757</color>
+    <color name="app_custom_main">#ff3e50c2</color>
+    <color name="app_background_main">#f7f7f7</color>
     <color name="transparent">@android:color/transparent</color>
     <color name="app_custom_background_light_grey">#fff2f2f2</color>
     <color name="app_custom_background_grey">#ffadadad</color>
@@ -22,4 +24,6 @@
     <color name="app_custom_dispatch_background_happened">#FFFDDEB5</color>
     <color name="app_custom_dispatch_background_planed">#ffa7e2f2</color>
     <color name="app_custom_text_grey">#ff4f4f4f</color>
+    <color name="app_custom_summary_final_card_blue">#ffe6f7ff</color>
+    <color name="app_custom_summary_consumable_card_green">#ffebffec</color>
 </resources>

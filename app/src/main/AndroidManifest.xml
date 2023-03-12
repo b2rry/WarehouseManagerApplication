@@ -15,37 +15,37 @@
             android:name=".CreateChangeDispatchEventActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:windowSoftInputMode="adjustPan"/><!--атрибут для сдвига активности при выдвижении клавиатуры-->
+            android:windowSoftInputMode="adjustPan"
+            tools:ignore="LockedOrientationActivity" /> <!-- атрибут для сдвига активности при выдвижении клавиатуры -->
         <activity
             android:name=".CreateChangeSupplyItemActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".LogBookActivity"
             android:exported="false"
+            android:label="@string/log_book_activity_button"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:label="@string/log_book_activity_button" />
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".AboutProgramActivity"
             android:exported="false"
+            android:label="@string/about_program_button"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:label="@string/about_program_button" />
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".SupplyListActivity"
             android:exported="false"
+            android:label="@string/supply_list_activity_button"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:label="@string/supply_list_activity_button" />
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".SupplyItemActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

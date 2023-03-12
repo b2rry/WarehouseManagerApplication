@@ -4,39 +4,306 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_background_main"
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/supply_list_activity_button"
+        android:id="@+id/supply_list_button"
+        android:layout_width="380dp"
+        android:layout_height="80dp"
         android:onClick="onSupplyListActivityClick"
+        android:text="@string/supply_list_activity_button"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="188dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="-9dp"
+        android:onClick="onSaveClick"
+        android:text="@string/save_button"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/supply_list_button"
+        app:layout_constraintEnd_toEndOf="@+id/supply_list_button" />
+
+    <Button
+        android:id="@+id/about_program_button"
+        android:layout_width="189dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="-9dp"
+        android:onClick="onAboutProgramActivityClick"
+        android:text="@string/about_program_button"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/supply_list_button"
+        app:layout_constraintStart_toStartOf="@+id/supply_list_button" />
+
+    <Button
+        android:id="@+id/log_book_button"
+        android:layout_width="189dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="-9dp"
+        android:onClick="onLogBookActivityClick"
+        android:text="@string/log_book_activity_button"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/about_program_button"
+        app:layout_constraintStart_toStartOf="@+id/supply_list_button" />
+
+    <Button
+        android:id="@+id/update_summary_button"
+        android:layout_width="188dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="-9dp"
+        android:onClick="onUpdateSummaryClick"
+        android:text="@string/update_summary_information_button"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@+id/save_button"
+        app:layout_constraintEnd_toEndOf="@+id/supply_list_button" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/final_product_summary"
+        android:layout_width="380dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="5dp"
+        app:cardBackgroundColor="@color/app_custom_summary_consumable_card_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/log_book_activity_button"
-        android:onClick="onLogBookActivityClick"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/about_program_button"
-        android:onClick="onAboutProgramActivityClick"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+            <TextView
+                android:id="@+id/final_product_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/final_product_text_field"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/final_positions_amount_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="70dp"
+                android:text="@string/amount_positions_in_app_field"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/final_available_amount_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="100dp"
+                android:text="@string/available_final_rest_amount_field"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/final_factual_amount_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="130dp"
+                android:text="@string/factual_final_rest_amount_field"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/value_final_positions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/final_positions_amount_text"
+                app:layout_constraintStart_toEndOf="@+id/final_positions_amount_text"
+                tools:text="15" />
+
+            <TextView
+                android:id="@+id/value_final_available"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/final_available_amount_text"
+                app:layout_constraintStart_toEndOf="@+id/final_available_amount_text"
+                tools:text="115" />
+
+            <TextView
+                android:id="@+id/value_final_factual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/final_factual_amount_text"
+                app:layout_constraintStart_toEndOf="@+id/final_factual_amount_text"
+                tools:text="115" />
+
+            <TextView
+                android:id="@+id/main_units_pieces_text_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="@string/pieces_units_field"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/value_final_positions"
+                app:layout_constraintStart_toEndOf="@+id/value_final_positions" />
+
+            <TextView
+                android:id="@+id/main_units_pieces_text_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="@string/pieces_units_field"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/value_final_factual"
+                app:layout_constraintStart_toEndOf="@+id/value_final_factual" />
+
+            <TextView
+                android:id="@+id/main_units_pieces_text_third"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="@string/pieces_units_field"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/value_final_available"
+                app:layout_constraintStart_toEndOf="@+id/value_final_available" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/consumable_material_summary"
+        android:layout_width="380dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="7dp"
+        app:cardBackgroundColor="@color/app_custom_summary_final_card_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/final_product_summary" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/consumable_material_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/consumable_material_text_field"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/consumable_positions_amount_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="70dp"
+                android:text="@string/amount_positions_in_app_field"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/consumable_available_amount_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="100dp"
+                android:text="@string/available_consumable_rest_amount_field"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/consumable_factual_amount_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="130dp"
+                android:text="@string/factual_consumable_rest_amount_field"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/value_consumable_positions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/consumable_positions_amount_text"
+                app:layout_constraintStart_toEndOf="@+id/consumable_positions_amount_text"
+                tools:text="155" />
+
+            <TextView
+                android:id="@+id/value_consumable_available"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/consumable_available_amount_text"
+                app:layout_constraintStart_toEndOf="@+id/consumable_available_amount_text"
+                tools:text="11555" />
+
+            <TextView
+                android:id="@+id/value_consumable_factual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/consumable_factual_amount_text"
+                app:layout_constraintStart_toEndOf="@+id/consumable_factual_amount_text"
+                tools:text="11555" />
+
+            <TextView
+                android:id="@+id/main_units_pieces_text_fourth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="@string/pieces_units_field"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/value_consumable_positions"
+                app:layout_constraintStart_toEndOf="@+id/value_consumable_positions" />
+
+            <TextView
+                android:id="@+id/main_units_pieces_text_fifth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="@string/kg_units_field"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/value_consumable_factual"
+                app:layout_constraintStart_toEndOf="@+id/value_consumable_factual" />
+
+            <TextView
+                android:id="@+id/main_units_pieces_text_sixth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="@string/kg_units_field"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/value_consumable_available"
+                app:layout_constraintStart_toEndOf="@+id/value_consumable_available" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

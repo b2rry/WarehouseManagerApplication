@@ -5,23 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
-import com.appksa.warehousemanager.model.BufferSupplyItem;
 import com.appksa.warehousemanager.model.DispatchEvent;
 import com.appksa.warehousemanager.model.LogBookItem;
+import com.appksa.warehousemanager.model.SummaryInformation;
 import com.appksa.warehousemanager.model.SupplyItem;
 import com.appksa.warehousemanager.model.WarehouseState;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     public static WarehouseState warehouseState;
     WarehouseState tempClassForId;
+    SummaryInformation summaryInformation = new SummaryInformation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("\t\t\t\t\tMainActivity Created");
 
         generateTestPositions();
+
+        updateSummaryInformation();
     }
 
     @Override
@@ -85,6 +86,24 @@ public class MainActivity extends AppCompatActivity {
         return dispatchEventsList;
     }
 
+    protected void updateSummaryInformation(){
+        summaryInformation.updateAmounts();
+
+        TextView valueFinalPositions = findViewById(R.id.value_final_positions);
+        TextView valueFinalFactual = findViewById(R.id.value_final_factual);
+        TextView valueFinalAvailable = findViewById(R.id.value_final_available);
+        TextView valueConsumablePositions = findViewById(R.id.value_consumable_positions);
+        TextView valueConsumableFactual = findViewById(R.id.value_consumable_factual);
+        TextView valueConsumableAvailable = findViewById(R.id.value_consumable_available);
+
+        valueFinalPositions.setText(String.valueOf(summaryInformation.getFinalProductPositionsAmount()));
+        valueFinalFactual.setText(String.valueOf(summaryInformation.getFinalProductFactualRestAmount()));
+        valueFinalAvailable.setText(String.valueOf(summaryInformation.getFinalProductAvailableRestAmount()));
+        valueConsumablePositions.setText(String.valueOf(summaryInformation.getConsumableMaterialPositionsAmount()));
+        valueConsumableFactual.setText(String.valueOf(summaryInformation.getConsumableMaterialFactualRestAmount()));
+        valueConsumableAvailable.setText(String.valueOf(summaryInformation.getConsumableMaterialAvailableRestAmount()));
+    }
+
     public void onSupplyListActivityClick(View view) {
         Intent intent = new Intent(this, SupplyListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -101,5 +120,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AboutProgramActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
+    }
+
+    public void onSaveClick(View view) {
+    }
+
+    public void onUpdateSummaryClick(View view) { //да бля в onResume засунуть обновление, просто что кнопка хорошо смотрится =)
+        updateSummaryInformation();
     }
 }

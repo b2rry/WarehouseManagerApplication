@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appksa.warehousemanager.adapter.EditDispatchEventsAdapter;
-import com.appksa.warehousemanager.model.BufferSupplyItem;
 import com.appksa.warehousemanager.model.DispatchEvent;
 import com.appksa.warehousemanager.model.SupplyItem;
 
