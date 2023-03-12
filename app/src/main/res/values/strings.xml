@@ -54,4 +54,6 @@
     <string name="planed_dispatch_event_field">Запланированная отгрузка:</string>
     <string name="rest_factual_amount_field">Фактический остаток:</string>
 
+    <!--Menu options-->
+
 </resources>

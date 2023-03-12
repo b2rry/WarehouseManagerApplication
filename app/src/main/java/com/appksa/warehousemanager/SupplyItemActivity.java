@@ -35,7 +35,6 @@ public class SupplyItemActivity extends AppCompatActivity {
         isChanged = getIntent().getBooleanExtra("isChanged", false);
         System.out.println("Флаг isChanged - " + isChanged);
 
-        MainActivity.bufferItem = null;
         currentSupplyItem = getSupplyItemById(id);
         if(currentSupplyItem == null){
             //if here then Error
@@ -102,8 +101,10 @@ public class SupplyItemActivity extends AppCompatActivity {
     public void onAllPositionsButtonClick(View view) {
         Intent intent = new Intent(this, SupplyListActivity.class);
         if(isChanged) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            SupplyListActivity.isChanged = true;
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
         }else{
+            SupplyListActivity.isChanged = false;
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         }
         startActivity(intent);
@@ -124,7 +125,8 @@ public class SupplyItemActivity extends AppCompatActivity {
     public void acceptDeletionDialogClicked() {
         MainActivity.warehouseState.getSupplyItemsList().remove(currentSupplyItemInd);
         Intent intent = new Intent(this, SupplyListActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        SupplyListActivity.isChanged = true;
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 }

@@ -14,6 +14,7 @@
         android:layout_marginBottom="5dp"
         android:onClick="onMainActivityClick"
         android:text="@string/menu_button"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -22,10 +23,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:onClick="onTitleSortClick"
         android:text="Название"
         android:textSize="16sp"
-        android:onClick="onTitleSortClick"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,10 +35,11 @@
         android:id="@+id/text_view_start_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="125dp"
+        android:layout_marginStart="105dp"
+        android:onClick="onStartAmountSortClick"
         android:text="Приход"
         android:textSize="16sp"
-        android:onClick="onStartAmountSortClick"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_title"
         app:layout_constraintStart_toEndOf="@+id/text_view_title"
         app:layout_constraintTop_toTopOf="@+id/text_view_title" />
@@ -45,10 +48,11 @@
         android:id="@+id/text_view_rest_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="20dp"
+        android:onClick="onRestAmountSortClick"
         android:text="Остаток"
         android:textSize="16sp"
-        android:onClick="onRestAmountSortClick"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_start_amount"
         app:layout_constraintStart_toEndOf="@+id/text_view_start_amount"
         app:layout_constraintTop_toTopOf="@+id/text_view_start_amount" />
@@ -57,10 +61,11 @@
         android:id="@+id/text_view_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="20dp"
+        android:onClick="onDateSortClick"
         android:text="Дата"
         android:textSize="16sp"
-        android:onClick="onDateSortClick"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_rest_amount"
         app:layout_constraintStart_toEndOf="@+id/text_view_rest_amount"
         app:layout_constraintTop_toTopOf="@+id/text_view_rest_amount" />
@@ -97,5 +102,46 @@
         android:text="@string/update_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/sort_img_title"
+        android:layout_width="15dp"
+        android:layout_height="11dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_title"
+        app:layout_constraintStart_toEndOf="@+id/text_view_title"
+        app:layout_constraintTop_toTopOf="@+id/text_view_title"
+        app:srcCompat="@drawable/arrow_up_float" />
+
+    <ImageView
+        android:id="@+id/sort_img_start_amount"
+        android:layout_width="15dp"
+        android:layout_height="11dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_start_amount"
+        app:layout_constraintStart_toEndOf="@+id/text_view_start_amount"
+        app:layout_constraintTop_toTopOf="@+id/text_view_start_amount"
+        app:srcCompat="@drawable/arrow_up_float" />
+
+    <ImageView
+        android:id="@+id/sort_img_rest_amount"
+        android:layout_width="15dp"
+        android:layout_height="11dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_rest_amount"
+        app:layout_constraintStart_toEndOf="@+id/text_view_rest_amount"
+        app:layout_constraintTop_toTopOf="@+id/text_view_rest_amount"
+        app:srcCompat="@drawable/arrow_up_float" />
+
+    <ImageView
+        android:id="@+id/sort_img_date"
+        android:layout_width="15dp"
+        android:layout_height="11dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_date"
+        app:layout_constraintStart_toEndOf="@+id/text_view_date"
+        app:layout_constraintTop_toTopOf="@+id/text_view_date"
+        app:srcCompat="@drawable/arrow_up_float" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

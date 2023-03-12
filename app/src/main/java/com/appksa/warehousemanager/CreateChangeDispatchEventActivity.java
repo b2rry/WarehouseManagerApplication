@@ -157,9 +157,10 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
             }
 
             Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra("isChanged", true);
-            intent.putExtra("supplyItemId", currentSupplyItem.getId());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            //intent.putExtra("isChanged", true);
+            //intent.putExtra("supplyItemId", currentSupplyItem.getId());
+            CreateChangeSupplyItemActivity.isChanged = true;
             startActivity(intent);
         }
     }
@@ -172,9 +173,10 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
         MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().remove(currDispatchEventInd);
         MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmounts();
         Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("isChanged", true);
-        intent.putExtra("supplyItemId", currentSupplyItem.getId());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        //intent.putExtra("isChanged", true);
+        //intent.putExtra("supplyItemId", currentSupplyItem.getId());
+        CreateChangeSupplyItemActivity.isChanged = true;
         startActivity(intent);
     }
 }

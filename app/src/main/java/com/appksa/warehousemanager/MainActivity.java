@@ -21,8 +21,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     public static WarehouseState warehouseState;
-    public static BufferSupplyItem bufferItem;
-    public static HashMap<Long,SupplyItem> displayedSupplyItemsMap;
     WarehouseState tempClassForId;
 
     @Override
@@ -89,11 +87,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSupplyListActivityClick(View view) {
         Intent intent = new Intent(this, SupplyListActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 
     public void onLogBookActivityClick(View view) {
         Intent intent = new Intent(this, LogBookActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 

@@ -30,9 +30,9 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
 
     private SupplyItem currentSupplyItem; // поле текущей позиции склада
     private int currentSupplyItemInd; // поле индекса в коллекции текущей позиции склада
-    BufferSupplyItem bufferItem;
-    private boolean isChanged; // поле для хранения флага состояния позиции
+    public static boolean isChanged; // поле для хранения флага состояния позиции
     private boolean isCreation; // поле для хранения состояния действия пользователя, создания или изменения позиции
+    RecyclerView editDispatchEventsRecycler;
     EditText editTextTitle;
     EditText editTextDate;
     EditText editTextStartAmount;
@@ -61,6 +61,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
             currentSupplyItem = getSupplyItemById(id);
         }
 
+        editDispatchEventsRecycler = findViewById(R.id.recycler_edit_dispatch_events);
         editTextTitle = findViewById(R.id.edit_text_create_disp_event_contractor);
         editTextDate = findViewById(R.id.edit_text_create_disp_event_date);
         editTextStartAmount = findViewById(R.id.edit_text_create_disp_event_amount);
@@ -76,37 +77,23 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
             consumableSwitchCompat.setChecked(false);
             textUnitsThird.setText(R.string.pieces_units_field);
         }else{
-            bufferItem = MainActivity.bufferItem;
-            System.out.println("isChanged -- " + isChanged + "bufferItem -- " + bufferItem);
-            if(isChanged && bufferItem != null){
-                editTextTitle.setText(bufferItem.getTitle());
-                editTextDate.setText(bufferItem.getDate());
-                editTextStartAmount.setText(bufferItem.getStartAmount());
-                editTextComment.setText(bufferItem.getComment());
-                setCorrectRadioButton(bufferItem.getBgColor());
-                consumableSwitchCompat.setChecked(bufferItem.isConsumableMaterial());
-                textUnitsThird.setText(bufferItem.isConsumableMaterial() ? R.string.kg_units_field : R.string.pieces_units_field);
-            }else {
-                editTextTitle.setText(currentSupplyItem.getTitle());
-                editTextDate.setText(currentSupplyItem.getDate());
-                editTextStartAmount.setText(String.valueOf(currentSupplyItem.getStartAmount()));
-                editTextComment.setText(currentSupplyItem.getComment());
-                setCorrectRadioButton(currentSupplyItem.getBgColor());
-                consumableSwitchCompat.setChecked(currentSupplyItem.isConsumableMaterial());
-                textUnitsThird.setText(currentSupplyItem.isConsumableMaterial() ? R.string.kg_units_field : R.string.pieces_units_field);
-            }
+            System.out.println("isChanged -- " + isChanged);
+            editTextTitle.setText(currentSupplyItem.getTitle());
+            editTextDate.setText(currentSupplyItem.getDate());
+            editTextStartAmount.setText(String.valueOf(currentSupplyItem.getStartAmount()));
+            editTextComment.setText(currentSupplyItem.getComment());
+            setCorrectRadioButton(currentSupplyItem.getBgColor());
+            consumableSwitchCompat.setChecked(currentSupplyItem.isConsumableMaterial());
+            textUnitsThird.setText(currentSupplyItem.isConsumableMaterial() ? R.string.kg_units_field : R.string.pieces_units_field);
         }
-        RecyclerView editDispatchEventsRecycler = findViewById(R.id.recycler_edit_dispatch_events);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        editDispatchEventsRecycler.setLayoutManager(layoutManager);
-
-        EditDispatchEventsAdapter editDispatchEventsAdapter = new EditDispatchEventsAdapter(this, currentSupplyItem.getDispatchEventsList(), currentSupplyItem.getId()); // при создании пользователя не будет позиций и не получится нажать вызвать createChangeDispIvent на пустом пользователе
-        editDispatchEventsRecycler.setAdapter(editDispatchEventsAdapter);
+        recreateRecycler();
     }
 
     @Override
     protected void onResume() {
+        if(isChanged) {
+            recreateRecycler();
+        }
         System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Resumed");
         super.onResume();
     }
@@ -114,6 +101,13 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
     protected void onDestroy() {
         System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Destroyed");
         super.onDestroy();
+    }
+    protected void recreateRecycler(){
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        editDispatchEventsRecycler.setLayoutManager(layoutManager);
+
+        EditDispatchEventsAdapter editDispatchEventsAdapter = new EditDispatchEventsAdapter(this, currentSupplyItem.getDispatchEventsList(), currentSupplyItem.getId()); // при создании пользователя не будет позиций и не получится нажать вызвать createChangeDispIvent на пустом пользователе
+        editDispatchEventsRecycler.setAdapter(editDispatchEventsAdapter);
     }
 
     protected SupplyItem getSupplyItemById(Long id){
@@ -258,16 +252,6 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
         if(isCreation) {
             Toast.makeText(getApplicationContext(), R.string.decline_dispatch_event_message, Toast.LENGTH_LONG).show();
         }else{
-            MainActivity.bufferItem = new BufferSupplyItem(
-                    null,
-                    String.valueOf(editTextTitle.getText()),
-                    String.valueOf(editTextDate.getText()),
-                    String.valueOf(editTextStartAmount.getText()),
-                    getSelectedRadioButtonColorId(),
-                    null,
-                    String.valueOf(editTextComment.getText()),
-                    consumableSwitchCompat.isChecked());
-
             Intent intent = new Intent(this, CreateChangeDispatchEventActivity.class);
             intent.putExtra("supplyItemId", currentSupplyItem.getId());
             intent.putExtra("isNewDispatch", true);
