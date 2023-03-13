@@ -52,12 +52,12 @@
         app:layout_constraintStart_toStartOf="@+id/supply_list_button" />
 
     <Button
-        android:id="@+id/update_summary_button"
+        android:id="@+id/export_file_button"
         android:layout_width="188dp"
         android:layout_height="80dp"
         android:layout_marginBottom="-9dp"
-        android:onClick="onUpdateSummaryClick"
-        android:text="@string/update_summary_information_button"
+        android:onClick="onExportFileClick"
+        android:text="@string/export_file_button"
         android:textSize="13sp"
         app:layout_constraintBottom_toTopOf="@+id/save_button"
         app:layout_constraintEnd_toEndOf="@+id/supply_list_button" />

@@ -15,7 +15,7 @@
     <string name="delete_button">Удалить</string>
     <string name="update_button">Обновить</string>
     <string name="save_button">Сохранить</string>
-    <string name="update_summary_information_button">Обновить суммарную информацию</string>
+    <string name="export_file_button">Выгрузить файл</string>
 
     <!--Fields names-->
     <string name="title_field">Название:</string>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.appksa.warehousemanager.json.JsonHelper;
 import com.appksa.warehousemanager.model.DispatchEvent;
 import com.appksa.warehousemanager.model.LogBookItem;
 import com.appksa.warehousemanager.model.SummaryInformation;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static WarehouseState warehouseState;
     WarehouseState tempClassForId;
     SummaryInformation summaryInformation = new SummaryInformation();
+    JsonHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +31,16 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println("\t\t\t\t\tMainActivity Created");
 
-        generateTestPositions();
+        helper = new JsonHelper();
+        warehouseState = helper.importFromJsonFromInternalFile(this);
 
-        updateSummaryInformation();
+        //generateTestPositions();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
+        updateSummaryInformation();
         System.out.println("\t\t\t\t\tMainActivity Resumed");
     }
     @Override
@@ -45,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
     public void generateTestPositions(){
+        warehouseState = null;
+
         tempClassForId = new WarehouseState(-1L, null, null);
         //bufferItem = new BufferSupplyItem(tempClassForId.getIdGen(),"BUFFER MAIN INIT!!!","","",0,null,"");
 
@@ -123,9 +129,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSaveClick(View view) {
+        helper.exportToJsonAndInternalSave(this, warehouseState);
     }
-
-    public void onUpdateSummaryClick(View view) { //да бля в onResume засунуть обновление, просто что кнопка хорошо смотрится =)
-        updateSummaryInformation();
+    public void onExportFileClick(View view) {
+        helper.exportToJsonAndExternalSave(this, warehouseState);
+        generateTestPositions();
     }
 }
