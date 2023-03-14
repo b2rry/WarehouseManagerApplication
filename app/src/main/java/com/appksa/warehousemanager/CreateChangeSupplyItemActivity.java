@@ -230,6 +230,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
                 currentSupplyItem.setBgColor(getSelectedRadioButtonColorId());
                 currentSupplyItem.setConsumableMaterial(consumableSwitchCompat.isChecked());
                 MainActivity.warehouseState.getSupplyItemsList().add(currentSupplyItem);
+                MainActivity.warehouseState.addChangeLog(currentSupplyItem.getTitle(),3);
             } else {
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setStartAmount(bufStartAmount);
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setTitle(String.valueOf(editTextTitle.getText()));
@@ -237,6 +238,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setComment(String.valueOf(editTextComment.getText()));
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(getSelectedRadioButtonColorId());
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setConsumableMaterial(consumableSwitchCompat.isChecked());
+                MainActivity.warehouseState.addChangeLog(currentSupplyItem.getTitle(),4);
             }
 
             Intent intent = new Intent(this, SupplyItemActivity.class);

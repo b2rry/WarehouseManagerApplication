@@ -12,6 +12,9 @@
         android:theme="@style/Theme.WarehouseManager"
         tools:targetApi="31">
         <activity
+            android:name=".LogBookItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreateChangeDispatchEventActivity"
             android:exported="false"
             android:screenOrientation="portrait"

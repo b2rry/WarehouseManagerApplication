@@ -30,12 +30,7 @@ public class SupplyItem{
         this.consumableMaterial = consumableMaterial;
         setCorrectRestAmounts();
     }
-    public SupplyItem(String title, String date, int startAmount, int bgColor, int restAvailableAmount){
-        this.title = title;
-        this.date = date;
-        this.startAmount = startAmount;
-        this.bgColor = bgColor;
-        this.restAvailableAmount = restAvailableAmount;
+    public SupplyItem(){
     }
 
     public void setCorrectRestAmounts(){
