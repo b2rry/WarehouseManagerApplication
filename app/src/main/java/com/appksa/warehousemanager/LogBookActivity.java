@@ -9,14 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.appksa.warehousemanager.adapter.LogBookItemAdapter;
-import com.appksa.warehousemanager.adapter.SupplyListAdapter;
 import com.appksa.warehousemanager.model.LogBookItem;
 
-import java.sql.Array;
-import java.util.AbstractCollection;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -37,8 +31,8 @@ public class LogBookActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        updateRequiredRecycler(logBookSavesRecycler, MainActivity.warehouseState.getLogBookSaveItemsQueue(), true);
-        updateRequiredRecycler(logBookChangesRecycler, MainActivity.warehouseState.getLogBookChangeItemsQueue(), false);
+        updateRequiredRecycler(logBookSavesRecycler, MainActivity.logBookSaveItemsQueue, true);
+        updateRequiredRecycler(logBookChangesRecycler, MainActivity.logBookChangeItemsQueue, false);
         System.out.println("\t\t\t\t\tLogBookActivity Resumed");
     }
 
@@ -48,7 +42,7 @@ public class LogBookActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    protected void updateRequiredRecycler(RecyclerView currentRecycler, Queue<LogBookItem> currentQueue, boolean isSave){
+    protected void updateRequiredRecycler(RecyclerView currentRecycler, Queue<LogBookItem> currentQueue, boolean isSaveLogs){
         LinkedList<LogBookItem> currentList = (LinkedList<LogBookItem>) currentQueue;
         LogBookItem[] finalArray = new LogBookItem[50];
         int iterator = 50;
@@ -59,7 +53,7 @@ public class LogBookActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         currentRecycler.setLayoutManager(layoutManager);
 
-        LogBookItemAdapter logBookItemAdapter = new LogBookItemAdapter(this, finalArray, isSave);
+        LogBookItemAdapter logBookItemAdapter = new LogBookItemAdapter(this, finalArray, isSaveLogs);
         currentRecycler.setAdapter(logBookItemAdapter);
     }
 

@@ -147,7 +147,7 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
                 currDispatchEvent.setPlaned(planedDispatchSwitch.isChecked());
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().add(currDispatchEvent);
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmounts();
-                MainActivity.warehouseState.addChangeLog(currentSupplyItem.getTitle(),6);
+                MainActivity.addChangeLog(currentSupplyItem.getTitle(),6);
             } else {
                 //change
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setAmount(bufAmount);
@@ -155,7 +155,7 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setDispatchDate(String.valueOf(editTextDate.getText()));
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setPlaned(planedDispatchSwitch.isChecked());
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmounts();
-                MainActivity.warehouseState.addChangeLog(currentSupplyItem.getTitle(),7);
+                MainActivity.addChangeLog(currentSupplyItem.getTitle(),7);
             }
 
             Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
@@ -174,7 +174,7 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
     public void acceptDeletionDialogClicked() {
         MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().remove(currDispatchEventInd);
         MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmounts();
-        MainActivity.warehouseState.addChangeLog(currentSupplyItem.getTitle(),8);
+        MainActivity.addChangeLog(currentSupplyItem.getTitle(),8);
         Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         CreateChangeSupplyItemActivity.isChanged = true;

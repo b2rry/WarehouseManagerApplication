@@ -56,7 +56,7 @@
     <string name="incorrect_amount_format_message">Некорректный формат данных в поле "Количество"</string>
     <string name="incorrect_prihod_format_message">Некорректный формат данных в поле "Приход"</string>
     <string name="decline_dispatch_event_message">Чтобы добавить отгрузку создайте позицию"</string>
-    <string name="Choose_supply_item_color_message">Выберите цвет заднего фона:</string>
+    <string name="Choose_supply_item_color_message">Выберите цвет заднего фона позиции</string>
     <string name="delete_supply_item_dialog_title_message">Подтвердите удаление позиции</string>
     <string name="delete_dispatch_event_dialog_title_message">Подтвердите удаление отгрузки</string>
     <string name="delete_dialog_message_message">Выберите соответствующее действие</string>

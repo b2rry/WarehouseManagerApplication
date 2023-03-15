@@ -2,6 +2,7 @@ package com.appksa.warehousemanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,9 +17,8 @@ import com.appksa.warehousemanager.model.SummaryInformation;
 import com.appksa.warehousemanager.model.SupplyItem;
 import com.appksa.warehousemanager.model.WarehouseState;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -26,6 +26,8 @@ import java.util.Queue;
 public class MainActivity extends AppCompatActivity {
 
     public static WarehouseState warehouseState;
+    public static Queue<LogBookItem> logBookSaveItemsQueue;
+    public static Queue<LogBookItem> logBookChangeItemsQueue;
     SummaryInformation summaryInformation = new SummaryInformation();
     JsonHelper helper;
     SharedPreferences prefs;
@@ -41,12 +43,11 @@ public class MainActivity extends AppCompatActivity {
         if (prefs.getBoolean("firstRun", true)) {
             generateTestPositions();
             prefs.edit().putBoolean("firstRun", false).apply();
-            warehouseState.changeState();//в состояние сохранения
+            warehouseState.updateLogLists();
             helper.exportToJsonAndInternalSave(this, warehouseState);
-            warehouseState.changeState();//в рабочее состояние
         }else{
             warehouseState = helper.importFromJsonFromInternalFile(this);
-            warehouseState.changeState();//в рабочее состояние
+            warehouseState.updateLogQueues();
         }
 
         System.out.println("\t\t\t\t\tMainActivity Created");
@@ -97,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         warehouseState.setSupplyItemsList(supplyItemsList);
-        warehouseState.setLogBookSaveItemsQueue(logBookSaveItemsQueue);//рабочее состояние
-        warehouseState.setLogBookChangeItemsQueue(logBookChangeItemsQueue);//рабочее состояние
+        MainActivity.logBookSaveItemsQueue = logBookSaveItemsQueue;
+        MainActivity.logBookChangeItemsQueue = logBookChangeItemsQueue;
     }
 
     private List<DispatchEvent> getList(){
@@ -130,6 +131,50 @@ public class MainActivity extends AppCompatActivity {
         valueConsumableAvailable.setText(String.valueOf(summaryInformation.getConsumableMaterialAvailableRestAmount()));
     }
 
+    public static void addSaveLog(int operationCode){
+        Date date = new Date();
+        @SuppressLint("DefaultLocale") String currentMoment = String.format("%td.%<tm.%<tY / %<tR", date);
+        if(operationCode == 1){
+            logBookSaveItemsQueue.poll();
+            logBookSaveItemsQueue.add(new LogBookItem(currentMoment, "Сохранено состояние склада", operationCode));
+        } else if (operationCode == 2) {
+            logBookSaveItemsQueue.poll();
+            logBookSaveItemsQueue.add(new LogBookItem(currentMoment, "Выгружен файл состояния", operationCode));
+        }else{
+            logBookSaveItemsQueue.poll();
+            logBookSaveItemsQueue.add(new LogBookItem(currentMoment, "received incorrect code", 400));
+        }
+    }
+    public static void addChangeLog(String itemTitle, int operationCode){
+        String action = "";
+        switch(operationCode){
+            case 3:
+                action = "Добавлена позиция";
+                break;
+            case 4:
+                action = "Изменена позиция";
+                break;
+            case 5:
+                action = "Удалена позиция";
+                break;
+            case 6:
+                action = "Добавлена отгрузка";
+                break;
+            case 7:
+                action = "Изменена отгрузка";
+                break;
+            case 8:
+                action = "Удалена отгрузка";
+                break;
+            default:
+                operationCode = 400;
+                action = "received incorrect code";
+                break;
+        }
+        logBookChangeItemsQueue.poll();
+        logBookChangeItemsQueue.add(new LogBookItem(action, itemTitle, operationCode));
+    }
+
     public void onSupplyListActivityClick(View view) {
         Intent intent = new Intent(this, SupplyListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -149,25 +194,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSaveClick(View view) {
-        warehouseState.addSaveLog(1);
-        warehouseState.changeState();//в состояние сохранения
+        addSaveLog(1);
+        warehouseState.updateLogLists();
         if(helper.exportToJsonAndInternalSave(this, warehouseState)){
-            warehouseState.changeState();//в рабочее состояние
             Toast.makeText(getApplicationContext(), "Состояние сохранено успешно", Toast.LENGTH_LONG).show();
         }else {
-            warehouseState.changeState();//в рабочее состояние
             Toast.makeText(getApplicationContext(), "СОХРАНЕНИЕ НЕ УДАЛОСЬ!", Toast.LENGTH_LONG).show();
         }
     }
     public void onExportFileClick(View view) {
-        warehouseState.addSaveLog(2);
-        warehouseState.changeState();//в состояние сохранения
+        addSaveLog(2);
+        warehouseState.updateLogLists();
         if(helper.exportToJsonAndExternalSave(this, warehouseState)){
             helper.exportToJsonAndInternalSave(this, warehouseState);//сохранение состояния для сохранения лога (не интуитивно понятно что лог не сохранится после выхода)
-            warehouseState.changeState();//в рабочее состояние
             Toast.makeText(getApplicationContext(), "Файл выгружен успешно", Toast.LENGTH_LONG).show();
         }else {
-            warehouseState.changeState();//в рабочее состояние
             Toast.makeText(getApplicationContext(), "ВЫГРУЗКА НЕ УДАЛОСЬ!", Toast.LENGTH_LONG).show();
         }
     }

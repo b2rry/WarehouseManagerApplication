@@ -124,7 +124,7 @@ public class SupplyItemActivity extends AppCompatActivity {
 
     public void acceptDeletionDialogClicked() {
         MainActivity.warehouseState.getSupplyItemsList().remove(currentSupplyItemInd);
-        MainActivity.warehouseState.addChangeLog(currentSupplyItem.getTitle(),5);
+        MainActivity.addChangeLog(currentSupplyItem.getTitle(),5);
         Intent intent = new Intent(this, SupplyListActivity.class);
         SupplyListActivity.isChanged = true;
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);

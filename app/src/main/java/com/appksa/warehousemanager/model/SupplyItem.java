@@ -17,8 +17,6 @@ public class SupplyItem{
     protected String comment;
     protected Boolean consumableMaterial;
 
-    //возможно нужны пустые конструкторы для десериализации из json
-
     public SupplyItem(Long id, String title, String date, int startAmount, int bgColor, List<DispatchEvent> dispatchEventsList, String comment, boolean consumableMaterial) {
         this.id = id;
         this.title = title;

@@ -44,6 +44,7 @@
         android:layout_marginTop="10dp"
         android:hint="@string/enter_text_message"
         android:textSize="16sp"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_1"
         app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_1"
         app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_1" />
@@ -56,6 +57,7 @@
         android:layout_marginTop="6dp"
         android:hint="@string/enter_text_message"
         android:textSize="16sp"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_2"
         app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_2"
         app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_2" />
@@ -68,6 +70,7 @@
         android:layout_marginTop="6dp"
         android:hint="@string/enter_amount_message"
         android:textSize="16sp"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_3"
         app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_3"
         app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_3" />
