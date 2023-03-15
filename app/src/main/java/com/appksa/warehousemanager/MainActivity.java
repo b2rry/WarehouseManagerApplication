@@ -1,15 +1,20 @@
 package com.appksa.warehousemanager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appksa.warehousemanager.dialog.AcceptLoadingFromExternalFileDialogFragment;
 import com.appksa.warehousemanager.json.JsonHelper;
 import com.appksa.warehousemanager.model.DispatchEvent;
 import com.appksa.warehousemanager.model.LogBookItem;
@@ -31,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     SummaryInformation summaryInformation = new SummaryInformation();
     JsonHelper helper;
     SharedPreferences prefs;
+    public static boolean isStateSaved;
+    TextView saveWarningText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +57,21 @@ public class MainActivity extends AppCompatActivity {
             warehouseState.updateLogQueues();
         }
 
+        isStateSaved = true;
+        saveWarningText = findViewById(R.id.save_warning_text_view);
         System.out.println("\t\t\t\t\tMainActivity Created");
     }
 
     @Override
     protected void onResume(){
         super.onResume();
+        if(isStateSaved){
+            saveWarningText.setText(R.string.save_not_required_message);
+            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.swamp_green));
+        }else{
+            saveWarningText.setText(R.string.save_warning_message);
+            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.soft_red));
+        }
         updateSummaryInformation();
         System.out.println("\t\t\t\t\tMainActivity Resumed");
     }
@@ -63,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         System.out.println("\t\t\t\t\tMainActivity Destroyed");
         super.onDestroy();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
     public void generateTestPositions(){
         warehouseState = new WarehouseState(0L, null);
@@ -171,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 action = "received incorrect code";
                 break;
         }
+        isStateSaved = false;
         logBookChangeItemsQueue.poll();
         logBookChangeItemsQueue.add(new LogBookItem(action, itemTitle, operationCode));
     }
@@ -198,6 +220,9 @@ public class MainActivity extends AppCompatActivity {
         warehouseState.updateLogLists();
         if(helper.exportToJsonAndInternalSave(this, warehouseState)){
             Toast.makeText(getApplicationContext(), "Состояние сохранено успешно", Toast.LENGTH_LONG).show();
+            isStateSaved = true;
+            saveWarningText.setText(R.string.save_not_required_message);
+            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.swamp_green));
         }else {
             Toast.makeText(getApplicationContext(), "СОХРАНЕНИЕ НЕ УДАЛОСЬ!", Toast.LENGTH_LONG).show();
         }
@@ -206,10 +231,32 @@ public class MainActivity extends AppCompatActivity {
         addSaveLog(2);
         warehouseState.updateLogLists();
         if(helper.exportToJsonAndExternalSave(this, warehouseState)){
-            helper.exportToJsonAndInternalSave(this, warehouseState);//сохранение состояния для сохранения лога (не интуитивно понятно что лог не сохранится после выхода)
+            helper.exportToJsonAndInternalSave(this, warehouseState); //сохранение состояния для сохранения лога (не интуитивно понятно что лог не сохранится после выхода)
             Toast.makeText(getApplicationContext(), "Файл выгружен успешно", Toast.LENGTH_LONG).show();
         }else {
             Toast.makeText(getApplicationContext(), "ВЫГРУЗКА НЕ УДАЛОСЬ!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onLoadExternalFileClick(MenuItem item) {
+        AcceptLoadingFromExternalFileDialogFragment myDialogFragment = new AcceptLoadingFromExternalFileDialogFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        myDialogFragment.show(fragmentManager, "acceptExternalFileLoading");
+    }
+
+    public void acceptExternalFileLoadingClicked() {
+        warehouseState = helper.importFromJsonFromExternalFile(this);
+        if(warehouseState == null){
+            Toast.makeText(getApplicationContext(), "Файл не найден, необходимо четко следовать инструкции", Toast.LENGTH_LONG).show();
+            warehouseState = helper.importFromJsonFromInternalFile(this);
+        }else {
+            warehouseState.updateLogQueues();
+            Toast.makeText(getApplicationContext(), "Состояние приложения успешно обновлено", Toast.LENGTH_LONG).show();
+            isStateSaved = false;
+            saveWarningText.setText(R.string.save_warning_message);
+            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.soft_red));
+            updateSummaryInformation();
+            SupplyListActivity.isChanged = true;
         }
     }
 }

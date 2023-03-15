@@ -64,4 +64,22 @@ public class JsonHelper {
 
         return null;
     }
+
+    public WarehouseState importFromJsonFromExternalFile(Context context) {
+
+
+        try{
+            File externalDir = new File(context.getExternalFilesDir(null), FILE_NAME);
+            FileInputStream fileInputStream = new FileInputStream(externalDir);
+            InputStreamReader streamReader = new InputStreamReader(fileInputStream);
+
+            Gson gson = new Gson();
+            return gson.fromJson(streamReader, WarehouseState.class);
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
 }

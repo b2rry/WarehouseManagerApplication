@@ -58,10 +58,17 @@
     <string name="decline_dispatch_event_message">Чтобы добавить отгрузку создайте позицию"</string>
     <string name="Choose_supply_item_color_message">Выберите цвет заднего фона позиции</string>
     <string name="delete_supply_item_dialog_title_message">Подтвердите удаление позиции</string>
+    <string name="load_external_state_file_title_message">Подтвердите следующее действие</string>
     <string name="delete_dispatch_event_dialog_title_message">Подтвердите удаление отгрузки</string>
     <string name="delete_dialog_message_message">Выберите соответствующее действие</string>
+    <string name="load_external_state_file_message">После этого действия текущее состояние приложения будет безвозвратно удалено и заменено состоянием из внешнего файла. Вы уверены что хотите продолжить?</string>
+    <string name="load_external_action_first_message">Подтвердить</string>
     <string name="delete_dialog_action_first_message">Удалить</string>
     <string name="delete_dialog_action_second_message">Отменить</string>
+    <string name="save_warning_message">Не забудьте сохранить изменения!</string>
+    <string name="save_not_required_message">Сохранение не требуется</string>
+    <string name="input_field_message">Поле ввода</string>
+    <string name="load_external_file_message">Загрузить состояние из файла</string>
 
     <!--Menu options-->
 
