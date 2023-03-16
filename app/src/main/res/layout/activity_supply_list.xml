@@ -111,7 +111,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/text_view_title"
         app:layout_constraintStart_toEndOf="@+id/text_view_title"
         app:layout_constraintTop_toTopOf="@+id/text_view_title"
-        app:srcCompat="@drawable/arrow_up_float" />
+        app:srcCompat="@drawable/triangle_up" />
 
     <ImageView
         android:id="@+id/sort_img_start_amount"
@@ -121,7 +121,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/text_view_start_amount"
         app:layout_constraintStart_toEndOf="@+id/text_view_start_amount"
         app:layout_constraintTop_toTopOf="@+id/text_view_start_amount"
-        app:srcCompat="@drawable/arrow_up_float" />
+        app:srcCompat="@drawable/triangle_up" />
 
     <ImageView
         android:id="@+id/sort_img_rest_amount"
@@ -131,7 +131,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/text_view_rest_amount"
         app:layout_constraintStart_toEndOf="@+id/text_view_rest_amount"
         app:layout_constraintTop_toTopOf="@+id/text_view_rest_amount"
-        app:srcCompat="@drawable/arrow_up_float" />
+        app:srcCompat="@drawable/triangle_up" />
 
     <ImageView
         android:id="@+id/sort_img_date"
@@ -141,7 +141,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/text_view_date"
         app:layout_constraintStart_toEndOf="@+id/text_view_date"
         app:layout_constraintTop_toTopOf="@+id/text_view_date"
-        app:srcCompat="@drawable/arrow_up_float" />
+        app:srcCompat="@drawable/triangle_up" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
