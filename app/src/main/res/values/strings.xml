@@ -1,6 +1,7 @@
 <resources>
     <!--App names-->
     <string name="app_name">Warehouse Manager</string>
+    <string name="app_name_local">Менеджер склада</string>
 
     <!--Button names-->
     <string name="supply_list_activity_button">Список позиций</string>
@@ -17,12 +18,16 @@
     <string name="save_button">Сохранить</string>
     <string name="export_file_button">Выгрузить файл</string>
 
+    <!--Descriptions-->
+    <string name="img_description_first">треугольник для отображения столбца сортировки</string>
+
     <!--Fields names-->
+    <string name="item_activity_field">Просмотр позиции</string>
     <string name="title_field">Название:</string>
     <string name="date_field">Дата прихода:</string>
     <string name="start_amount_field">Приход:</string>
     <string name="rest_available_amount_field">Доступный остаток:</string>
-    <string name="dispatches_field">Отгрузки:</string>
+    <string name="dispatches_field">Отгрузки</string>
     <string name="comment_field">Комментарий:</string>
     <string name="kg_units_field">кг</string>
     <string name="pieces_units_field">шт</string>
@@ -32,15 +37,21 @@
     <string name="background_color_field">Цвет фона:</string>
     <string name="consumable_material_field">Расходный материал</string>
     <string name="consumable_material_field_2">Расходный материал:</string>
-    <string name="planed_dispatch_event_field">Запланированная отгрузка:</string>
+    <string name="planed_dispatch_event_field">Запланированная отгрузка</string>
     <string name="rest_factual_amount_field">Фактический остаток:</string>
     <string name="final_product_text_field">Конечная продукция</string>
     <string name="consumable_material_text_field">Расходные материалы</string>
     <string name="amount_positions_in_app_field">Количество позиций в приложении:</string>
-    <string name="available_final_rest_amount_field">Количество доступных товаров для продажи:</string>
-    <string name="factual_final_rest_amount_field">Фактическое количество товаров на складе:</string>
-    <string name="available_consumable_rest_amount_field">Масса доступного товара для продажи:</string>
-    <string name="factual_consumable_rest_amount_field">Фактическая масса товара на складе:</string>
+    <string name="available_final_rest_amount_field">Доступно товаров для продажи:</string>
+    <string name="factual_final_rest_amount_field">Фактическое количество на складе:</string>
+    <string name="available_consumable_rest_amount_field">Доступно товара для продажи:</string>
+    <string name="factual_consumable_rest_amount_field">Фактическая масса на складе:</string>
+    <string name="change_logs_field">Изменения</string>
+    <string name="save_logs_field">Сохранения</string>
+    <string name="items_list_title_column_field">Название</string>
+    <string name="items_list_start_amount_column_field">Приход</string>
+    <string name="items_list_rest_amount_column_field">Остаток</string>
+    <string name="items_list_date_column_field">Дата</string>
 
     <!--Messages names-->
     <string name="yes_message">Да</string>
@@ -54,7 +65,7 @@
     <string name="create_dispatch_event_message">Добавление отгрузки</string>
     <string name="change_dispatch_event_message">Изменение отгрузки</string>
     <string name="incorrect_amount_format_message">Некорректный формат данных в поле "Количество"</string>
-    <string name="incorrect_prihod_format_message">Некорректный формат данных в поле "Приход"</string>
+    <string name="incorrect_start_amount_format_message">Некорректный формат данных в поле "Приход"</string>
     <string name="decline_dispatch_event_message">Чтобы добавить отгрузку создайте позицию"</string>
     <string name="Choose_supply_item_color_message">Выберите цвет заднего фона позиции</string>
     <string name="delete_supply_item_dialog_title_message">Подтвердите удаление позиции</string>
@@ -69,7 +80,8 @@
     <string name="save_not_required_message">Сохранение не требуется</string>
     <string name="input_field_message">Поле ввода</string>
     <string name="load_external_file_message">Загрузить состояние из файла</string>
+    <string name="hint_information_info">Для отображения информации, выберите интересующий вас раздел выше</string>
 
-    <!--Menu options-->
-
+    <!--Information-->
+    <string name="information_activity_text">Приложение предназначено для упрощения ведения состояния склада. А именно - создания и изменения позиций склада и их отгрузок. Также предусмотрен журнал изменений позиций и сохранений состояния 	приложения.\n\n\nФункционал:\n\nВ приложении имеется 7 возможных экранов с информацией:\n\n1. Основной экран, \"Менеджер склада\":\nНа экране располагаются основные кнопки переходов, кнопка сохранения, кнопка выгрузки файла, кнопка меню и два окна отображающих информацию. При нажатии на кнопку меню можно выбрать действие для обоновления состояния приложения, по средствам загрузки состояния из ранее выгруженного файла. Два окна отображают суммарную информацию о складе. Также на экране присутствует надпись оповещающая о наличии не сохраненных изменений, и соответственно, необходимости сохранения.\n\n2. Второй экран, \"Список позиций\":\nНа экране располагаются кнопки перехода и создания позиции и основной список всех позиций. При нажатии на позицию осуществляется переход к ее просмотру, при нажатии на один из названий столбцов таблицы, таблица будет отсортирована по соответствующим данным.\n\n3. Третий экран, \"Журнал изменений\":\nНа экране присутствует кнопка возврата в меню, а также два списка: список сохранений и список изменений. Списки отображают актуальные изменения и сохранения в приложении, оба списка работают по принципу очереди и содержат по 50 записей, когда в верхушку списка помещается новое событие, нижнее удаляется.\n\n4. Четвертый экран, \"Информация\":\nЭкран является информационным и содержит информацию, которую вы читаете в данный момент.\n\n5. Пятый экран, \"Просмотр позиции\":\nНа экране присутствует кнопка возврата к листу позиций, кнопка изменения позиции и кнопка удаления позиции. Также на экране располагаются текстовые поля, содержащие информацию о позиции и список отгрузок по этой позиции.\n\n6. Шестой экран, \"Изменение или Создание позиции\":\nЭкран используется как для изменения, так и для создания позиции на складе. На экране присутствует кнопка возврата к просмотру позиции и кнопка подтверждения изменений. На экране вы можете задать необходимые информационные значения, добавить или изменить отгрузки товара, а также изменить задний фон отображения позиции склада в общем списке. У позиции есть два состояния - расходный материал и конечный продукт, относительно их подсчитывается суммарное состояние склада на основном экране.\n\n7. Седьмой экран, \"Изменение или Создание отгрузки\":\nЭкран используется как для изменения отгрузки, так и для ее создания. На экране присутствует конпка возврата к изменяющейся позиции склада, кнопка подтверждения изменений и кнопка удаления отгрузки. Также на экране вы можете задать необходимые информационные значения. У отгрузки есть два состояния - отгруженное и запланированное, относительно их подсчитываются фактические и доступные остатки товаров на складе.\n\n\nВыгрузка/Загрузка состояния приложения:\n\nДля выгрузки состояния приложения в файл, достаточно нажать на кнопку \"Выгрузить файл\", файл с названием \"warehouse_manager_state\" можно забрать из дериктории по пути /Android/data/com.appksa.warehousemanager/files. Не следует изменять содержимое файла, если не уверены в правильности вносимых корректировок. Файл перезаписывается при каждой новой выгрузке из приложения, соответственно, может находиться исключительно в еденичном экземпляре по указанному пути. Для загрузки файла в приложение, перейдите по указанному выше пути, удалите устаревший файл (если вы его не удаляли заранее), поместите нужный вам файл состояния в еденичном экземпляре с указанным выше названием (обязательно) и загрузите его в приложении через действие из меню основного экрана.\n\n\nО программе:\n\nПриложение написано в рамках обучения программирования под платформу Android, с целью помочь семейному бизнесу, Март 2023г.\n\nРазработчик: Кирилл Андреевич Сехович.</string>
 </resources>

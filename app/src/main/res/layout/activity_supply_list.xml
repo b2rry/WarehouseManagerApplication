@@ -9,23 +9,25 @@
     <Button
         android:id="@+id/button6"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginStart="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="1dp"
+        android:fontFamily="@font/manrope_extrabold"
+
         android:onClick="onMainActivityClick"
         android:text="@string/menu_button"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/text_view_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/manrope_bold"
         android:onClick="onTitleSortClick"
-        android:text="Название"
+        android:text="@string/items_list_title_column_field"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,48 +36,51 @@
     <TextView
         android:id="@+id/text_view_start_amount"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="105dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="3dp"
+        android:fontFamily="@font/manrope_bold"
         android:onClick="onStartAmountSortClick"
-        android:text="Приход"
+        android:text="@string/items_list_start_amount_column_field"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_title"
-        app:layout_constraintStart_toEndOf="@+id/text_view_title"
+        app:layout_constraintEnd_toStartOf="@+id/sort_img_start_amount"
         app:layout_constraintTop_toTopOf="@+id/text_view_title" />
 
     <TextView
         android:id="@+id/text_view_rest_amount"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="3dp"
+        android:fontFamily="@font/manrope_bold"
         android:onClick="onRestAmountSortClick"
-        android:text="Остаток"
+        android:text="@string/items_list_rest_amount_column_field"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_start_amount"
-        app:layout_constraintStart_toEndOf="@+id/text_view_start_amount"
+        app:layout_constraintEnd_toStartOf="@+id/sort_img_rest_amount"
         app:layout_constraintTop_toTopOf="@+id/text_view_start_amount" />
 
     <TextView
         android:id="@+id/text_view_date"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="3dp"
+        android:fontFamily="@font/manrope_bold"
         android:onClick="onDateSortClick"
-        android:text="Дата"
+        android:text="@string/items_list_date_column_field"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_rest_amount"
-        app:layout_constraintStart_toEndOf="@+id/text_view_rest_amount"
+        app:layout_constraintEnd_toStartOf="@+id/sort_img_date"
         app:layout_constraintTop_toTopOf="@+id/text_view_rest_amount" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/supply_list_recycler"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,30 +89,34 @@
     <Button
         android:id="@+id/button11"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="1dp"
+        android:fontFamily="@font/manrope_extrabold"
         android:onClick="onCreateButtonClick"
         android:text="@string/create_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button6" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <!--Button
         android:id="@+id/button17"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="1dp"
+        android:fontFamily="@font/manrope_bold"
         android:onClick="onUpdateActivity"
         android:text="@string/update_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" /-->
 
     <ImageView
         android:id="@+id/sort_img_title"
         android:layout_width="15dp"
         android:layout_height="11dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="-7dp"
+        android:contentDescription="@string/img_description_first"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_title"
         app:layout_constraintStart_toEndOf="@+id/text_view_title"
         app:layout_constraintTop_toTopOf="@+id/text_view_title"
@@ -117,9 +126,11 @@
         android:id="@+id/sort_img_start_amount"
         android:layout_width="15dp"
         android:layout_height="11dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="-7dp"
+        android:layout_marginEnd="7dp"
+        android:contentDescription="@string/img_description_first"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_start_amount"
-        app:layout_constraintStart_toEndOf="@+id/text_view_start_amount"
+        app:layout_constraintEnd_toStartOf="@+id/text_view_rest_amount"
         app:layout_constraintTop_toTopOf="@+id/text_view_start_amount"
         app:srcCompat="@drawable/triangle_up" />
 
@@ -127,9 +138,11 @@
         android:id="@+id/sort_img_rest_amount"
         android:layout_width="15dp"
         android:layout_height="11dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="-7dp"
+        android:layout_marginEnd="7dp"
+        android:contentDescription="@string/img_description_first"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_rest_amount"
-        app:layout_constraintStart_toEndOf="@+id/text_view_rest_amount"
+        app:layout_constraintEnd_toStartOf="@+id/text_view_date"
         app:layout_constraintTop_toTopOf="@+id/text_view_rest_amount"
         app:srcCompat="@drawable/triangle_up" />
 
@@ -137,9 +150,11 @@
         android:id="@+id/sort_img_date"
         android:layout_width="15dp"
         android:layout_height="11dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="-7dp"
+        android:layout_marginEnd="5dp"
+        android:contentDescription="@string/img_description_first"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_date"
-        app:layout_constraintStart_toEndOf="@+id/text_view_date"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/text_view_date"
         app:srcCompat="@drawable/triangle_up" />
 

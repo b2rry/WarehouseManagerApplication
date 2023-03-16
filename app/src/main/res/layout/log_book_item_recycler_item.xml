@@ -34,9 +34,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="3dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/manrope_semibold"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                android:textColor="@color/black"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="2016.11.13 / 12:12:36" />
 
@@ -46,9 +47,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="3dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/manrope_medium"
                 android:gravity="center"
                 android:singleLine="true"
-                android:textColor="@color/black"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/log_book_recycler_info_field"
                 tools:text="SC-101 08x08 AC Керамический наполнитель" />

@@ -39,7 +39,7 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_change_dispatch_event);
 
-        System.out.println("\t\t\t\t\tCreateChangeDispatchEventActivity Created");
+//        System.out.println("\t\t\t\t\tCreateChangeDispatchEventActivity Created");
 
         Long id = getIntent().getLongExtra("supplyItemId", 0);
         isNewDispatch = getIntent().getBooleanExtra("isNewDispatch", true);
@@ -49,11 +49,11 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
 
         if(isNewDispatch) {
             //create
-            setTitle(R.string.create_dispatch_event_message + " создание " + eventId + " eid");
-            currDispatchEvent = new DispatchEvent(0, "CONTRACTOR", "DATE", eventId, false);
+            setTitle(R.string.create_dispatch_event_message);
+            currDispatchEvent = new DispatchEvent(0, "", "", eventId, false);
         }else{
             //change
-            setTitle(R.string.change_dispatch_event_message + " изменение " + eventId + " eid");
+            setTitle(R.string.change_dispatch_event_message);
             currDispatchEvent = getDispatchEventById(eventId);
         }
 
@@ -64,7 +64,6 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
         planedDispatchSwitch = findViewById(R.id.planed_dispatch_event_switch);
 
         if(!isNewDispatch) {
-            //change
             editTextContractor.setText(currDispatchEvent.getContractor());
             editTextDate.setText(currDispatchEvent.getDispatchDate());
             editTextAmount.setText(String.valueOf(currDispatchEvent.getAmount()));
@@ -75,12 +74,12 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        System.out.println("\t\t\t\t\tCreateChangeDispatchEventActivity Resumed");
+//        System.out.println("\t\t\t\t\tCreateChangeDispatchEventActivity Resumed");
         super.onResume();
     }
     @Override
     protected void onDestroy() {
-        System.out.println("\t\t\t\t\tCreateChangeDispatchEventActivity Destroyed");
+//        System.out.println("\t\t\t\t\tCreateChangeDispatchEventActivity Destroyed");
         super.onDestroy();
     }
 
@@ -88,7 +87,6 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
         List<SupplyItem> currList = MainActivity.warehouseState.getSupplyItemsList();
         currSupplyItemInd = 0;
         for(SupplyItem currItem : currList){
-            System.out.println("needed id = " + id + ", check item id = " + currItem.getId());
             if(currItem.getId().equals(id)){
                 return currItem;
             }
@@ -160,8 +158,6 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            //intent.putExtra("isChanged", true);
-            //intent.putExtra("supplyItemId", currentSupplyItem.getId());
             CreateChangeSupplyItemActivity.isChanged = true;
             startActivity(intent);
         }

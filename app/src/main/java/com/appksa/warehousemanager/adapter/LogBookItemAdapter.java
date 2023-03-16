@@ -2,7 +2,6 @@ package com.appksa.warehousemanager.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +12,8 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appksa.warehousemanager.LogBookItemActivity;
 import com.appksa.warehousemanager.R;
 import com.appksa.warehousemanager.model.LogBookItem;
-
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
 
 public class LogBookItemAdapter extends RecyclerView.Adapter<LogBookItemAdapter.LogBookItemViewHolder>{
 
@@ -68,7 +61,7 @@ public class LogBookItemAdapter extends RecyclerView.Adapter<LogBookItemAdapter.
                 holder.logBookCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.app_custom_background_red));
                 break;
             case 400:
-                holder.logBookCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.attention_red));
+                holder.logBookCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.app_custom_attention_red));
                 break;
             default:
                 break;
@@ -77,17 +70,17 @@ public class LogBookItemAdapter extends RecyclerView.Adapter<LogBookItemAdapter.
         holder.logBookInfoFieldTextView.setText(logBookItemArray[position].getInfoField());
         holder.logBookCommentFieldTextView.setText(logBookItemArray[position].getCommentField());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, LogBookItemActivity.class);
-
-                intent.putExtra("isSave",isSave);
-                intent.putExtra("infoField", logBookItemArray[position].getInfoField());
-                intent.putExtra("commentField", logBookItemArray[position].getCommentField());
-                context.startActivity(intent);
-            }
-        });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, LogBookItemActivity.class);
+//
+//                intent.putExtra("isSave",isSave);
+//                intent.putExtra("infoField", logBookItemArray[position].getInfoField());
+//                intent.putExtra("commentField", logBookItemArray[position].getCommentField());
+//                context.startActivity(intent);
+//            }
+//        });
 
     }
 

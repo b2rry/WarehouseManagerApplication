@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:layout_width="320dp"
+    android:layout_width="380dp"
     android:layout_height="40dp">
 
     <androidx.cardview.widget.CardView
 
         android:id="@+id/card_dispatch_event"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginBottom="4dp"
         android:layout_marginTop="1dp"
@@ -30,10 +30,11 @@
 
             <TextView
                 android:id="@+id/dispatch_event_recycler_contractor"
-                android:layout_width="170dp"
+                android:layout_width="180dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/manrope_semibold"
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 tools:text="ООО &quot;Викор&quot;" />
@@ -41,9 +42,10 @@
 
             <TextView
                 android:id="@+id/dispatch_event_recycler_amount"
-                android:layout_width="45dp"
+                android:layout_width="30dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/manrope_medium"
                 android:gravity="center"
                 android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,10 +53,11 @@
 
             <TextView
                 android:id="@+id/dispatch_event_recycler_date"
-                android:layout_width="80dp"
+                android:layout_width="50dp"
                 android:layout_height="35dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/manrope_semibold"
                 android:gravity="center"
                 android:singleLine="true"
                 tools:text="05.06.22" />

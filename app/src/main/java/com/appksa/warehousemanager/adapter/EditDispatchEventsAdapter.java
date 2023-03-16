@@ -11,15 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appksa.warehousemanager.CreateChangeDispatchEventActivity;
-import com.appksa.warehousemanager.CreateChangeSupplyItemActivity;
 import com.appksa.warehousemanager.R;
-import com.appksa.warehousemanager.SupplyItemActivity;
-import com.appksa.warehousemanager.dialog.AcceptDeletionDispatchEventDialogFragment;
-import com.appksa.warehousemanager.dialog.AcceptDeletionSupplyItemDialogFragment;
 import com.appksa.warehousemanager.model.DispatchEvent;
 
 import java.util.List;

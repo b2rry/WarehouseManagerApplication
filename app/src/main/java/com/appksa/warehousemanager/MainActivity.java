@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         isStateSaved = true;
         saveWarningText = findViewById(R.id.save_warning_text_view);
-        System.out.println("\t\t\t\t\tMainActivity Created");
+//        System.out.println("\t\t\t\t\tMainActivity Created");
     }
 
     @Override
@@ -67,17 +67,17 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if(isStateSaved){
             saveWarningText.setText(R.string.save_not_required_message);
-            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.swamp_green));
+            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.app_custom_swamp_green));
         }else{
             saveWarningText.setText(R.string.save_warning_message);
-            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.soft_red));
+            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.app_custom_soft_red));
         }
         updateSummaryInformation();
-        System.out.println("\t\t\t\t\tMainActivity Resumed");
+//        System.out.println("\t\t\t\t\tMainActivity Resumed");
     }
     @Override
     protected void onDestroy() {
-        System.out.println("\t\t\t\t\tMainActivity Destroyed");
+//        System.out.println("\t\t\t\t\tMainActivity Destroyed");
         super.onDestroy();
     }
     @Override
@@ -87,32 +87,19 @@ public class MainActivity extends AppCompatActivity {
     }
     public void generateTestPositions(){
         warehouseState = new WarehouseState(0L, null);
-
-        SupplyItem supplyItem1 = new SupplyItem(warehouseState.getIdGen(),"S-101/SC 06x06 SC Керамический наполнитель", "06.03.2023", 650, R.color.app_custom_background_light_grey, getList(),"Test comment line. Here will be comments about this supply item!", true);
-        SupplyItem supplyItem2 = new SupplyItem(warehouseState.getIdGen(),"S-106/AC 08x20 HX+ Керамический наполнитель", "25.03.2023", 500, R.color.app_custom_background_red, getList(),"Test comment line. Here will be comments about this supply item!", true);
-        SupplyItem supplyItem3 = new SupplyItem(warehouseState.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "25.03.2023", 500, R.color.app_custom_background_orange, getList(),"Test comment line. Here will be comments about this supply item!", true);
-        SupplyItem supplyItem4 = new SupplyItem(warehouseState.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "06.03.2024", 500, R.color.app_custom_background_yellow, getList(),"Test comment line. Here will be comments about this supply item!", true);
-        SupplyItem supplyItem5 = new SupplyItem(warehouseState.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "14.03.2023", 500, R.color.app_custom_background_green, getList(),"Test comment line. Here will be comments about this supply item!", true);
-        SupplyItem supplyItem6 = new SupplyItem(warehouseState.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "28.03.2023", 500, R.color.app_custom_background_blue, getList(),"Test comment line. Here will be comments about this supply item!", true);
-        SupplyItem supplyItem7 = new SupplyItem(warehouseState.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "28.03.2023", 600, R.color.app_custom_background_purple, getList(),"Test comment line. Here will be comments about this supply item!", false);
-        SupplyItem supplyItem8 = new SupplyItem(warehouseState.getIdGen(),"MG 20 Кукурузный гранулят (0.7 - 1.5мм)", "28.03.2023", 700, R.color.app_custom_background_grey, getList(),"Test comment line. Here will be comments about this supply item!", false);
         List<SupplyItem> supplyItemsList = new ArrayList<>();
-        supplyItemsList.add(supplyItem1);
-        supplyItemsList.add(supplyItem2);
-        supplyItemsList.add(supplyItem3);
-        supplyItemsList.add(supplyItem4);
-        supplyItemsList.add(supplyItem5);
-        supplyItemsList.add(supplyItem6);
-        supplyItemsList.add(supplyItem7);
-        supplyItemsList.add(supplyItem8);
+
+        SupplyItem supplyItem = new SupplyItem(warehouseState.getIdGen(), "S-106/AC 08x20 HX+ Керамический наполнитель", "2022.07.14", 500, R.color.app_custom_background_light_grey, getList(), "Комментарий к этой позиции на складе.", true);
+        supplyItemsList.add(supplyItem);
+
 
         Queue<LogBookItem> logBookSaveItemsQueue = new LinkedList<>();
         Queue<LogBookItem> logBookChangeItemsQueue = new LinkedList<>();
 
         try {
             for (int i = 0; i < 50; i++) {
-                logBookSaveItemsQueue.add(new LogBookItem("iterator - " + i, "testComment",0));
-                logBookChangeItemsQueue.add(new LogBookItem("iterator - " + i, "testComment",0));
+                logBookSaveItemsQueue.add(new LogBookItem("", "",0));
+                logBookChangeItemsQueue.add(new LogBookItem("", "",0));
             }
         }catch(IllegalStateException ex){
             System.out.println("IllegalStateException catch");
@@ -125,12 +112,10 @@ public class MainActivity extends AppCompatActivity {
 
     private List<DispatchEvent> getList(){
         List<DispatchEvent> dispatchEventsList = new ArrayList<>();
-        dispatchEventsList.add(new DispatchEvent(25,"contractor_one", "15.02.19", warehouseState.getIdGen(),false));
-        dispatchEventsList.add(new DispatchEvent(50,"contractor_two", "17.08.20", warehouseState.getIdGen(),false));
-        dispatchEventsList.add(new DispatchEvent(75,"contractor_three", "25.06.21", warehouseState.getIdGen(),true));
-        dispatchEventsList.add(new DispatchEvent(25,"contractor_four", "23.06.21", warehouseState.getIdGen(),false));
-        dispatchEventsList.add(new DispatchEvent(5,"contractor_five", "08.04.22", warehouseState.getIdGen(),false));
-        dispatchEventsList.add(new DispatchEvent(5,"contractor_six", "09.09.22", warehouseState.getIdGen(),false));
+
+        dispatchEventsList.add(new DispatchEvent(125, "Контрагент 1", "2022.07.19", warehouseState.getIdGen(), false));
+        dispatchEventsList.add(new DispatchEvent(200, "Контрагент 2", "2022.08.03", warehouseState.getIdGen(), true));
+
         return dispatchEventsList;
     }
 
@@ -222,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Состояние сохранено успешно", Toast.LENGTH_LONG).show();
             isStateSaved = true;
             saveWarningText.setText(R.string.save_not_required_message);
-            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.swamp_green));
+            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.app_custom_swamp_green));
         }else {
             Toast.makeText(getApplicationContext(), "СОХРАНЕНИЕ НЕ УДАЛОСЬ!", Toast.LENGTH_LONG).show();
         }
@@ -254,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Состояние приложения успешно обновлено", Toast.LENGTH_LONG).show();
             isStateSaved = false;
             saveWarningText.setText(R.string.save_warning_message);
-            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.soft_red));
+            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.app_custom_soft_red));
             updateSummaryInformation();
             SupplyListActivity.isChanged = true;
         }

@@ -29,18 +29,18 @@ public class SupplyItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supply_item);
 
-        System.out.println("\t\t\t\t\tSupplyItemActivity Created");
+//        System.out.println("\t\t\t\t\tSupplyItemActivity Created");
 
         Long id = getIntent().getLongExtra("supplyItemId", 0);
         isChanged = getIntent().getBooleanExtra("isChanged", false);
-        System.out.println("Флаг isChanged - " + isChanged);
+//        System.out.println("Флаг isChanged - " + isChanged);
 
         currentSupplyItem = getSupplyItemById(id);
         if(currentSupplyItem == null){
             //if here then Error
             setTitle(R.string.error_message);
         }else {
-            setTitle(R.string.show_item_message + " позиция с id " + id);
+            setTitle(R.string.show_item_message);
 
             TextView textTitle = findViewById(R.id.textView_title);
             TextView textDate = findViewById(R.id.textView_date);
@@ -77,12 +77,12 @@ public class SupplyItemActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        System.out.println("\t\t\t\t\tSupplyItemActivity Resumed");
+//        System.out.println("\t\t\t\t\tSupplyItemActivity Resumed");
         super.onResume();
     }
     @Override
     protected void onDestroy() {
-        System.out.println("\t\t\t\t\tSupplyItemActivity Destroyed");
+//        System.out.println("\t\t\t\t\tSupplyItemActivity Destroyed");
         super.onDestroy();
     }
 

@@ -45,18 +45,18 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_change_supply_item);
 
-        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Created");
+//        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Created");
 
         Long id = getIntent().getLongExtra("supplyItemId", 0);
         isChanged  = getIntent().getBooleanExtra("isChanged", false);
         isCreation = getIntent().getBooleanExtra("isCreation", false);
-        System.out.println("Флаг isChanged - " + isChanged);
-        System.out.println("Флаг isCreation - " + isCreation);
+//        System.out.println("Флаг isChanged - " + isChanged);
+//        System.out.println("Флаг isCreation - " + isCreation);
 
         if(isCreation) {
-            setTitle(R.string.create_item_message + " создание " + id + " id");
+            setTitle(R.string.create_item_message);
         }else{
-            setTitle(R.string.edit_item_message + " изменение " + id + " id");
+            setTitle(R.string.edit_item_message);
             currentSupplyItem = getSupplyItemById(id);
         }
 
@@ -93,12 +93,12 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
         if(isChanged) {
             recreateRecycler();
         }
-        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Resumed");
+//        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Resumed");
         super.onResume();
     }
     @Override
     protected void onDestroy() {
-        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Destroyed");
+//        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Destroyed");
         super.onDestroy();
     }
     protected void recreateRecycler(){
@@ -218,7 +218,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
             bufStartAmount = Integer.parseInt(String.valueOf(editTextStartAmount.getText()));
         }catch(NumberFormatException exception) {
             isException = true;
-            Toast.makeText(getApplicationContext(), R.string.incorrect_prihod_format_message, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.incorrect_start_amount_format_message, Toast.LENGTH_LONG).show();
         }
         if(!isException) {
 

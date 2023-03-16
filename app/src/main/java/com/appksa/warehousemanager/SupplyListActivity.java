@@ -1,18 +1,13 @@
 package com.appksa.warehousemanager;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.appksa.warehousemanager.adapter.SupplyListAdapter;
 import com.appksa.warehousemanager.model.SupplyItem;
@@ -36,7 +31,7 @@ public class SupplyListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supply_list);
 
-        System.out.println("\t\t\t\t\tSupplyListActivity Created");
+//        System.out.println("\t\t\t\t\tSupplyListActivity Created");
 
         isChanged = false;
 
@@ -56,7 +51,7 @@ public class SupplyListActivity extends AppCompatActivity {
         MainActivity.warehouseState.getSupplyItemsList().sort(currentComparator);
         updateRecycler();
 
-        imgSortTitle.setImageResource(R.drawable.triangle_down);
+        imgSortTitle.setImageResource(R.drawable.triangle_down_v2);
     }
     @Override
     protected void onResume() {
@@ -68,11 +63,11 @@ public class SupplyListActivity extends AppCompatActivity {
             isChanged = false;
         }
 
-        System.out.println("\t\t\t\t\tSupplyListActivity Resumed");
+//        System.out.println("\t\t\t\t\tSupplyListActivity Resumed");
     }
     @Override
     protected void onDestroy() {
-        System.out.println("\t\t\t\t\tSupplyListActivity Destroyed");
+//        System.out.println("\t\t\t\t\tSupplyListActivity Destroyed");
         super.onDestroy();
     }
 
@@ -93,16 +88,16 @@ public class SupplyListActivity extends AppCompatActivity {
     public void onCreateButtonClick(View view) {
         Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
         intent.putExtra("supplyItemId", MainActivity.warehouseState.getIdGen());
-        intent.putExtra("isCreation", true);
+//        intent.putExtra("isCreation", true);
         startActivity(intent);
     }
 
-    public void onUpdateActivity(View view) {
-        recreate();
-    }
+//    public void onUpdateActivity(View view) {
+//        recreate();
+//    }
 
     public void onTitleSortClick(View view) {
-        imgSortTitle.setImageResource(R.drawable.triangle_down);
+        imgSortTitle.setImageResource(R.drawable.triangle_down_v2);
         imgSortDate.setImageResource(R.drawable.triangle_up);
         imgSortStartAmount.setImageResource(R.drawable.triangle_up);
         imgSortRestAmount.setImageResource(R.drawable.triangle_up);
@@ -115,7 +110,7 @@ public class SupplyListActivity extends AppCompatActivity {
     public void onStartAmountSortClick(View view) {
         imgSortTitle.setImageResource(R.drawable.triangle_up);
         imgSortDate.setImageResource(R.drawable.triangle_up);
-        imgSortStartAmount.setImageResource(R.drawable.triangle_down);
+        imgSortStartAmount.setImageResource(R.drawable.triangle_down_v2);
         imgSortRestAmount.setImageResource(R.drawable.triangle_up);
 
         currentComparator = (startAmountComparator.reversed()).thenComparing(titleComparator).thenComparing(dateComparator.reversed());
@@ -127,7 +122,7 @@ public class SupplyListActivity extends AppCompatActivity {
         imgSortTitle.setImageResource(R.drawable.triangle_up);
         imgSortDate.setImageResource(R.drawable.triangle_up);
         imgSortStartAmount.setImageResource(R.drawable.triangle_up);
-        imgSortRestAmount.setImageResource(R.drawable.triangle_down);
+        imgSortRestAmount.setImageResource(R.drawable.triangle_down_v2);
 
         currentComparator = (restAvailableAmountComparator.reversed()).thenComparing(titleComparator).thenComparing(dateComparator.reversed());
         MainActivity.warehouseState.getSupplyItemsList().sort(currentComparator);
@@ -136,7 +131,7 @@ public class SupplyListActivity extends AppCompatActivity {
 
     public void onDateSortClick(View view) {
         imgSortTitle.setImageResource(R.drawable.triangle_up);
-        imgSortDate.setImageResource(R.drawable.triangle_down);
+        imgSortDate.setImageResource(R.drawable.triangle_down_v2);
         imgSortStartAmount.setImageResource(R.drawable.triangle_up);
         imgSortRestAmount.setImageResource(R.drawable.triangle_up);
 

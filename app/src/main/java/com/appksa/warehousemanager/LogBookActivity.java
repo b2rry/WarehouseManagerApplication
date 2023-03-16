@@ -25,7 +25,7 @@ public class LogBookActivity extends AppCompatActivity {
         logBookSavesRecycler = findViewById(R.id.recycler_save_queue);
         logBookChangesRecycler = findViewById(R.id.recycler_change_queue);
 
-        System.out.println("\t\t\t\t\tLogBookActivity Created");
+//        System.out.println("\t\t\t\t\tLogBookActivity Created");
     }
 
     @Override
@@ -33,12 +33,12 @@ public class LogBookActivity extends AppCompatActivity {
         super.onResume();
         updateRequiredRecycler(logBookSavesRecycler, MainActivity.logBookSaveItemsQueue, true);
         updateRequiredRecycler(logBookChangesRecycler, MainActivity.logBookChangeItemsQueue, false);
-        System.out.println("\t\t\t\t\tLogBookActivity Resumed");
+//        System.out.println("\t\t\t\t\tLogBookActivity Resumed");
     }
 
     @Override
     protected void onDestroy() {
-        System.out.println("\t\t\t\t\tLogBookActivity Destroyed");
+//        System.out.println("\t\t\t\t\tLogBookActivity Destroyed");
         super.onDestroy();
     }
 

@@ -18,7 +18,7 @@ public class WarehouseState {
     }
 
     public Long getIdGen() {
-        System.out.println("set id " + (idGen+1));
+//        System.out.println("set id " + (idGen+1));
         return ++idGen;
     }
 
