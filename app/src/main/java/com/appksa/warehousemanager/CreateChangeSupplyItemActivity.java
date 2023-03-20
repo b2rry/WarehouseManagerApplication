@@ -45,7 +45,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_change_supply_item);
 
-//        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Created");
+        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Created");
 
         Long id = getIntent().getLongExtra("supplyItemId", 0);
         isChanged  = getIntent().getBooleanExtra("isChanged", false);
@@ -93,12 +93,17 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
         if(isChanged) {
             recreateRecycler();
         }
-//        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Resumed");
+        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Resumed");
         super.onResume();
     }
     @Override
+    protected void onStop() {
+        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Stopped");
+        super.onStop();
+    }
+    @Override
     protected void onDestroy() {
-//        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Destroyed");
+        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Destroyed");
         super.onDestroy();
     }
     protected void recreateRecycler(){
@@ -242,10 +247,14 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
             }
 
             Intent intent = new Intent(this, SupplyItemActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Пересоздаем item, удаляем эту активность
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Пересоздаем item, удаляем эту активность (удаляем все активности в стеке над SupplyItemActivity, включительно с ней)
             intent.putExtra("supplyItemId", currentSupplyItem.getId());
             intent.putExtra("isChanged", isChanged);
             startActivity(intent);
+            finish();//finish так как после переходе сюда(createChange...Activity) в СОЗДАНИЕ позиции (а именно переход в эту активность из supplyList активности),
+            //после успешного создания и перехода в supplyItem активность, не удаляется текущая активность создания.
+            //Потому что флаг перехода FLAG_ACTIVITY_CLEAR_TOP не очищает стек, за ненадобностью пересоздавать активность supplyItem(ее нету в стеке, соответственно над ней в стеке ничего не удаляется, она просто создается сверху)
+            //Хотя можно не добавлять finish, а просто перед созданием активности CreateChange... создавать фиктивную активность SupplyItem и ее пересоздавать посредствам FLAG_ACTIVITY_CLEAR_TOP (но есть нюансы)
         }
     }
 

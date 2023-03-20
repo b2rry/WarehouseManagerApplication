@@ -2,6 +2,7 @@ package com.appksa.warehousemanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
@@ -28,7 +29,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AcceptLoadingFromExternalFileDialogFragment.LoadingFromExternalFileDialogListener{
 
     public static WarehouseState warehouseState;
     public static Queue<LogBookItem> logBookSaveItemsQueue;
@@ -229,7 +230,8 @@ public class MainActivity extends AppCompatActivity {
         myDialogFragment.show(fragmentManager, "acceptExternalFileLoading");
     }
 
-    public void acceptExternalFileLoadingClicked() {
+    @Override
+    public void onDialogAcceptLoadingClick(DialogFragment dialog) {
         warehouseState = helper.importFromJsonFromExternalFile(this);
         if(warehouseState == null){
             Toast.makeText(getApplicationContext(), "Файл не найден, необходимо четко следовать инструкции", Toast.LENGTH_LONG).show();

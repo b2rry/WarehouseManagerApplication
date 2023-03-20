@@ -3,6 +3,7 @@ package com.appksa.warehousemanager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +19,7 @@ import com.appksa.warehousemanager.model.SupplyItem;
 
 import java.util.List;
 
-public class SupplyItemActivity extends AppCompatActivity {
+public class SupplyItemActivity extends AppCompatActivity implements AcceptDeletionSupplyItemDialogFragment.DeletionSupplyItemDialogListener{
 
     SupplyItem currentSupplyItem;
     private int currentSupplyItemInd;
@@ -29,7 +30,7 @@ public class SupplyItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supply_item);
 
-//        System.out.println("\t\t\t\t\tSupplyItemActivity Created");
+        System.out.println("\t\t\t\t\tSupplyItemActivity Created");
 
         Long id = getIntent().getLongExtra("supplyItemId", 0);
         isChanged = getIntent().getBooleanExtra("isChanged", false);
@@ -77,12 +78,17 @@ public class SupplyItemActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-//        System.out.println("\t\t\t\t\tSupplyItemActivity Resumed");
+        System.out.println("\t\t\t\t\tSupplyItemActivity Resumed");
         super.onResume();
     }
     @Override
+    protected void onStop() {
+        System.out.println("\t\t\t\t\tSupplyItemActivity Stopped");
+        super.onStop();
+    }
+    @Override
     protected void onDestroy() {
-//        System.out.println("\t\t\t\t\tSupplyItemActivity Destroyed");
+        System.out.println("\t\t\t\t\tSupplyItemActivity Destroyed");
         super.onDestroy();
     }
 
@@ -122,7 +128,8 @@ public class SupplyItemActivity extends AppCompatActivity {
         myDialogFragment.show(fragmentManager, "deleteConfirm");
     }
 
-    public void acceptDeletionDialogClicked() {
+    @Override
+    public void onDialogAcceptDeletionClick(DialogFragment dialog) {
         MainActivity.warehouseState.getSupplyItemsList().remove(currentSupplyItemInd);
         MainActivity.addChangeLog(currentSupplyItem.getTitle(),5);
         Intent intent = new Intent(this, SupplyListActivity.class);

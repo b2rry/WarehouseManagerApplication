@@ -3,6 +3,7 @@ package com.appksa.warehousemanager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
@@ -21,8 +22,8 @@ import com.appksa.warehousemanager.model.SupplyItem;
 
 import java.util.List;
 
-public class CreateChangeDispatchEventActivity extends AppCompatActivity {
-
+public class CreateChangeDispatchEventActivity extends AppCompatActivity implements AcceptDeletionDispatchEventDialogFragment.DeletionDispatchEventDialogListener {
+//в перспективе менять на фрагмент или диалог
     private SupplyItem currentSupplyItem; // поле для редактируемого item
     private int currSupplyItemInd; // поле для индекса в листе редактируемого item
     private DispatchEvent currDispatchEvent; // поле для редактируемого event
@@ -167,7 +168,9 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         myDialogFragment.show(fragmentManager, "deleteConfirm");
     }
-    public void acceptDeletionDialogClicked() {
+
+    @Override
+    public void onDialogAcceptDeletionClick(DialogFragment dialog) {
         MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().remove(currDispatchEventInd);
         MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmounts();
         MainActivity.addChangeLog(currentSupplyItem.getTitle(),8);

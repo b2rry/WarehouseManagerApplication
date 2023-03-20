@@ -88,7 +88,7 @@ public class SupplyListActivity extends AppCompatActivity {
     public void onCreateButtonClick(View view) {
         Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
         intent.putExtra("supplyItemId", MainActivity.warehouseState.getIdGen());
-//        intent.putExtra("isCreation", true);
+        intent.putExtra("isCreation", true);
         startActivity(intent);
     }
 
