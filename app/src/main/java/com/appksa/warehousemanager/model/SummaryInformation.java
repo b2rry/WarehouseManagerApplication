@@ -4,7 +4,7 @@ import com.appksa.warehousemanager.MainActivity;
 
 import java.util.List;
 
-public class SummaryInformation { // конечная продукция / расходный материал
+public class SummaryInformation { // оборудование(пред. назв. конечная продукция ) / расходный материал
     private int finalProductPositionsAmount;
     private int finalProductAvailableRestAmount;
     private int finalProductFactualRestAmount;

@@ -60,7 +60,11 @@ public class SupplyItemActivity extends AppCompatActivity implements AcceptDelet
             textStartAmount.setText(String.valueOf(currentSupplyItem.getStartAmount()));
             textRestAvailableAmount.setText(String.valueOf(currentSupplyItem.getRestAvailableAmount()));
             textRestFactualAmount.setText(String.valueOf(currentSupplyItem.getRestFactualAmount()));
-            textComment.setText(currentSupplyItem.getComment());
+            if(currentSupplyItem.getComment().equals("") || currentSupplyItem.getComment() == null){
+                textComment.setText("Комментарий отсутствует");
+            }else{
+                textComment.setText(currentSupplyItem.getComment());
+            }
             cardBackgroundColor.setCardBackgroundColor(ContextCompat.getColor(this, currentSupplyItem.getBgColor()));
             textIsConsumable.setText(currentSupplyItem.isConsumableMaterial() ? R.string.yes_message : R.string.no_message);
             RecyclerView dispatchEventRecycler = findViewById(R.id.recycler_dispatch_events);

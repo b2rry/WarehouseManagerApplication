@@ -20,19 +20,21 @@
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
         android:layout_marginBottom="1dp"
         android:fontFamily="@font/manrope_extrabold"
         android:onClick="onMainActivityClick"
         android:text="@string/menu_button"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_save_queue"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="220dp"
         android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +43,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_change_queue"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"

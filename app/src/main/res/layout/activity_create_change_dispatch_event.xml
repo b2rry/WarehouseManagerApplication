@@ -20,19 +20,22 @@
 
     <TextView
         android:id="@+id/text_view_create_dispatch_2"
-        android:layout_width="132dp"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="35dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/manrope_semibold"
-        android:text="@string/dispatch_date_field"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/manrope_bold"
+        android:gravity="center_vertical"
+        android:onClick="onSetDateTextClick"
+        android:text="Выбрать дату"
+        android:textColor="@color/app_custom_main"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_1" />
 
     <TextView
         android:id="@+id/text_view_create_dispatch_3"
-        android:layout_width="132dp"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
@@ -45,46 +48,45 @@
     <EditText
         android:id="@+id/edit_text_create_disp_event_contractor"
         android:layout_width="0dp"
-        android:layout_height="38dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/manrope_medium"
         android:hint="@string/input_field_message"
+        android:inputType="text"
         android:singleLine="true"
         android:textSize="17sp"
-        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_1"
         app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_1" />
 
-    <EditText
+    <TextView
         android:id="@+id/edit_text_create_disp_event_date"
         android:layout_width="110dp"
-        android:layout_height="37sp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
         android:fontFamily="@font/manrope_medium"
         android:hint="@string/input_field_message"
         android:singleLine="true"
         android:textSize="16sp"
-        android:inputType="date"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_2"
         app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_2"
         app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_2" />
 
     <EditText
         android:id="@+id/edit_text_create_disp_event_amount"
-        android:layout_width="110dp"
-        android:layout_height="37sp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="3dp"
         android:fontFamily="@font/manrope"
         android:hint="@string/input_field_message"
+        android:inputType="number"
         android:singleLine="true"
         android:textSize="16sp"
-        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_create_dispatch_3"
         app:layout_constraintStart_toEndOf="@+id/text_view_create_dispatch_3"
         app:layout_constraintTop_toTopOf="@+id/text_view_create_dispatch_3" />
@@ -102,63 +104,76 @@
         app:layout_constraintTop_toTopOf="@+id/edit_text_create_disp_event_amount"
         tools:text="@string/kg_units_field" />
 
-    <TextView
-        android:id="@+id/textViewPlanedDispatchText"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="45dp"
-        android:fontFamily="@font/manrope_medium"
-        android:text="@string/planed_dispatch_event_field"
-        android:textSize="18sp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_3" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_create_dispatch_3">
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/planed_dispatch_event_switch"
-        android:layout_width="45dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="3dp"
-        android:checked="false"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewPlanedDispatchText"
-        app:layout_constraintStart_toEndOf="@+id/textViewPlanedDispatchText"
-        app:layout_constraintTop_toTopOf="@+id/textViewPlanedDispatchText" />
+        <TextView
+            android:id="@+id/textViewPlanedDispatchText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_medium"
+            android:text="@string/planed_dispatch_event_field"
+            android:textSize="18sp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/planed_dispatch_event_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewPlanedDispatchText"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/button13"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
         android:layout_marginBottom="1dp"
         android:fontFamily="@font/manrope_extrabold"
         android:onClick="onBackButtonClick"
         android:text="@string/back_button"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button14"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="55dp"
+        android:layout_marginStart="3dp"
         android:layout_marginEnd="3dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="-9dp"
         android:fontFamily="@font/manrope_extrabold"
         android:onClick="onApplyButtonClick"
         android:text="@string/apply_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button16" />
+        app:layout_constraintBottom_toTopOf="@+id/button13"
+        app:layout_constraintEnd_toStartOf="@+id/button16"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button16"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="55dp"
         android:layout_marginEnd="3dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="-9dp"
         android:fontFamily="@font/manrope_extrabold"
         android:onClick="onDeleteButtonClick"
         android:text="@string/delete_button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button13"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

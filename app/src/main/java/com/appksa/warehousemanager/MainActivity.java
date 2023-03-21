@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity implements AcceptLoadingFromExternalFileDialogFragment.LoadingFromExternalFileDialogListener{
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements AcceptLoadingFrom
 
     public static void addSaveLog(int operationCode){
         Date date = new Date();
-        @SuppressLint("DefaultLocale") String currentMoment = String.format("%td.%<tm.%<tY / %<tR", date);
+        String currentMoment = String.format("%td.%<tm.%<tY / %<tR", date);
         if(operationCode == 1){
             logBookSaveItemsQueue.poll();
             logBookSaveItemsQueue.add(new LogBookItem(currentMoment, "Сохранено состояние склада", operationCode));

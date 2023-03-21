@@ -8,23 +8,25 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/manrope_extrabold"
         android:onClick="onMainActivityClick"
         android:text="@string/menu_button"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="7dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,8 +40,8 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/information_activity_text"
             android:fontFamily="@font/manrope"
+            android:text="@string/information_activity_text"
             android:textSize="18sp" />
     </ScrollView>
 

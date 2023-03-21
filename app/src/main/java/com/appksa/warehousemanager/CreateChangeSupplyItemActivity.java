@@ -6,12 +6,17 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,13 +24,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appksa.warehousemanager.adapter.EditDispatchEventsAdapter;
+import com.appksa.warehousemanager.exceptions.ValidationException;
 import com.appksa.warehousemanager.model.DispatchEvent;
 import com.appksa.warehousemanager.model.SupplyItem;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-public class CreateChangeSupplyItemActivity extends AppCompatActivity {
+public class CreateChangeSupplyItemActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener{
 
     private SupplyItem currentSupplyItem; // поле текущей позиции склада
     private int currentSupplyItemInd; // поле индекса в коллекции текущей позиции склада
@@ -33,11 +41,12 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
     private boolean isCreation; // поле для хранения состояния действия пользователя, создания или изменения позиции
     RecyclerView editDispatchEventsRecycler;
     EditText editTextTitle;
-    EditText editTextDate;
+    TextView editTextDate;
     EditText editTextStartAmount;
     EditText editTextComment;
     RadioGroup changeColorRadioGroup;
     SwitchCompat consumableSwitchCompat;
+    Calendar setDate = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +82,9 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
             currentSupplyItem = new SupplyItem(id, "NAME", "DATE", 0, 0, new ArrayList<DispatchEvent>(), "", false);//добавить конструктор полупустой
             RadioButton lightGreyButton = findViewById(R.id.color_change_radio_button_light_grey);
             lightGreyButton.setChecked(true);
-            consumableSwitchCompat.setChecked(false);
-            textUnitsThird.setText(R.string.pieces_units_field);
+            consumableSwitchCompat.setChecked(true);
+            textUnitsThird.setText(R.string.kg_units_field);
+            setInitialDateTime(new Date());
         }else{
             System.out.println("isChanged -- " + isChanged);
             editTextTitle.setText(currentSupplyItem.getTitle());
@@ -85,7 +95,9 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
             consumableSwitchCompat.setChecked(currentSupplyItem.isConsumableMaterial());
             textUnitsThird.setText(currentSupplyItem.isConsumableMaterial() ? R.string.kg_units_field : R.string.pieces_units_field);
         }
+        consumableSwitchCompat.setOnCheckedChangeListener(this);
         recreateRecycler();
+
     }
 
     @Override
@@ -125,6 +137,36 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
         }
         return null;
     }
+
+    private void setInitialDateTime(Date date) {
+        String setDateString = String.format("%tY.%<tm.%<td", date);
+        editTextDate.setText(setDateString);
+    }
+
+    public void onSetDateTextClick(View v) {
+        new DatePickerDialog(CreateChangeSupplyItemActivity.this, d,
+                setDate.get(Calendar.YEAR),
+                setDate.get(Calendar.MONTH),
+                setDate.get(Calendar.DAY_OF_MONTH))
+                .show();
+    }
+
+    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            setDate.set(Calendar.YEAR, year);
+            setDate.set(Calendar.MONTH, monthOfYear);
+            setDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            setInitialDateTime(new Date(setDate.getTimeInMillis()));
+        }
+    };
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        TextView textUnitsThird = findViewById(R.id.text_view_units_third);
+        textUnitsThird.setText(isChecked ? R.string.kg_units_field : R.string.pieces_units_field);
+    }
+
+
     protected void setCorrectRadioButton(int correctColor){
         switch (correctColor) {
             case (R.color.app_custom_background_grey):
@@ -214,38 +256,52 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onApplyButtonClick(View view) {
+    public void onApplyButtonClick(View view){
 
-        isChanged = true;
-        boolean isException = false;
-        int bufStartAmount = 777;//невозможное значение
         try {
-            bufStartAmount = Integer.parseInt(String.valueOf(editTextStartAmount.getText()));
-        }catch(NumberFormatException exception) {
-            isException = true;
-            Toast.makeText(getApplicationContext(), R.string.incorrect_start_amount_format_message, Toast.LENGTH_LONG).show();
-        }
-        if(!isException) {
 
             if (isCreation) {
-                currentSupplyItem.setStartAmount(bufStartAmount);
-                currentSupplyItem.setTitle(String.valueOf(editTextTitle.getText()));
-                currentSupplyItem.setDate(String.valueOf(editTextDate.getText()));
+                if(String.valueOf(editTextTitle.getText()).length() >= 6) {
+                    currentSupplyItem.setTitle(String.valueOf(editTextTitle.getText()));
+                }else{ throw new ValidationException(1, "incorrect title field data"); }
+
+                if(String.valueOf(editTextDate.getText()).length() >= 8) {
+                    currentSupplyItem.setDate(String.valueOf(editTextDate.getText()));
+                }else{ throw new ValidationException(2, "incorrect date field data"); }
+
+                try {
+                    currentSupplyItem.setStartAmount(Integer.parseInt(String.valueOf(editTextStartAmount.getText())));
+                }catch(NumberFormatException exception) {
+                    throw new ValidationException(3, "incorrect startAmount field data");
+                }
+
                 currentSupplyItem.setComment(String.valueOf(editTextComment.getText()));
                 currentSupplyItem.setBgColor(getSelectedRadioButtonColorId());
                 currentSupplyItem.setConsumableMaterial(consumableSwitchCompat.isChecked());
                 MainActivity.warehouseState.getSupplyItemsList().add(currentSupplyItem);
                 MainActivity.addChangeLog(currentSupplyItem.getTitle(),3);
             } else {
-                MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setStartAmount(bufStartAmount);
-                MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setTitle(String.valueOf(editTextTitle.getText()));
-                MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setDate(String.valueOf(editTextDate.getText()));
+                if(String.valueOf(editTextTitle.getText()).length() >= 6) {
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setTitle(String.valueOf(editTextTitle.getText()));
+                }else{ throw new ValidationException(1, "incorrect title field data"); }
+
+                if(String.valueOf(editTextDate.getText()).length() >= 8) {
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setDate(String.valueOf(editTextDate.getText()));
+                }else{ throw new ValidationException(2, "incorrect date field data"); }
+
+                try {
+                    MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setStartAmount(Integer.parseInt(String.valueOf(editTextStartAmount.getText())));
+                }catch(NumberFormatException exception) {
+                    throw new ValidationException(3, "incorrect startAmount field data");
+                }
+
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setComment(String.valueOf(editTextComment.getText()));
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setBgColor(getSelectedRadioButtonColorId());
                 MainActivity.warehouseState.getSupplyItemsList().get(currentSupplyItemInd).setConsumableMaterial(consumableSwitchCompat.isChecked());
                 MainActivity.addChangeLog(currentSupplyItem.getTitle(),4);
             }
 
+            isChanged = true;
             Intent intent = new Intent(this, SupplyItemActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Пересоздаем item, удаляем эту активность (удаляем все активности в стеке над SupplyItemActivity, включительно с ней)
             intent.putExtra("supplyItemId", currentSupplyItem.getId());
@@ -255,6 +311,33 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity {
             //после успешного создания и перехода в supplyItem активность, не удаляется текущая активность создания.
             //Потому что флаг перехода FLAG_ACTIVITY_CLEAR_TOP не очищает стек, за ненадобностью пересоздавать активность supplyItem(ее нету в стеке, соответственно над ней в стеке ничего не удаляется, она просто создается сверху)
             //Хотя можно не добавлять finish, а просто перед созданием активности CreateChange... создавать фиктивную активность SupplyItem и ее пересоздавать посредствам FLAG_ACTIVITY_CLEAR_TOP (но есть нюансы)
+
+        }catch(ValidationException exception) {
+            switch(exception.getErrorCode()){//позже буду объединять активности с соответствующими валидациями
+                case 0:
+                    break;
+                case 1:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_title_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 2:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_item_date_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 3:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_start_amount_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 4:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_comment_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 5:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_contractor_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 6:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_dispatch_date_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 7:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_amount_format_message, Toast.LENGTH_LONG).show();
+                    break;
+            }
         }
     }
 

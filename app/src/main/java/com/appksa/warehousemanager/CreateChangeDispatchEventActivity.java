@@ -6,20 +6,26 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appksa.warehousemanager.dialog.AcceptDeletionDispatchEventDialogFragment;
+import com.appksa.warehousemanager.exceptions.ValidationException;
 import com.appksa.warehousemanager.model.DispatchEvent;
 import com.appksa.warehousemanager.model.SupplyItem;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CreateChangeDispatchEventActivity extends AppCompatActivity implements AcceptDeletionDispatchEventDialogFragment.DeletionDispatchEventDialogListener {
@@ -30,9 +36,10 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity impleme
     private int currDispatchEventInd; // поле для индекса в листе редактируемого event
     private boolean isNewDispatch; // флаг создания нового event
     EditText editTextContractor;
-    EditText editTextDate;
+    TextView editTextDate;
     EditText editTextAmount;
     SwitchCompat planedDispatchSwitch;
+    Calendar setDate = Calendar.getInstance();
 
 
     @Override
@@ -64,7 +71,9 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity impleme
         TextView textUnitsFourth = findViewById(R.id.text_view_units_fourth);
         planedDispatchSwitch = findViewById(R.id.planed_dispatch_event_switch);
 
-        if(!isNewDispatch) {
+        if(isNewDispatch) {
+            setInitialDateTime(new Date());
+        }else{
             editTextContractor.setText(currDispatchEvent.getContractor());
             editTextDate.setText(currDispatchEvent.getDispatchDate());
             editTextAmount.setText(String.valueOf(currDispatchEvent.getAmount()));
@@ -121,6 +130,28 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity impleme
         return super.dispatchTouchEvent(event);
     }
 
+    private void setInitialDateTime(Date date) {
+        String setDateString = String.format("%td.%<tm.%<tY", date);
+        editTextDate.setText(setDateString);
+    }
+
+    public void onSetDateTextClick(View v) {
+        new DatePickerDialog(CreateChangeDispatchEventActivity.this, d,
+                setDate.get(Calendar.YEAR),
+                setDate.get(Calendar.MONTH),
+                setDate.get(Calendar.DAY_OF_MONTH))
+                .show();
+    }
+
+    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            setDate.set(Calendar.YEAR, year);
+            setDate.set(Calendar.MONTH, monthOfYear);
+            setDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            setInitialDateTime(new Date(setDate.getTimeInMillis()));
+        }
+    };
+
     public void onBackButtonClick(View view) {
         Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -128,39 +159,77 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity impleme
     }
 
     public void onApplyButtonClick(View view) {
-        boolean isException = false;
-        int bufAmount = 777;//невозможное значение
         try {
-            bufAmount = Integer.parseInt(String.valueOf(editTextAmount.getText()));
-        }catch(NumberFormatException exception) {
-            isException = true;
-            Toast.makeText(getApplicationContext(), R.string.incorrect_amount_format_message, Toast.LENGTH_LONG).show();
-        }
-        if(!isException) {
-
             if (isNewDispatch) {
-                //create
-                currDispatchEvent.setAmount(bufAmount);
-                currDispatchEvent.setContractor(String.valueOf(editTextContractor.getText()));
-                currDispatchEvent.setDispatchDate(String.valueOf(editTextDate.getText()));
+                if(String.valueOf(editTextContractor.getText()).length() >= 4) {
+                    currDispatchEvent.setContractor(String.valueOf(editTextContractor.getText()));
+                }else{ throw new ValidationException(5, "incorrect contractor field data"); }
+
+                if(String.valueOf(editTextDate.getText()).length() >= 8) {
+                    currDispatchEvent.setDispatchDate(String.valueOf(editTextDate.getText()));
+                }else{ throw new ValidationException(6, "incorrect dispatchDate field data"); }
+
+                try {
+                    currDispatchEvent.setAmount(Integer.parseInt(String.valueOf(editTextAmount.getText())));
+                } catch (NumberFormatException exception) {
+                    throw new ValidationException(7, "incorrect amount field data");
+                }
+
                 currDispatchEvent.setPlaned(planedDispatchSwitch.isChecked());
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().add(currDispatchEvent);
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmounts();
-                MainActivity.addChangeLog(currentSupplyItem.getTitle(),6);
+                MainActivity.addChangeLog(currentSupplyItem.getTitle(), 6);
             } else {
-                //change
-                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setAmount(bufAmount);
-                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setContractor(String.valueOf(editTextContractor.getText()));
-                MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setDispatchDate(String.valueOf(editTextDate.getText()));
+                if(String.valueOf(editTextContractor.getText()).length() >= 4) {
+                    MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setContractor(String.valueOf(editTextContractor.getText()));
+                }else{ throw new ValidationException(5, "incorrect title field data"); }
+
+                if(String.valueOf(editTextDate.getText()).length() >= 8) {
+                    MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setDispatchDate(String.valueOf(editTextDate.getText()));
+                }else{ throw new ValidationException(6, "incorrect dispatchDate field data"); }
+
+                try {
+                    MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setAmount(Integer.parseInt(String.valueOf(editTextAmount.getText())));
+                } catch (NumberFormatException exception) {
+                    throw new ValidationException(7, "incorrect amount field data");
+                }
+
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).getDispatchEventsList().get(currDispatchEventInd).setPlaned(planedDispatchSwitch.isChecked());
                 MainActivity.warehouseState.getSupplyItemsList().get(currSupplyItemInd).setCorrectRestAmounts();
-                MainActivity.addChangeLog(currentSupplyItem.getTitle(),7);
+                MainActivity.addChangeLog(currentSupplyItem.getTitle(), 7);
             }
 
             Intent intent = new Intent(this, CreateChangeSupplyItemActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             CreateChangeSupplyItemActivity.isChanged = true;
             startActivity(intent);
+
+        }catch(ValidationException exception){
+            switch(exception.getErrorCode()){//позже буду объединять активности с соответствующими валидациями
+                case 0:
+                    break;
+                case 1:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_title_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 2:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_item_date_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 3:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_start_amount_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 4:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_comment_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 5:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_contractor_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 6:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_dispatch_date_format_message, Toast.LENGTH_LONG).show();
+                    break;
+                case 7:
+                    Toast.makeText(getApplicationContext(), R.string.incorrect_amount_format_message, Toast.LENGTH_LONG).show();
+                    break;
+            }
         }
     }
     public void onDeleteButtonClick(View view) {
