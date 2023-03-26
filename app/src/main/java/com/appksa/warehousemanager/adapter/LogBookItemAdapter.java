@@ -50,6 +50,8 @@ public class LogBookItemAdapter extends RecyclerView.Adapter<LogBookItemAdapter.
                 break;
             case 3:
             case 6:
+            case 9:
+            case 10:
                 holder.logBookCardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.app_custom_background_green));
                 break;
             case 4:

@@ -131,7 +131,7 @@ public class CreateChangeDispatchEventActivity extends AppCompatActivity impleme
     }
 
     private void setInitialDateTime(Date date) {
-        String setDateString = String.format("%td.%<tm.%<tY", date);
+        String setDateString = String.format("%tY.%<tm.%<td", date);
         editTextDate.setText(setDateString);
     }
 

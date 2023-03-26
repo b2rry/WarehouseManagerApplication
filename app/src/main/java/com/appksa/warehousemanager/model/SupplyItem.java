@@ -29,6 +29,10 @@ public class SupplyItem{
     public SupplyItem(){
     }
 
+    public SupplyItem(Long id){
+        this.id = id;
+    }
+
     public void setCorrectRestAmounts(){
         restAvailableAmount = startAmount;
         for(DispatchEvent eventItem: dispatchEventsList){

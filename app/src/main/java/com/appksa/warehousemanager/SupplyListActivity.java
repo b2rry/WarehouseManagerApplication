@@ -18,9 +18,13 @@ public class SupplyListActivity extends AppCompatActivity {
     public static boolean isChanged;
     RecyclerView supplyListRecycler;
     private Comparator<SupplyItem> titleComparator;
+    private int titleComparatorIterator = 1;
     private Comparator<SupplyItem> dateComparator;
+    private int dateComparatorIterator = 0;
     private Comparator<SupplyItem> startAmountComparator;
+    private int startAmountComparatorIterator = 0;
     private Comparator<SupplyItem> restAvailableAmountComparator;
+    private int restAvailableAmountComparatorIterator = 0;
     private Comparator<SupplyItem> currentComparator;
     ImageView imgSortTitle;
     ImageView imgSortDate;
@@ -51,7 +55,7 @@ public class SupplyListActivity extends AppCompatActivity {
         MainActivity.warehouseState.getSupplyItemsList().sort(currentComparator);
         updateRecycler();
 
-        imgSortTitle.setImageResource(R.drawable.triangle_down_v2);
+        imgSortTitle.setImageResource(R.drawable.triangle_selected_down);
     }
     @Override
     protected void onResume() {
@@ -97,45 +101,105 @@ public class SupplyListActivity extends AppCompatActivity {
 //    }
 
     public void onTitleSortClick(View view) {
-        imgSortTitle.setImageResource(R.drawable.triangle_down_v2);
-        imgSortDate.setImageResource(R.drawable.triangle_up);
-        imgSortStartAmount.setImageResource(R.drawable.triangle_up);
-        imgSortRestAmount.setImageResource(R.drawable.triangle_up);
+        titleComparatorIterator++;
+        dateComparatorIterator = 0;
+        startAmountComparatorIterator = 0;
+        restAvailableAmountComparatorIterator = 0;
 
-        currentComparator = titleComparator.thenComparing(dateComparator.reversed());
+        switch(titleComparatorIterator % 3){
+            case 1:
+                imgSortTitle.setImageResource(R.drawable.triangle_selected_down);
+                currentComparator = titleComparator.thenComparing(dateComparator.reversed());
+                break;
+            case 2:
+                imgSortTitle.setImageResource(R.drawable.triangle_selected_up);
+                currentComparator = (titleComparator.reversed()).thenComparing(dateComparator);
+                titleComparatorIterator++;
+                break;
+        }
+
+        imgSortDate.setImageResource(R.drawable.triangle_empty_side);
+        imgSortStartAmount.setImageResource(R.drawable.triangle_empty_side);
+        imgSortRestAmount.setImageResource(R.drawable.triangle_empty_side);
+
         MainActivity.warehouseState.getSupplyItemsList().sort(currentComparator);
         updateRecycler();
     }
 
     public void onStartAmountSortClick(View view) {
-        imgSortTitle.setImageResource(R.drawable.triangle_up);
-        imgSortDate.setImageResource(R.drawable.triangle_up);
-        imgSortStartAmount.setImageResource(R.drawable.triangle_down_v2);
-        imgSortRestAmount.setImageResource(R.drawable.triangle_up);
+        titleComparatorIterator= 0;
+        dateComparatorIterator = 0;
+        startAmountComparatorIterator++;
+        restAvailableAmountComparatorIterator = 0;
 
-        currentComparator = (startAmountComparator.reversed()).thenComparing(titleComparator).thenComparing(dateComparator.reversed());
+        switch(startAmountComparatorIterator % 3){
+            case 1:
+                imgSortStartAmount.setImageResource(R.drawable.triangle_selected_down);
+                currentComparator = (startAmountComparator.reversed()).thenComparing(titleComparator).thenComparing(dateComparator.reversed());
+                break;
+            case 2:
+                imgSortStartAmount.setImageResource(R.drawable.triangle_selected_up);
+                currentComparator = startAmountComparator.thenComparing(titleComparator.reversed()).thenComparing(dateComparator);
+                startAmountComparatorIterator++;
+                break;
+        }
+
+        imgSortTitle.setImageResource(R.drawable.triangle_empty_side);
+        imgSortDate.setImageResource(R.drawable.triangle_empty_side);
+        imgSortRestAmount.setImageResource(R.drawable.triangle_empty_side);
+
         MainActivity.warehouseState.getSupplyItemsList().sort(currentComparator);
         updateRecycler();
     }
 
     public void onRestAmountSortClick(View view) {
-        imgSortTitle.setImageResource(R.drawable.triangle_up);
-        imgSortDate.setImageResource(R.drawable.triangle_up);
-        imgSortStartAmount.setImageResource(R.drawable.triangle_up);
-        imgSortRestAmount.setImageResource(R.drawable.triangle_down_v2);
+        titleComparatorIterator = 0;
+        dateComparatorIterator = 0;
+        startAmountComparatorIterator = 0;
+        restAvailableAmountComparatorIterator++;
 
-        currentComparator = (restAvailableAmountComparator.reversed()).thenComparing(titleComparator).thenComparing(dateComparator.reversed());
+        switch(restAvailableAmountComparatorIterator % 3){
+            case 1:
+                imgSortRestAmount.setImageResource(R.drawable.triangle_selected_down);
+                currentComparator = (restAvailableAmountComparator.reversed()).thenComparing(titleComparator).thenComparing(dateComparator.reversed());
+                break;
+            case 2:
+                imgSortRestAmount.setImageResource(R.drawable.triangle_selected_up);
+                currentComparator = restAvailableAmountComparator.thenComparing(titleComparator.reversed()).thenComparing(dateComparator);
+                restAvailableAmountComparatorIterator++;
+                break;
+        }
+
+        imgSortTitle.setImageResource(R.drawable.triangle_empty_side);
+        imgSortDate.setImageResource(R.drawable.triangle_empty_side);
+        imgSortStartAmount.setImageResource(R.drawable.triangle_empty_side);
+
         MainActivity.warehouseState.getSupplyItemsList().sort(currentComparator);
         updateRecycler();
     }
 
     public void onDateSortClick(View view) {
-        imgSortTitle.setImageResource(R.drawable.triangle_up);
-        imgSortDate.setImageResource(R.drawable.triangle_down_v2);
-        imgSortStartAmount.setImageResource(R.drawable.triangle_up);
-        imgSortRestAmount.setImageResource(R.drawable.triangle_up);
+        titleComparatorIterator = 0;
+        dateComparatorIterator++;
+        startAmountComparatorIterator = 0;
+        restAvailableAmountComparatorIterator = 0;
 
-        currentComparator = (dateComparator.reversed()).thenComparing(titleComparator);
+        switch(dateComparatorIterator % 3){
+            case 1:
+                imgSortDate.setImageResource(R.drawable.triangle_selected_down);
+                currentComparator = (dateComparator.reversed()).thenComparing(titleComparator);
+                break;
+            case 2:
+                imgSortDate.setImageResource(R.drawable.triangle_selected_up);
+                currentComparator = dateComparator.thenComparing(titleComparator.reversed());
+                dateComparatorIterator++;
+                break;
+        }
+
+        imgSortTitle.setImageResource(R.drawable.triangle_empty_side);
+        imgSortStartAmount.setImageResource(R.drawable.triangle_empty_side);
+        imgSortRestAmount.setImageResource(R.drawable.triangle_empty_side);
+
         MainActivity.warehouseState.getSupplyItemsList().sort(currentComparator);
         updateRecycler();
     }

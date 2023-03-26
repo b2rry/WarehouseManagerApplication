@@ -10,5 +10,17 @@
         android:title="@string/load_external_file_message"
         android:onClick="onLoadExternalFileClick"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_second"
+        android:orderInCategory="100"
+        android:title="Выгрузить Exel файл"
+        android:onClick="onExelExportClick"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_third"
+        android:orderInCategory="100"
+        android:title="Загрузить Exel файл"
+        android:onClick="onExelImportClick"
+        app:showAsAction="never" />
 
 </menu>

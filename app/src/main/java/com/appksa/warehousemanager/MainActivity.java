@@ -5,7 +5,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appksa.warehousemanager.dialog.AcceptLoadingFromExternalFileDialogFragment;
+import com.appksa.warehousemanager.excel.ExcelHelper;
 import com.appksa.warehousemanager.json.JsonHelper;
 import com.appksa.warehousemanager.model.DispatchEvent;
 import com.appksa.warehousemanager.model.LogBookItem;
@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity implements AcceptLoadingFromExternalFileDialogFragment.LoadingFromExternalFileDialogListener{
@@ -36,7 +35,8 @@ public class MainActivity extends AppCompatActivity implements AcceptLoadingFrom
     public static Queue<LogBookItem> logBookSaveItemsQueue;
     public static Queue<LogBookItem> logBookChangeItemsQueue;
     SummaryInformation summaryInformation = new SummaryInformation();
-    JsonHelper helper;
+    JsonHelper jHelper;
+    ExcelHelper exHelper;
     SharedPreferences prefs;
     public static boolean isStateSaved;
     TextView saveWarningText;
@@ -47,15 +47,16 @@ public class MainActivity extends AppCompatActivity implements AcceptLoadingFrom
         setContentView(R.layout.activity_main);
 
         prefs = getSharedPreferences("com.appksa.warehousemanager", MODE_PRIVATE);
-        helper = new JsonHelper();
+        jHelper = new JsonHelper();
+        exHelper = new ExcelHelper();
 
         if (prefs.getBoolean("firstRun", true)) {
             generateTestPositions();
             prefs.edit().putBoolean("firstRun", false).apply();
             warehouseState.updateLogLists();
-            helper.exportToJsonAndInternalSave(this, warehouseState);
+            jHelper.exportToJsonAndInternalSave(this, warehouseState);
         }else{
-            warehouseState = helper.importFromJsonFromInternalFile(this);
+            warehouseState = jHelper.importFromJsonFromInternalFile(this);
             warehouseState.updateLogQueues();
         }
 
@@ -148,6 +149,12 @@ public class MainActivity extends AppCompatActivity implements AcceptLoadingFrom
         } else if (operationCode == 2) {
             logBookSaveItemsQueue.poll();
             logBookSaveItemsQueue.add(new LogBookItem(currentMoment, "Выгружен файл состояния", operationCode));
+        } else if (operationCode == 9) {
+            logBookSaveItemsQueue.poll();
+            logBookSaveItemsQueue.add(new LogBookItem(currentMoment, "Выгружен Exel-файл позиций", operationCode));
+        } else if (operationCode == 10) {
+            logBookSaveItemsQueue.poll();
+            logBookSaveItemsQueue.add(new LogBookItem(currentMoment, "Загружен Exel-файл позиций", operationCode));
         }else{
             logBookSaveItemsQueue.poll();
             logBookSaveItemsQueue.add(new LogBookItem(currentMoment, "received incorrect code", 400));
@@ -205,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements AcceptLoadingFrom
     public void onSaveClick(View view) {
         addSaveLog(1);
         warehouseState.updateLogLists();
-        if(helper.exportToJsonAndInternalSave(this, warehouseState)){
+        if(jHelper.exportToJsonAndInternalSave(this, warehouseState)){
             Toast.makeText(getApplicationContext(), "Состояние сохранено успешно", Toast.LENGTH_LONG).show();
             isStateSaved = true;
             saveWarningText.setText(R.string.save_not_required_message);
@@ -217,8 +224,8 @@ public class MainActivity extends AppCompatActivity implements AcceptLoadingFrom
     public void onExportFileClick(View view) {
         addSaveLog(2);
         warehouseState.updateLogLists();
-        if(helper.exportToJsonAndExternalSave(this, warehouseState)){
-            helper.exportToJsonAndInternalSave(this, warehouseState); //сохранение состояния для сохранения лога (не интуитивно понятно что лог не сохранится после выхода)
+        if(jHelper.exportToJsonAndExternalSave(this, warehouseState)){
+            jHelper.exportToJsonAndInternalSave(this, warehouseState); //сохранение состояния для сохранения лога (не интуитивно понятно что лог не сохранится после выхода)
             Toast.makeText(getApplicationContext(), "Файл выгружен успешно", Toast.LENGTH_LONG).show();
         }else {
             Toast.makeText(getApplicationContext(), "ВЫГРУЗКА НЕ УДАЛОСЬ!", Toast.LENGTH_LONG).show();
@@ -233,10 +240,10 @@ public class MainActivity extends AppCompatActivity implements AcceptLoadingFrom
 
     @Override
     public void onDialogAcceptLoadingClick(DialogFragment dialog) {
-        warehouseState = helper.importFromJsonFromExternalFile(this);
+        warehouseState = jHelper.importFromJsonFromExternalFile(this);
         if(warehouseState == null){
             Toast.makeText(getApplicationContext(), "Файл не найден, необходимо четко следовать инструкции", Toast.LENGTH_LONG).show();
-            warehouseState = helper.importFromJsonFromInternalFile(this);
+            warehouseState = jHelper.importFromJsonFromInternalFile(this);
         }else {
             warehouseState.updateLogQueues();
             Toast.makeText(getApplicationContext(), "Состояние приложения успешно обновлено", Toast.LENGTH_LONG).show();
@@ -246,5 +253,41 @@ public class MainActivity extends AppCompatActivity implements AcceptLoadingFrom
             updateSummaryInformation();
             SupplyListActivity.isChanged = true;
         }
+    }
+    public void onExelExportClick(MenuItem item) {
+        warehouseState.updateLogLists();
+        if(exHelper.externalExportXSSFPositionDataFile(this, warehouseState.getSupplyItemsList())){
+            addSaveLog(9);
+            jHelper.exportToJsonAndInternalSave(this, warehouseState); //сохранение состояния для сохранения лога (не интуитивно понятно что лог не сохранится после выхода)
+            Toast.makeText(getApplicationContext(), "Файл выгружен успешно", Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(getApplicationContext(), "ВЫГРУЗКА НЕ УДАЛОСЬ!", Toast.LENGTH_LONG).show();
+        }
+    }
+    public void onExelImportClick(MenuItem item) {
+
+        warehouseState = exHelper.externalImportXSSFDataFile(this);
+
+        if(warehouseState == null){
+            Toast.makeText(getApplicationContext(), "Файл не найден, либо содержит критические ошибки, необходимо четко следовать инструкции", Toast.LENGTH_LONG).show();
+            warehouseState = jHelper.importFromJsonFromInternalFile(this);
+        }else{
+            addSaveLog(10);
+            warehouseState.updateLogLists();
+            Toast.makeText(getApplicationContext(), "Состояние приложения успешно обновлено", Toast.LENGTH_LONG).show();
+            isStateSaved = false;
+            saveWarningText.setText(R.string.save_warning_message);
+            saveWarningText.setTextColor(ContextCompat.getColor(this, R.color.app_custom_soft_red));
+            updateSummaryInformation();
+            SupplyListActivity.isChanged = true;
+        }
+
+        if(ExcelHelper.finalReport.equals("")){
+            ExcelHelper.finalReport = "Не было сформировано никаких сообщений при конвертировании файла";
+        }
+        Intent intent = new Intent(this, AboutProgramActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.putExtra("isReport", true);
+        startActivity(intent);
     }
 }

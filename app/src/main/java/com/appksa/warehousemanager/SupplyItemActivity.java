@@ -30,7 +30,7 @@ public class SupplyItemActivity extends AppCompatActivity implements AcceptDelet
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supply_item);
 
-        System.out.println("\t\t\t\t\tSupplyItemActivity Created");
+//        System.out.println("\t\t\t\t\tSupplyItemActivity Created");
 
         Long id = getIntent().getLongExtra("supplyItemId", 0);
         isChanged = getIntent().getBooleanExtra("isChanged", false);
@@ -82,17 +82,17 @@ public class SupplyItemActivity extends AppCompatActivity implements AcceptDelet
 
     @Override
     protected void onResume() {
-        System.out.println("\t\t\t\t\tSupplyItemActivity Resumed");
+//        System.out.println("\t\t\t\t\tSupplyItemActivity Resumed");
         super.onResume();
     }
     @Override
     protected void onStop() {
-        System.out.println("\t\t\t\t\tSupplyItemActivity Stopped");
+//        System.out.println("\t\t\t\t\tSupplyItemActivity Stopped");
         super.onStop();
     }
     @Override
     protected void onDestroy() {
-        System.out.println("\t\t\t\t\tSupplyItemActivity Destroyed");
+//        System.out.println("\t\t\t\t\tSupplyItemActivity Destroyed");
         super.onDestroy();
     }
 

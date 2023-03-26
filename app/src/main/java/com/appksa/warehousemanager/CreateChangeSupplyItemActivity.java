@@ -54,7 +54,7 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_change_supply_item);
 
-        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Created");
+//        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Created");
 
         Long id = getIntent().getLongExtra("supplyItemId", 0);
         isChanged  = getIntent().getBooleanExtra("isChanged", false);
@@ -105,17 +105,17 @@ public class CreateChangeSupplyItemActivity extends AppCompatActivity implements
         if(isChanged) {
             recreateRecycler();
         }
-        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Resumed");
+//        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Resumed");
         super.onResume();
     }
     @Override
     protected void onStop() {
-        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Stopped");
+//        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Stopped");
         super.onStop();
     }
     @Override
     protected void onDestroy() {
-        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Destroyed");
+//        System.out.println("\t\t\t\t\tCreateChangeSupplyItemActivity Destroyed");
         super.onDestroy();
     }
     protected void recreateRecycler(){

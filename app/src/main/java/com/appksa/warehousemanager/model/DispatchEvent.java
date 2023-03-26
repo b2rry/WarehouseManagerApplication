@@ -16,6 +16,10 @@ public class DispatchEvent {
         this.planed = planed;
     }
 
+    public DispatchEvent(Long dispatchId) {
+        this.dispatchId = dispatchId;
+    }
+
     public int getAmount() {
         return amount;
     }
